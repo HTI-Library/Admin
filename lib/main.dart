@@ -99,10 +99,7 @@ class _MyAppState extends State<MyApp> {
               translation: widget.translation,
             )
             ..checkInternet()
-            ..checkConnectivity()
-            ..categories()
-            ..topBorrow(page: 1)
-            ..getNotifications(),
+            ..checkConnectivity(),
         ),
       ],
       child: BlocBuilder<MainCubit, MainState>(
@@ -123,8 +120,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-// test add new code to git
-// test create the first branch
-// test create old
-// my first git homa hadoba
-// second branch
