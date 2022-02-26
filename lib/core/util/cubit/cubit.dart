@@ -8,17 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/error/exceptions.dart';
-import 'package:hti_library_admin/core/models/book_details_model.dart';
-import 'package:hti_library_admin/core/models/categories_model.dart';
 import 'package:hti_library_admin/core/models/login_model.dart';
-import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/translation.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../models/notification_model.dart';
 import '../constants.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -488,145 +484,5 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // logOut ------------------- end
-
-  num appBarHeight = AppBar().preferredSize.height;
-
-  var currentMonth = DateTime.now().month;
-
-  void setSelectedMonth(int value) {
-    currentMonth = value;
-    emit(SelectMonth(value: currentMonth));
-  }
-
-  int currentDay = 0;
-
-  void setSelectedDay(int value) {
-    currentDay = value;
-    emit(SelectDay(value: currentDay));
-  }
-
-  // topBorrow ------------------- start
-
-  TopBorrowModel? topBorrowModel;
-
-  void topBorrow({required int page}) async {
-    debugPrint('topBorrow------------loading');
-    emit(TopBorrowLoading());
-    await _repository.topBorrowRepo(page: page).then((value) {
-      // success
-      topBorrowModel = TopBorrowModel.fromJson(value.data);
-      debugPrint(topBorrowModel!.books[1].bookImage);
-      debugPrint('topBorrowModel!.books[1].bookImage');
-      debugPrint('topBorrow------------success');
-      emit(TopBorrowSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('topBorrow------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
-  }
-
-// topBorrow ------------------- end
-
-  // bookDetails ------------------- start
-
-  BookDetailsModel? bookModel;
-
-  void bookDetails({required String bookId}) async {
-    debugPrint('bookDetails------------loading');
-    bookModel = null;
-    emit(BookDetailsLoading());
-    await _repository
-        .bookDetailsRepo(
-      bookId: bookId,
-    )
-        .then((value) {
-      // success
-      bookModel = BookDetailsModel.fromJson(value.data);
-      debugPrint(bookModel!.book.bookImage);
-      debugPrint('bookDetails------------success');
-      emit(BookDetailsSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('bookDetails------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
-  }
-
-  // bookDetails ------------------- end
-
-  // categories ------------------- start
-
-  CategoriesModel? categoriesModel;
-
-  void categories() async {
-    debugPrint('categories------------loading');
-    emit(CategoriesLoading());
-    await _repository.categoriesRepo().then((value) {
-      // success
-      categoriesModel = CategoriesModel.fromJson(value.data);
-      debugPrint('categories------------success');
-      emit(CategoriesSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('categories------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
-  }
-
-  // categories ------------------- end
-
-  // categoryDetails ------------------- start
-
-  TopBorrowModel? categoryDetailsModel;
-
-  void categoryDetails({
-    required String categoryName,
-  }) async {
-    categoryDetailsModel = null;
-    debugPrint('categoryDetails------------loading');
-    emit(CategoryLoading());
-    await _repository
-        .categoryDetailsRepo(categoryName: categoryName)
-        .then((value) {
-      // success
-      categoryDetailsModel = TopBorrowModel.fromJson(value.data);
-      debugPrint('categoryDetails------------success');
-      emit(CategorySuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('categoryDetails------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
-  }
-
-// categoryDetails ------------------- end
-
-  // getNotifications ------------------- start
-
-  NotificationModel? getNotificationsModel;
-
-  void getNotifications() async {
-    debugPrint('getNotifications------------loading');
-    emit(NotificationLoading());
-    await _repository.getNotificationsRepo().then((value) {
-      // success
-      // getNotificationsModel = NotificationModel.fromJson(value.data);
-      debugPrint('getNotifications------------success');
-      print(getNotificationsModel!.notifications[0].message);
-      emit(NotificationSuccess());
-    }).catchError((error) {
-      // error
-      debugPrint('getNotifications------------error');
-      debugPrint(error.toString());
-      emit(Error(error.toString()));
-    });
-  }
-
-// getNotifications ------------------- end
 
 }
