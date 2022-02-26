@@ -1,0 +1,51 @@
+{
+
+  "myProfile": "الملف الشخصى",
+  "notification": "الإشعارات",
+  "myMessage": "رسائلى",
+  "calender": "التقويم",
+  "setting": "الإعدادات",
+  "changeLanguage": "تغيير اللغة",
+  "language": "اللغة",
+  "arabic": "اللغة العربية",
+  "english": "اللغة الانجليزية",
+  "themes": "نسق التطبيق",
+  "light": "الوضع الفاتح",
+  "dark": "الوضع الداكن",
+  "info": "المزيد من المعلومات",
+  "privacyPolicy": "سياسة الخصوصية",
+  "getHelp": "مركز المساعدة",
+  "aboutUs": "نبذة عنا",
+  "logOut": "تسجيل الخروج",
+  "search": "بحث",
+  "topBorrowBooks": "الأكثر استعارة",
+  "recentlyReturned": "المُسترج حديثاً",
+  "htiMaterial": "كتب المعهد",
+  "graduationProjects": "مشاريع تخرج",
+  "available": "متاح",
+  "unavailable": "غير متاح",
+  "borrow": "استعارة",
+  "read": "قراءة",
+  "overview": "نظرة عامة",
+  "moreEditionOfThisBook": "اصدارات أكثر من هذا الكتاب",
+  "moreBooksFromThisCategory": "كتب أكثر من هذه الفئة",
+  "moreBooksFromThisAuthor": "كتب أكثر لهذا المؤلف",
+
+  "doYouWantToLogout": "هل تريد تسجيل الخروج؟",
+  "bookName": "اسم الكتاب",
+  "author": "المؤلف",
+  "pagesNum": "صفحات",
+
+  "youDonthavenotifications": "لا توجد لديك اي إشعارات",
+
+
+  "yes": "نعم",
+  "no": "لا",
+  "loginToLibrary": "تسجيل الدخول الي المكتبة",
+  "password": "كلمة المرور",
+  "id": "الرقم الاكاديمي",
+
+
+
+  "logIn": "تسجيل الدخول"
+}
