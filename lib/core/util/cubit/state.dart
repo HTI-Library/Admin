@@ -66,7 +66,7 @@ class ChangeImageErrorState extends MainState {
 class LoginLoading extends MainState {}
 
 class LoginSuccess extends MainState {
-  LoginModel loginModel;
+  final LoginModel loginModel;
 
   LoginSuccess({required this.loginModel});
 }
