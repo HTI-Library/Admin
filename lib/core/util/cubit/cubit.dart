@@ -501,4 +501,57 @@ class MainCubit extends Cubit<MainState> {
 
 // deleteUser ------------------- end
 
+  /// getAllBooks ------------------- start
+
+  void getAllBooks({
+    required int page,
+  }) async {
+    debugPrint('getAllBooks------------loading');
+    emit(GetAllBooksLoading());
+    await _repository
+        .getAllBooksRepo(
+      page: page,
+    )
+        .then((value) {
+      // success
+      debugPrint('getAllBooks------------success');
+      emit(GetAllBooksSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('getAllBooks------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('getAllBooks------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// getAllBooks ------------------- end
+
+
+  /// deleteBook ------------------- start
+
+  void deleteBook({
+    required String bookId,
+  }) async {
+    debugPrint('deleteBook------------loading');
+    emit(DeleteBookLoading());
+    await _repository.deleteBookRepo(bookId: bookId,).then((value) {
+      // success
+      debugPrint('deleteBook------------success');
+      emit(DeleteBookSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('deleteBook------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('deleteBook------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// deleteBook ------------------- end
+
 }

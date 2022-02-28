@@ -16,6 +16,14 @@ abstract class Repository {
   Future<Response> deleteUserRepo({
     required String uId,
   });
+
+  Future<Response> getAllBooksRepo({
+    required int page,
+  });
+
+  Future<Response> deleteBookRepo({
+    required String bookId,
+  });
 }
 
 class RepoImplementation extends Repository {
@@ -58,6 +66,30 @@ class RepoImplementation extends Repository {
       url: deleteUserUrl,
       query: {
         'user_id': uId,
+      },
+    );
+  }
+
+  @override
+  Future<Response> getAllBooksRepo({
+    required int page,
+  }) async {
+    return await dioHelper.get(
+      url: getAllBooksUrl,
+      query: {
+        'page': page,
+      },
+    );
+  }
+
+  @override
+  Future<Response> deleteBookRepo({
+    required String bookId,
+  }) async {
+    return await dioHelper.delete(
+      url: deleteBookUrl,
+      query: {
+        'book_id': bookId,
       },
     );
   }

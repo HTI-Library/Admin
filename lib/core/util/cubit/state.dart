@@ -1,4 +1,3 @@
-import 'package:hti_library_admin/core/models/login_model.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -63,11 +62,9 @@ class ChangeImageErrorState extends MainState {
   ChangeImageErrorState(this.error);
 }
 
-
 class CreateUserLoading extends MainState {}
 
 class CreateUserSuccess extends MainState {}
-
 
 class GetAllUsersLoading extends MainState {}
 
@@ -77,4 +74,10 @@ class DeleteUserLoading extends MainState {}
 
 class DeleteUserSuccess extends MainState {}
 
+class GetAllBooksLoading extends MainState {}
 
+class GetAllBooksSuccess extends MainState {}
+
+class DeleteBookLoading extends MainState {}
+
+class DeleteBookSuccess extends MainState {}
