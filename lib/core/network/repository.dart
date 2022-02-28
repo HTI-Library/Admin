@@ -1,17 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:hti_library_admin/core/network/remote/dio_helper.dart';
-import 'package:hti_library_admin/core/util/constants.dart';
 
 import 'end_points.dart';
 import 'local/cache_helper.dart';
 
 abstract class Repository {
-  Future<Response> login({
+  Future<Response> getAllUsersRepo();
+
+  Future<Response> createUserRepo({
     required String email,
+    required String name,
     required String password,
   });
 
-  Future<Response> logOut();
+  Future<Response> deleteUserRepo({
+    required String uId,
+  });
 }
 
 class RepoImplementation extends Repository {
@@ -24,24 +28,37 @@ class RepoImplementation extends Repository {
   });
 
   @override
-  Future<Response> login({
+  Future<Response> getAllUsersRepo() async {
+    return await dioHelper.get(
+      url: getUsersUrl,
+    );
+  }
+
+  @override
+  Future<Response> createUserRepo({
     required String email,
+    required String name,
     required String password,
   }) async {
     return await dioHelper.post(
-      url: loginUrl,
+      url: createUserUrl,
       data: {
         'email': email,
+        'name': name,
         'password': password,
       },
     );
   }
 
   @override
-  Future<Response> logOut() async {
-    return await dioHelper.get(
-      url: logOutUrl,
-      token: token,
+  Future<Response> deleteUserRepo({
+    required String uId,
+  }) async {
+    return await dioHelper.delete(
+      url: deleteUserUrl,
+      query: {
+        'user_id': uId,
+      },
     );
   }
 }

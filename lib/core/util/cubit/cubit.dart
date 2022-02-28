@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/error/exceptions.dart';
-import 'package:hti_library_admin/core/models/login_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
@@ -405,7 +404,7 @@ class MainCubit extends Cubit<MainState> {
     Navigator.pop(context);
   }
 
-  ///TODO pick photo ------------ start
+  //TODO pick photo ------------ start
   // final ImagePicker _picker = ImagePicker();
   // File? imageFile;
   //
@@ -426,63 +425,80 @@ class MainCubit extends Cubit<MainState> {
   //
   //   emit(PickImageSuccessState());
   // }
-  ///TODO pick photo ------------ end
+  //TODO pick photo ------------ end
 
-  // login ------------------- start
+  /// createUser ------------------- start
 
-  bool userSigned = false;
-
-  void changeUser(bool user) {
-    userSigned = user;
-    emit(SignInState());
-  }
-
-  LoginModel? loginModel;
-
-  void login({
+  void createUser({
     required String email,
+    required String name,
     required String password,
   }) async {
-    debugPrint('login------------loading');
-    emit(LoginLoading());
-    await _repository.login(email: email, password: password).then((value) {
+    debugPrint('createUser------------loading');
+    emit(CreateUserLoading());
+    await _repository
+        .createUserRepo(email: email, name: name, password: password)
+        .then((value) {
       // success
-      debugPrint(value.data['message']);
-      debugPrint('success');
-      loginModel = LoginModel.fromJson(value.data);
-      changeUser(true);
-      currentIndex = 0;
-      debugPrint('login------------success');
-      emit(LoginSuccess(loginModel: loginModel!));
+      debugPrint('createUser------------success');
+      emit(CreateUserSuccess());
     }).catchError((error) {
       // error
       debugPrint(error.toString());
-      debugPrint('error');
+      debugPrint('createUser------------Error');
       ServerException exception = error as ServerException;
-      debugPrint('login------------error');
+      debugPrint('createUser------------ServerException error');
       debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }
 
-// login ------------------- end
+  // createUser ------------------- end
 
-  // logOut ------------------- start
+  /// getAllUsers ------------------- start
 
-  void logOut({required BuildContext context}) async {
-    emit(LogoutLoading());
-    await _repository.logOut().then((value) {
+  void getAllUsers() async {
+    debugPrint('getAllUsers------------loading');
+    emit(GetAllUsersLoading());
+    await _repository.getAllUsersRepo().then((value) {
       // success
-      signOut(context);
-      changeUser(false);
-      emit(LogoutSuccess());
+      debugPrint('getAllUsers------------success');
+      emit(GetAllUsersSuccess());
     }).catchError((error) {
       // error
       debugPrint(error.toString());
+      debugPrint('getAllUsers------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('getAllUsers------------ServerException error');
+      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }
 
-// logOut ------------------- end
+// getAllUsers ------------------- end
+
+  /// deleteUser ------------------- start
+
+  void deleteUser({
+    required String uId,
+  }) async {
+    debugPrint('deleteUser------------loading');
+    emit(DeleteUserLoading());
+    await _repository.deleteUserRepo(uId: uId).then((value) {
+      // success
+      debugPrint('deleteUser------------success');
+      emit(DeleteUserSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('deleteUser------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('deleteUser------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// deleteUser ------------------- end
 
 }

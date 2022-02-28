@@ -1,10 +1,9 @@
-import 'package:dio/dio.dart';
-import 'package:hti_library_admin/core/error/exceptions.dart';
 import 'dart:async';
 
+import 'package:dio/dio.dart';
+import 'package:hti_library_admin/core/error/exceptions.dart';
+
 import '../end_points.dart';
-
-
 
 abstract class DioHelper {
   Future<dynamic> post({
@@ -21,7 +20,7 @@ abstract class DioHelper {
 
   Future<dynamic> delete({
     required String url,
-    dynamic data,
+    dynamic query,
     String? token,
   });
 }
@@ -70,12 +69,12 @@ class DioImpl extends DioHelper {
     print('Header => ${dio.options.headers.toString()}');
     print('Body => $query');
     return await request(
-          () async => await dio.get(url, queryParameters: query),
+      () async => await dio.get(url, queryParameters: query),
     );
   }
 
   @override
-  Future delete({required String url, data, String? token}) async {
+  Future delete({required String url, query, String? token}) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
       if (token != null) 'Authorization': 'Bearer $token'
@@ -84,9 +83,9 @@ class DioImpl extends DioHelper {
     if (url.contains('??')) {
       url = url.replaceAll('??', '?');
     }
-
+    print('Body => $query');
     return await request(
-          () async => await dio.delete(url, queryParameters: data),
+      () async => await dio.delete(url, queryParameters: query),
     );
   }
 }
@@ -95,11 +94,11 @@ extension on DioHelper {
   Future request(Future<Response> Function() request) async {
     try {
       final r = await request.call();
-            print("Response => ${r.data}");
+      print("Response => ${r.data}");
 
       return r;
     } on DioError catch (e) {
-            print("Error => ${e.response!.data['error']}");
+      print("Error => ${e.response!.data['error']}");
 
       throw ServerException(
         error: e.response!.data['error'],

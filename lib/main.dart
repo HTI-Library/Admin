@@ -94,7 +94,6 @@ class _MyAppState extends State<MyApp> {
               rtl: widget.isRtl,
               dark: widget.isDark,
             )
-            ..changeUser(token!.isNotEmpty)
             ..setTranslation(
               translation: widget.translation,
             )
@@ -105,7 +104,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return MaterialApp(
-            title: 'HTI Library',
+            title: 'HTI Library Admin',
             debugShowCheckedModeBanner: false,
             themeMode: MainCubit.get(context).isDark
                 ? ThemeMode.dark

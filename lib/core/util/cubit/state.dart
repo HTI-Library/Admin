@@ -63,22 +63,18 @@ class ChangeImageErrorState extends MainState {
   ChangeImageErrorState(this.error);
 }
 
-class LoginLoading extends MainState {}
 
-class LoginSuccess extends MainState {
-  final LoginModel loginModel;
+class CreateUserLoading extends MainState {}
 
-  LoginSuccess({required this.loginModel});
-}
+class CreateUserSuccess extends MainState {}
 
-class LogoutLoading extends MainState {}
 
-class LogoutSuccess extends MainState {}
+class GetAllUsersLoading extends MainState {}
 
-class SelectMonth extends MainState {
-  final int value;
+class GetAllUsersSuccess extends MainState {}
 
-  SelectMonth({
-    required this.value,
-  });
-}
+class DeleteUserLoading extends MainState {}
+
+class DeleteUserSuccess extends MainState {}
+
+
