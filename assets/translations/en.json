@@ -41,6 +41,10 @@
   "password": "Password",
   "id": "ID",
 
-
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "delete": "Delete",
+  "edit": "Edit",
+  "deleteBook": "Delete Book ?",
   "logIn": "Login"
 }

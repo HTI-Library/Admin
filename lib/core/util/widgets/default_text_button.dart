@@ -26,7 +26,9 @@ class DefaultTextButton extends StatelessWidget {
       onPressed: onPress,
       style: buttonStyle,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if(icons != null)
           Icon(
             icons,
             size: 16.0,

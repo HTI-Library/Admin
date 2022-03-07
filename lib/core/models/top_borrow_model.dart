@@ -1,3 +1,5 @@
+import 'package:hti_library_admin/core/models/auther_model.dart';
+
 class TopBorrowModel {
   final List<SimpleBook> books;
   final num allBooks;
@@ -10,7 +12,7 @@ class TopBorrowModel {
   factory TopBorrowModel.fromJson(Map<String, dynamic> json) {
     return TopBorrowModel(
       books:
-      List.from(json['books']).map((e) => SimpleBook.fromJson(e)).toList(),
+          List.from(json['books']).map((e) => SimpleBook.fromJson(e)).toList(),
       allBooks: json['allBooks'] ?? 0,
     );
   }
@@ -26,27 +28,27 @@ class TopBorrowModel {
 class SimpleBook {
   late final String id;
   late final String name;
-  late final int amount;
+  late final num amount;
   late final String overview;
-  late final String authors;
+  late final List<Author> authors;
 
-  late final int rate;
+  late final num rate;
   late final String edition;
-  late final int pages;
+  late final num pages;
   late final String category;
-  late final int topBorrow;
+  late final num topBorrow;
   late final String bookImage;
   late final String bookLink;
   late final String createdAt;
   late final String updatedAt;
-  late final int __v;
+  late final num __v;
 
   SimpleBook.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
     amount = json['amount'] ?? 0;
     // overview = json['overview'] ?? '';
-    authors = json['auther'] ?? '';
+    authors = List.from(json['auther']).map((e) => Author.fromJson(e)).toList();
     rate = json['rate'] ?? 0;
     edition = json['edition'] ?? '';
     pages = json['pages'] ?? 0;

@@ -32,6 +32,7 @@ const String green = '#125c03';
 // const String black_e = '#282828';
 const String surface = '#f5f5f5';
 const String greyWhite = '#8fe1e7f0';
+const String dialogColor = '#e1e7f0';
 const String disableButton = '#A7B1D7';
 
 //dark theme

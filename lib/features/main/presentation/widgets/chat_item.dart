@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library_admin/core/util/constants.dart';
+
+class ChatItem extends StatelessWidget {
+  const ChatItem({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin:
+          const EdgeInsetsDirectional.only(start: 15.0, end: 15.0, top: 15.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: HexColor(greyWhite),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8.0),
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              const CircleAvatar(
+                radius: 28.0,
+                backgroundImage: NetworkImage(
+                    'https://www.darkmatterday.com/wp-content/uploads/2019/09/circle-cropped.png'),
+              ),
+              space10Horizontal,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Ehab Borae',
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: HexColor(black),
+                          ),
+                      maxLines: 1,
+                    ),
+                    Text(
+                      'message text sssssss ss sssss ssss sssss sssss sssss',
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: HexColor(black),
+                          ),
+                      maxLines: 1,
+                    ),
+                    space5Vertical,
+                    Text(
+                      '12/10/2022',
+                      style: Theme.of(context).textTheme.caption,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

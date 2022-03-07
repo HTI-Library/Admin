@@ -8,10 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/error/exceptions.dart';
+import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/translation.dart';
+import 'package:hti_library_admin/features/main/presentation/pages/books.dart';
+import 'package:hti_library_admin/features/main/presentation/pages/home.dart';
+import 'package:hti_library_admin/features/main/presentation/pages/messages.dart';
+import 'package:hti_library_admin/features/main/presentation/pages/setings.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../constants.dart';
@@ -25,10 +30,7 @@ class MainCubit extends Cubit<MainState> {
         super(Empty());
 
   static MainCubit get(context) => BlocProvider.of(context);
-
-  PageController pageController =
-      PageController(initialPage: 0, keepPage: true);
-
+  TabController? controller;
   int currentIndex = 0;
   List<String> mainPageTitles = [
     'Home',
@@ -36,15 +38,15 @@ class MainCubit extends Cubit<MainState> {
     'Saved',
     'Account',
   ];
+  List<Widget> mainPages = [
+    const Home(),
+    const Messages(),
+    const Books(),
+    const Settings(),
+  ];
 
   void bottomChanged(int index) {
-    if (index == 3) {
-      currentIndex = index;
-      emit(BottomChanged());
-    }
-
     currentIndex = index;
-
     emit(BottomChanged());
   }
 
@@ -93,16 +95,16 @@ class MainCubit extends Cubit<MainState> {
     family = isRtl ? 'Roboto' : 'Roboto';
 
     lightTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: HexColor(surface),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
         systemOverlayStyle: Platform.isIOS
             ? null
-            : const SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
+            : SystemUiOverlayStyle(
+                statusBarColor: HexColor(surface),
                 statusBarIconBrightness: Brightness.dark,
               ),
-        backgroundColor: Colors.white,
+        backgroundColor: HexColor(surface),
         elevation: 0.0,
         titleSpacing: 0.0,
         iconTheme: const IconThemeData(
@@ -115,8 +117,8 @@ class MainCubit extends Cubit<MainState> {
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.white,
-        elevation: 50.0,
+        backgroundColor: HexColor(surface),
+        elevation: 0.0,
         selectedItemColor: HexColor(mainColor),
         unselectedItemColor: HexColor(grey),
         type: BottomNavigationBarType.fixed,
@@ -193,7 +195,7 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: HexColor(surface),
           height: 1.4,
         ),
       ),
@@ -222,7 +224,7 @@ class MainCubit extends Cubit<MainState> {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: HexColor(scaffoldBackground),
-        elevation: 50.0,
+        elevation: 0.0,
         selectedItemColor: HexColor(mainColor),
         unselectedItemColor: HexColor(grey),
         type: BottomNavigationBarType.fixed,
@@ -299,7 +301,7 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 16.0,
           fontFamily: family,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: HexColor(surface),
           height: 1.4,
         ),
       ),
@@ -503,6 +505,8 @@ class MainCubit extends Cubit<MainState> {
 
   /// getAllBooks ------------------- start
 
+  TopBorrowModel? getAllBooksModel;
+
   void getAllBooks({
     required int page,
   }) async {
@@ -514,6 +518,7 @@ class MainCubit extends Cubit<MainState> {
     )
         .then((value) {
       // success
+      getAllBooksModel = TopBorrowModel.fromJson(value.data);
       debugPrint('getAllBooks------------success');
       emit(GetAllBooksSuccess());
     }).catchError((error) {
@@ -529,7 +534,6 @@ class MainCubit extends Cubit<MainState> {
 
 // getAllBooks ------------------- end
 
-
   /// deleteBook ------------------- start
 
   void deleteBook({
@@ -537,7 +541,11 @@ class MainCubit extends Cubit<MainState> {
   }) async {
     debugPrint('deleteBook------------loading');
     emit(DeleteBookLoading());
-    await _repository.deleteBookRepo(bookId: bookId,).then((value) {
+    await _repository
+        .deleteBookRepo(
+      bookId: bookId,
+    )
+        .then((value) {
       // success
       debugPrint('deleteBook------------success');
       emit(DeleteBookSuccess());

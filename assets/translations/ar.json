@@ -1,5 +1,4 @@
 {
-
   "myProfile": "الملف الشخصى",
   "notification": "الإشعارات",
   "myMessage": "رسائلى",
@@ -30,22 +29,20 @@
   "moreEditionOfThisBook": "اصدارات أكثر من هذا الكتاب",
   "moreBooksFromThisCategory": "كتب أكثر من هذه الفئة",
   "moreBooksFromThisAuthor": "كتب أكثر لهذا المؤلف",
-
   "doYouWantToLogout": "هل تريد تسجيل الخروج؟",
   "bookName": "اسم الكتاب",
   "author": "المؤلف",
   "pagesNum": "صفحات",
-
   "youDonthavenotifications": "لا توجد لديك اي إشعارات",
-
-
   "yes": "نعم",
   "no": "لا",
   "loginToLibrary": "تسجيل الدخول الي المكتبة",
   "password": "كلمة المرور",
   "id": "الرقم الاكاديمي",
-
-
-
+  "cancel": "الغاء",
+  "confirm": "تاكيد",
+  "delete": "حذف",
+  "edit": "تعديل",
+  "deleteBook": "حذف الكتاب ؟",
   "logIn": "تسجيل الدخول"
 }

@@ -20,11 +20,13 @@ class AvailableItem extends StatelessWidget {
         vertical: 3.0,
       ),
       decoration: BoxDecoration(
-        color: amount <= 1 ? HexColor(red) : HexColor(green),
+        color: amount > 1 ? HexColor(green) : HexColor(red),
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: Text(
-          amount != 0 ? appTranslation(context).available : appTranslation(context).unavailable,
+        amount > 1
+            ? appTranslation(context).available
+            : appTranslation(context).unavailable,
         style: Theme.of(context).textTheme.caption!.copyWith(
               color: HexColor(surface),
               fontSize: fontSize,
