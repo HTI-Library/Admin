@@ -6,6 +6,8 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/widgets/asset_svg.dart';
 import 'package:hti_library_admin/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library_admin/features/add_new_book/presentation/pages/add_new_book.dart';
+import 'package:hti_library_admin/features/search/presentation/search.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -19,7 +21,9 @@ class MainPage extends StatelessWidget {
             appBar: AppBar(
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    navigateTo(context, AddNewBook());
+                  },
                   icon: Icon(
                     Icons.note_add_outlined,
                     size: 20.0,
@@ -27,7 +31,9 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    navigateTo(context, SearchPage());
+                  },
                   icon: AssetSvg(
                     imagePath: 'search',
                     size: 20.0,

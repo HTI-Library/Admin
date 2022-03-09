@@ -54,7 +54,6 @@ void main() async {
     isRtl: isRtl,
     translation: translation,
   ));
-  debugPrint(translation);
 }
 
 class MyApp extends StatefulWidget {
@@ -99,6 +98,19 @@ class _MyAppState extends State<MyApp> {
             )
             ..checkInternet()
             ..checkConnectivity()
+            // ..createBook(
+            //     library: 'a',
+            //     type: 'b',
+            //     name: 'name ehab test',
+            //     edition: 2,
+            //     rate: 3.5,
+            //     auther: 'auther',
+            //     pages: 250,
+            //     category: 'category1',
+            //     bookNum: 117,
+            //     amount: 3,
+            //     classificationNum: '620.2',
+            //     overview: 'overview')
             ..getAllBooks(page: 1),
         ),
       ],

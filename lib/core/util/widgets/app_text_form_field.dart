@@ -51,6 +51,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             color: HexColor(greyWhite),
           ),
           child: TextFormField(
+            validator: (String? value) {
+              if (value!.isEmpty) {
+                return 'Enter ${widget.hint}';
+              } else {
+                return null;
+              }
+            },
             style: Theme.of(context).textTheme.subtitle2!.copyWith(
                   color: HexColor(mainColor),
                 ),

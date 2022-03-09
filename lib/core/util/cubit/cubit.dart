@@ -8,15 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/error/exceptions.dart';
+import 'package:hti_library_admin/core/models/categories_model.dart';
 import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/translation.dart';
+import 'package:hti_library_admin/features/account/pages/account/account.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/books.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/home.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/messages.dart';
-import 'package:hti_library_admin/features/main/presentation/pages/setings.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../constants.dart';
@@ -34,15 +35,15 @@ class MainCubit extends Cubit<MainState> {
   int currentIndex = 0;
   List<String> mainPageTitles = [
     'Home',
-    'Categories',
-    'Saved',
-    'Account',
+    'Messages',
+    'Books',
+    'Settings',
   ];
   List<Widget> mainPages = [
     const Home(),
     const Messages(),
     const Books(),
-    const Settings(),
+    Settings(),
   ];
 
   void bottomChanged(int index) {
@@ -561,5 +562,397 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // deleteBook ------------------- end
+
+  /// getAllCategories ------------------- start
+
+  CategoriesModel? categoriesModel;
+
+  void getAllCategories({
+    required String library,
+    required String type,
+  }) async {
+    debugPrint('getAllCategories------------loading');
+    emit(GetAllCategoriesLoading());
+    await _repository
+        .getAllCategoriesRepo(
+      type: type,
+      library: library,
+    )
+        .then((value) {
+      // success
+      categoriesModel = CategoriesModel.fromJson(value.data);
+      debugPrint('getAllCategories------------success');
+      emit(GetAllCategoriesSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('getAllCategories------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('getAllCategories------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// getAllCategories ------------------- end
+
+  /// createBook ------------------- start
+
+  void createBook({
+    required String library,
+    required String type,
+    required String name,
+    required num edition,
+    required num rate,
+    required String auther,
+    required num pages,
+    required String category,
+    required num bookNum,
+    required num amount,
+    required String classificationNum,
+    required String overview,
+  }) async {
+    debugPrint('createBook------------loading');
+    emit(CreateBookLoading());
+    await _repository
+        .createBookRepo(
+            library: library,
+            type: type,
+            name: name,
+            edition: edition,
+            rate: rate,
+            auther: auther,
+            pages: pages,
+            category: category,
+            bookNum: bookNum,
+            amount: amount,
+            classificationNum: classificationNum,
+            overview: overview)
+        .then((value) {
+      // success
+      debugPrint('createBook------------success');
+      emit(CreateBookSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('createBook------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('createBook------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// createBook ------------------- end
+
+  /// search ------------------- start
+
+  void search({
+    required String word,
+  }) async {
+    debugPrint('search------------loading');
+    emit(SearchLoading());
+    await _repository
+        .searchRepo(
+      word: word,
+    )
+        .then((value) {
+      // success
+      debugPrint('search------------success');
+      emit(SearchSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('search------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('search------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// search ------------------- end
+
+  var currentMonth = DateTime.now().month;
+
+  void setSelectedMonth(int value) {
+    currentMonth = value;
+    emit(SelectMonth(value: currentMonth));
+  }
+
+  int currentDay = 0;
+
+  void setSelectedDay(int value) {
+    currentDay = value;
+    emit(SelectDay(value: currentDay));
+  }
+
+  /// editBook ------------------- start
+
+  void editBook({
+    required String library,
+    required String type,
+    required String name,
+    required num edition,
+    required num rate,
+    required String auther,
+    required num pages,
+    required String category,
+    required num bookNum,
+    required num amount,
+    required String classificationNum,
+    required String overview,
+    required String bookId,
+  }) async {
+    debugPrint('editBook------------loading');
+    emit(EditBookLoading());
+    await _repository
+        .editBookRepo(
+      library: library,
+      type: type,
+      name: name,
+      edition: edition,
+      rate: rate,
+      auther: auther,
+      pages: pages,
+      category: category,
+      bookNum: bookNum,
+      amount: amount,
+      classificationNum: classificationNum,
+      overview: overview,
+      bookId: bookId,
+    )
+        .then((value) {
+      // success
+      debugPrint('editBook------------success');
+      emit(EditBookSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('editBook------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('editBook------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// editBook ------------------- end
+
+  /// createLibrary ------------------- start
+
+  void createLibrary({
+    required String code,
+    required String name,
+  }) async {
+    debugPrint('createLibrary------------loading');
+    emit(CreateLibraryLoading());
+    await _repository
+        .createLibraryRepo(
+      code: code,
+      name: name,
+    )
+        .then((value) {
+      // success
+      debugPrint('createLibrary------------success');
+      emit(CreateLibrarySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('createLibrary------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('createLibrary------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// createLibrary ------------------- end
+
+  /// editLibrary ------------------- start
+
+  void editLibrary({
+    required String code,
+    required String name,
+    required String libraryID,
+  }) async {
+    debugPrint('editLibrary------------loading');
+    emit(EditLibraryLoading());
+    await _repository
+        .editLibraryRepo(
+      code: code,
+      name: name,
+      libraryID: libraryID,
+    )
+        .then((value) {
+      // success
+      debugPrint('editLibrary------------success');
+      emit(EditLibrarySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('editLibrary------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('editLibrary------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// editLibrary ------------------- end
+
+  /// getAllLibraries ------------------- start
+
+  void getAllLibraries() async {
+    debugPrint('getAllLibraries------------loading');
+    emit(GetAllLibrariesLoading());
+    await _repository.getAllLibrariesRepo().then((value) {
+      // success
+      debugPrint('getAllLibraries------------success');
+      emit(GetAllLibrariesSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('getAllLibraries------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('getAllLibraries------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// getAllLibraries ------------------- end
+  /// deleteLibrary ------------------- start
+
+  void deleteLibrary({required String library}) async {
+    debugPrint('deleteLibrary------------loading');
+    emit(DeleteLibraryLoading());
+    await _repository.deleteLibraryRepo(library: library).then((value) {
+      // success
+      debugPrint('deleteLibrary------------success');
+      emit(DeleteLibrarySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('deleteLibrary------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('deleteLibrary------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// deleteLibrary ------------------- end
+
+  /// createType ------------------- start
+
+  void createType({
+    required String library,
+    required String name,
+  }) async {
+    debugPrint('createType------------loading');
+    emit(CreateTypeLoading());
+    await _repository
+        .createTypeRepo(
+      library: library,
+      name: name,
+    )
+        .then((value) {
+      // success
+      debugPrint('createType------------success');
+      emit(CreateTypeSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('createType------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('createType------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// createType ------------------- end
+
+  /// editType ------------------- start
+
+  void editType({
+    required String library,
+    required String name,
+    required String typeID,
+  }) async {
+    debugPrint('editType------------loading');
+    emit(EditTypeLoading());
+    await _repository
+        .editTypeRepo(
+      library: library,
+      name: name,
+      typeID: typeID,
+    )
+        .then((value) {
+      // success
+      debugPrint('editType------------success');
+      emit(EditTypeSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('editType------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('editType------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// editType ------------------- end
+
+  /// getAllTypes ------------------- start
+
+  void getAllTypes({
+    required String library,
+  }) async {
+    debugPrint('getAllTypes------------loading');
+    emit(GetAllTypesLoading());
+    await _repository.getAllTypesRepo(library: library).then((value) {
+      // success
+      debugPrint('getAllTypes------------success');
+      emit(GetAllTypesSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('getAllTypes------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('getAllTypes------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// getAllTypes ------------------- end
+  /// deleteType ------------------- start
+
+  void deleteType({required String typeID}) async {
+    debugPrint('deleteType------------loading');
+    emit(DeleteTypeLoading());
+    await _repository
+        .deleteTypeRepo(
+      typeID: typeID,
+    )
+        .then((value) {
+      // success
+      debugPrint('deleteType------------success');
+      emit(DeleteTypeSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('deleteType------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('deleteType------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// deleteType ------------------- end
 
 }

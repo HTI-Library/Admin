@@ -7,14 +7,90 @@ import 'local/cache_helper.dart';
 abstract class Repository {
   Future<Response> getAllUsersRepo();
 
+  Future<Response> getAllLibrariesRepo();
+
   Future<Response> createUserRepo({
     required String email,
     required String name,
     required String password,
   });
 
+  Future<Response> createBookRepo({
+    required String library,
+    required String type,
+    required String name,
+    required num edition,
+    required num rate,
+    required String auther,
+    required num pages,
+    required String category,
+    required num bookNum,
+    required num amount,
+    required String classificationNum,
+    required String overview,
+  });
+
+  Future<Response> createLibraryRepo({
+    required String code,
+    required String name,
+  });
+
+  Future<Response> editLibraryRepo({
+    required String code,
+    required String name,
+    required String libraryID,
+  });
+
+  Future<Response> createTypeRepo({
+    required String library,
+    required String name,
+  });
+
+  Future<Response> editTypeRepo({
+    required String library,
+    required String name,
+    required String typeID,
+  });
+
+  Future<Response> getAllTypesRepo({
+    required String library,
+  });
+
+  Future<Response> deleteTypeRepo({
+    required String typeID,
+  });
+
+  Future<Response> editBookRepo({
+    required String library,
+    required String type,
+    required String name,
+    required num edition,
+    required num rate,
+    required String auther,
+    required num pages,
+    required String category,
+    required num bookNum,
+    required num amount,
+    required String classificationNum,
+    required String overview,
+    required String bookId,
+  });
+
+  Future<Response> getAllCategoriesRepo({
+    required String library,
+    required String type,
+  });
+
   Future<Response> deleteUserRepo({
     required String uId,
+  });
+
+  Future<Response> deleteLibraryRepo({
+    required String library,
+  });
+
+  Future<Response> searchRepo({
+    required String word,
   });
 
   Future<Response> getAllBooksRepo({
@@ -90,6 +166,220 @@ class RepoImplementation extends Repository {
       url: deleteBookUrl,
       query: {
         'book_id': bookId,
+      },
+    );
+  }
+
+  @override
+  Future<Response> getAllCategoriesRepo({
+    required String library,
+    required String type,
+  }) async {
+    return await dioHelper.get(
+      url: getAllCategoriesUrl,
+      query: {
+        'library': library,
+        'type': type,
+      },
+    );
+  }
+
+  @override
+  Future<Response> createBookRepo({
+    required String library,
+    required String type,
+    required String name,
+    required num edition,
+    required num rate,
+    required String auther,
+    required num pages,
+    required String category,
+    required num bookNum,
+    required num amount,
+    required String classificationNum,
+    required String overview,
+  }) async {
+    return await dioHelper.post(
+      url: createBookUrl,
+      data: {
+        'data': {
+          'library': library,
+          'type': type,
+          'name': name,
+          'rate': rate,
+          'edition': edition,
+          'auther': [
+            {'name': auther}
+          ],
+          'pages': pages,
+          'category': category,
+          'bookNum': bookNum,
+          'amount': amount,
+          'overview': overview,
+          'classificationNum': classificationNum,
+        },
+      },
+    );
+  }
+
+  @override
+  Future<Response> editBookRepo({
+    required String library,
+    required String type,
+    required String name,
+    required num edition,
+    required num rate,
+    required String auther,
+    required num pages,
+    required String category,
+    required num bookNum,
+    required num amount,
+    required String classificationNum,
+    required String overview,
+    required String bookId,
+  }) async {
+    return await dioHelper.post(
+      url: editBookUrl,
+      data: {
+        'data': {
+          'library': library,
+          'type': type,
+          'name': name,
+          'rate': rate,
+          'edition': edition,
+          'auther': [
+            {'name': auther}
+          ],
+          'pages': pages,
+          'category': category,
+          'bookNum': bookNum,
+          'amount': amount,
+          'overview': overview,
+          'classificationNum': classificationNum,
+        },
+        'book_id': bookId,
+      },
+    );
+  }
+
+  @override
+  Future<Response> searchRepo({
+    required String word,
+  }) async {
+    return await dioHelper.get(
+      url: searchUrl,
+      query: {
+        'word': word,
+      },
+    );
+  }
+
+  @override
+  Future<Response> createLibraryRepo({
+    required String code,
+    required String name,
+  }) async {
+    return await dioHelper.post(
+      url: createLibraryUrl,
+      data: {
+        'data': {
+          'name': name,
+          'code': code,
+        },
+      },
+    );
+  }
+
+  @override
+  Future<Response> editLibraryRepo({
+    required String code,
+    required String name,
+    required String libraryID,
+  }) async {
+    return await dioHelper.post(
+      url: editLibraryUrl,
+      data: {
+        'data': {
+          'name': name,
+          'code': code,
+        },
+        'libraryID': libraryID,
+      },
+    );
+  }
+
+  @override
+  Future<Response> getAllLibrariesRepo() async {
+    return await dioHelper.get(
+      url: getAllLibrariesUrl,
+    );
+  }
+
+  @override
+  Future<Response> deleteLibraryRepo({
+    required String library,
+  }) async {
+    return await dioHelper.delete(
+      url: deleteLibraryUrl,
+      query: {
+        'library': library,
+      },
+    );
+  }
+
+  @override
+  Future<Response> createTypeRepo({
+    required String library,
+    required String name,
+  }) async {
+    return await dioHelper.post(
+      url: createTypeUrl,
+      data: {
+        'data': {
+          'name': name,
+          'library': library,
+        },
+      },
+    );
+  }
+
+  @override
+  Future<Response> editTypeRepo({
+    required String library,
+    required String name,
+    required String typeID,
+  }) async {
+    return await dioHelper.post(
+      url: createTypeUrl,
+      data: {
+        'data': {
+          'name': name,
+          'library': library,
+        },
+        'typeID': typeID,
+      },
+    );
+  }
+
+  @override
+  Future<Response> getAllTypesRepo({
+    required String library,
+  }) async {
+    return await dioHelper.get(url: getAllTypesUrl, query: {
+      'library': library,
+      'page': 1,
+    });
+  }
+
+  @override
+  Future<Response> deleteTypeRepo({
+    required String typeID,
+  }) async {
+    return await dioHelper.delete(
+      url: deleteTypeUrl,
+      query: {
+        'typeID': typeID,
+        'page': 1,
       },
     );
   }

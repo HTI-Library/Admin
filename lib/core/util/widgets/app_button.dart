@@ -46,6 +46,7 @@ class AppButton extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle2!.copyWith(
                 color: textColor ?? HexColor(surface),
               ),
+          maxLines: 1,
         ),
       ),
     );

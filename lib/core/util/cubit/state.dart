@@ -81,3 +81,72 @@ class GetAllBooksSuccess extends MainState {}
 class DeleteBookLoading extends MainState {}
 
 class DeleteBookSuccess extends MainState {}
+
+class GetAllCategoriesLoading extends MainState {}
+
+class GetAllCategoriesSuccess extends MainState {}
+
+class CreateBookLoading extends MainState {}
+
+class CreateBookSuccess extends MainState {}
+
+class SearchLoading extends MainState {}
+
+class SearchSuccess extends MainState {}
+
+class SelectMonth extends MainState {
+  final int value;
+
+  SelectMonth({
+    required this.value,
+  });
+}
+
+class SelectDay extends MainState {
+  final int value;
+
+  SelectDay({
+    required this.value,
+  });
+
+  @override
+  List<Object> get props => [
+        value,
+      ];
+}
+
+class EditBookLoading extends MainState {}
+
+class EditBookSuccess extends MainState {}
+
+class CreateLibraryLoading extends MainState {}
+
+class CreateLibrarySuccess extends MainState {}
+
+class EditLibraryLoading extends MainState {}
+
+class EditLibrarySuccess extends MainState {}
+
+class GetAllLibrariesLoading extends MainState {}
+
+class GetAllLibrariesSuccess extends MainState {}
+
+class DeleteLibraryLoading extends MainState {}
+
+class DeleteLibrarySuccess extends MainState {}
+
+class CreateTypeLoading extends MainState {}
+
+class CreateTypeSuccess extends MainState {}
+
+class EditTypeLoading extends MainState {}
+
+class EditTypeSuccess extends MainState {}
+
+class GetAllTypesLoading extends MainState {}
+
+class GetAllTypesSuccess extends MainState {}
+
+class DeleteTypeLoading extends MainState {}
+
+class DeleteTypeSuccess extends MainState {}

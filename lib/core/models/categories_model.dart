@@ -27,6 +27,8 @@ class CategoriesModel {
 class CategoryModel {
   late final String id;
   late final String name;
+  late final String library;
+  late final String type;
   late final String image;
   late final String createdAt;
   late final String updatedAt;
@@ -36,6 +38,8 @@ class CategoryModel {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
     image = json['image'] ?? '';
+    library = json['library'] ?? '';
+    type = json['type'] ?? '';
     // createdAt = json['createdAt'] ?? '';
     // updatedAt = json['updatedAt'] ?? '';
     // __v = json['__v'] ?? 0;
