@@ -49,7 +49,7 @@ class MyBtnAccount extends StatelessWidget {
         border: stroke ? Border.all(color: HexColor(mainColor)) : null,
       ),
       child: Material(
-        color: color == null ? HexColor(greyWhite) : color,
+        color: color ?? HexColor(greyWhite),
         child: InkWell(
           onTap: voidCallback,
           child: Padding(

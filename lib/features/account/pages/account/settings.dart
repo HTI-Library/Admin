@@ -5,7 +5,9 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/features/account/pages/info/info.dart';
 import 'package:hti_library_admin/features/account/widget/btn_my_account.dart';
+import 'package:hti_library_admin/features/libraries/presentation/pages/libraries_page.dart';
 import 'package:hti_library_admin/features/s_f_calender/widget/meeting.dart';
+import 'package:hti_library_admin/features/types/presentation/pages/types_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../setting/presntation/setting.dart';
@@ -36,7 +38,7 @@ class Settings extends StatelessWidget {
             child: Text(
               appointment.eventName,
               // textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
             ),
           ),
           const Padding(
@@ -67,14 +69,34 @@ class Settings extends StatelessWidget {
                   radius: 55,
                 ),
                 space20Vertical,
-                Text('Htian Here',
-                    style: Theme.of(context).textTheme.headline6!),
+                Text(
+                  'Htian Here',
+                  style: Theme.of(context).textTheme.headline6!,
+                ),
+                space10Vertical,
+                MyBtnAccount(
+                  voidCallback: () {
+                    navigateTo(context, const LibrariesPage());
+                  },
+                  text: 'Libraries',
+                  // text: appTranslation(context).setting,
+                  imagePath: '',
+                ),
+                space10Vertical,
+                MyBtnAccount(
+                  voidCallback: () {
+                    navigateTo(context, const TypesPage());
+                  },
+                  text: 'Types',
+                  // text: appTranslation(context).setting,
+                  imagePath: '',
+                ),
                 space10Vertical,
                 MyBtnAccount(
                   voidCallback: () {
                     navigateTo(context, SettingPages());
                   },
-                  text: '${appTranslation(context).setting}',
+                  text: appTranslation(context).setting,
                   imagePath: 'settings',
                 ),
                 space10Vertical,
@@ -82,7 +104,7 @@ class Settings extends StatelessWidget {
                   voidCallback: () {
                     navigateTo(context, InfoPage());
                   },
-                  text: '${appTranslation(context).info}',
+                  text: appTranslation(context).info,
                   imagePath: 'info',
                 ),
                 space10Vertical,
@@ -123,7 +145,7 @@ class Settings extends StatelessWidget {
                           );
                         });
                   },
-                  text: '${appTranslation(context).calender}',
+                  text: appTranslation(context).calender,
                   imagePath: 'calendar',
                 ),
               ],

@@ -14,7 +14,7 @@ import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/translation.dart';
-import 'package:hti_library_admin/features/account/pages/account/account.dart';
+import 'package:hti_library_admin/features/account/pages/account/settings.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/books.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/home.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/messages.dart';
