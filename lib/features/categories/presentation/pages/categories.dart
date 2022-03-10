@@ -35,24 +35,39 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainCubit, MainState>(
+    return BlocConsumer<MainCubit, MainState>(
+      listener: (context, state) {
+        if (state is DeleteCategorySuccess) {
+          MainCubit.get(context)
+              .getAllCategories(type: widget.type, library: widget.library);
+        }
+      },
       builder: (context, state) {
         return BackScaffold(
           title: 'Categories  In ${widget.type}',
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: MainCubit.get(context).categoriesModel != null
               ? MainCubit.get(context).categoriesModel!.categories.isNotEmpty
-                  ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => CatItem(
-                        categoryModel: MainCubit.get(context)
-                            .categoriesModel!
-                            .categories[index],
-                      ),
-                      itemCount: MainCubit.get(context)
-                          .categoriesModel!
-                          .categories
-                          .length,
+                  ? Column(
+                      children: [
+                        if (state is GetAllCategoriesLoading ||
+                            state is DeleteCategoryLoading)
+                          const LinearProgressIndicator(),
+                        Expanded(
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) => CatItem(
+                              categoryModel: MainCubit.get(context)
+                                  .categoriesModel!
+                                  .categories[index],
+                            ),
+                            itemCount: MainCubit.get(context)
+                                .categoriesModel!
+                                .categories
+                                .length,
+                          ),
+                        ),
+                      ],
                     )
                   : const EmptyWidget(text: 'There is no types yet')
               : const LoadingWidget(),

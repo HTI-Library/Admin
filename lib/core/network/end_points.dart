@@ -13,11 +13,8 @@ const createLibraryUrl = 'create_library';
 const editLibraryUrl = 'edit_library';
 const getAllLibrariesUrl = 'libraries';
 const deleteLibraryUrl = 'library';
-
 const createTypeUrl = 'create_type';
 const editTypeUrl = 'edit_type';
 const getAllTypesUrl = 'types';
 const deleteTypeUrl = 'type';
-
-
-
+const deleteCategoryUrl = 'category';

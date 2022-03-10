@@ -81,6 +81,10 @@ abstract class Repository {
     required String type,
   });
 
+  Future<Response> deleteCategoryRepo({
+    required String catId,
+  });
+
   Future<Response> deleteUserRepo({
     required String uId,
   });
@@ -384,6 +388,18 @@ class RepoImplementation extends Repository {
       query: {
         'typeID': typeID,
         'page': 1,
+      },
+    );
+  }
+
+  @override
+  Future<Response> deleteCategoryRepo({
+    required String catId,
+  }) async {
+    return await dioHelper.delete(
+      url: deleteCategoryUrl,
+      query: {
+        'categoryID': catId,
       },
     );
   }

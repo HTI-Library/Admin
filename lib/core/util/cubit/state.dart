@@ -151,4 +151,6 @@ class DeleteTypeLoading extends MainState {}
 
 class DeleteTypeSuccess extends MainState {}
 
-class ShowDataState extends MainState {}
+class DeleteCategoryLoading extends MainState {}
+
+class DeleteCategorySuccess extends MainState {}

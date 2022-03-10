@@ -965,11 +965,30 @@ class MainCubit extends Cubit<MainState> {
 
 // deleteType ------------------- end
 
-//
-// void putLibraryDataOnFields({required String name, required String code}){
-//   nameController.text = name;
-//   codeController.text = code;
-//   emit(ShowDataState());
-// }
+  /// deleteCategory ------------------- start
+
+  void deleteCategory({required String catId}) async {
+    debugPrint('deleteCategory------------loading');
+    emit(DeleteCategoryLoading());
+    await _repository
+        .deleteCategoryRepo(
+      catId: catId,
+    )
+        .then((value) {
+      // success
+      debugPrint('deleteCategory------------success');
+      emit(DeleteCategorySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('deleteCategory------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('deleteCategory------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// deleteCategory ------------------- end
 
 }
