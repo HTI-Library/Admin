@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
-import 'package:hti_library_admin/features/account/pages/info/info.dart';
-import 'package:hti_library_admin/features/account/widget/btn_my_account.dart';
 import 'package:hti_library_admin/features/libraries/presentation/pages/libraries_page.dart';
 import 'package:hti_library_admin/features/s_f_calender/widget/meeting.dart';
 import 'package:hti_library_admin/features/types/presentation/pages/types_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../widget/btn_my_account.dart';
+import '../info/info.dart';
 import '../setting/presntation/setting.dart';
 
 class Settings extends StatelessWidget {
@@ -79,15 +79,6 @@ class Settings extends StatelessWidget {
                     navigateTo(context, const LibrariesPage());
                   },
                   text: 'Libraries',
-                  // text: appTranslation(context).setting,
-                  imagePath: '',
-                ),
-                space10Vertical,
-                MyBtnAccount(
-                  voidCallback: () {
-                    navigateTo(context, const TypesPage());
-                  },
-                  text: 'Types',
                   // text: appTranslation(context).setting,
                   imagePath: '',
                 ),

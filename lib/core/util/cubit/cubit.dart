@@ -9,17 +9,19 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/error/exceptions.dart';
 import 'package:hti_library_admin/core/models/categories_model.dart';
+import 'package:hti_library_admin/core/models/get_all_library_model.dart';
+import 'package:hti_library_admin/core/models/get_all_types_model.dart';
 import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/translation.dart';
-import 'package:hti_library_admin/features/account/pages/account/settings.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/books.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/home.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/messages.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../features/settings/pages/settings/settings.dart';
 import '../constants.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -571,6 +573,7 @@ class MainCubit extends Cubit<MainState> {
     required String library,
     required String type,
   }) async {
+    categoriesModel = null;
     debugPrint('getAllCategories------------loading');
     emit(GetAllCategoriesLoading());
     await _repository
@@ -803,11 +806,14 @@ class MainCubit extends Cubit<MainState> {
 
   /// getAllLibraries ------------------- start
 
+  GetAllLibraryModel? getAllLibraryModel;
+
   void getAllLibraries() async {
     debugPrint('getAllLibraries------------loading');
     emit(GetAllLibrariesLoading());
     await _repository.getAllLibrariesRepo().then((value) {
       // success
+      getAllLibraryModel = GetAllLibraryModel.fromJson(value.data);
       debugPrint('getAllLibraries------------success');
       emit(GetAllLibrariesSuccess());
     }).catchError((error) {
@@ -908,13 +914,17 @@ class MainCubit extends Cubit<MainState> {
 
   /// getAllTypes ------------------- start
 
+  GetAllTypesModel? getAllTypesModel;
+
   void getAllTypes({
     required String library,
   }) async {
+    getAllTypesModel = null;
     debugPrint('getAllTypes------------loading');
     emit(GetAllTypesLoading());
     await _repository.getAllTypesRepo(library: library).then((value) {
       // success
+      getAllTypesModel = GetAllTypesModel.fromJson(value.data);
       debugPrint('getAllTypes------------success');
       emit(GetAllTypesSuccess());
     }).catchError((error) {
@@ -954,5 +964,12 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // deleteType ------------------- end
+
+//
+// void putLibraryDataOnFields({required String name, required String code}){
+//   nameController.text = name;
+//   codeController.text = code;
+//   emit(ShowDataState());
+// }
 
 }

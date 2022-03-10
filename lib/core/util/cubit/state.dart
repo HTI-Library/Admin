@@ -150,3 +150,5 @@ class GetAllTypesSuccess extends MainState {}
 class DeleteTypeLoading extends MainState {}
 
 class DeleteTypeSuccess extends MainState {}
+
+class ShowDataState extends MainState {}

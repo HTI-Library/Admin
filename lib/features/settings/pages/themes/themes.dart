@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library_admin/core/util/widgets/main_scaffold.dart';
-import 'package:hti_library_admin/features/account/widget/btn_my_account.dart';
+
+import '../../../../core/util/widgets/btn_my_account.dart';
 
 class ThemesPage extends StatelessWidget {
   const ThemesPage({Key? key}) : super(key: key);

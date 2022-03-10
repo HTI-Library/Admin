@@ -25,9 +25,7 @@ class SearchPage extends StatelessWidget {
                   imagePath: 'search',
                   color: HexColor(mainColor),
                 ),
-                callbackHandle: (controller) {
-                  searchController = controller;
-                },
+                textEditingController: searchController,
               ),
               space15Vertical,
             ],

@@ -8,23 +8,29 @@ import 'package:hti_library_admin/core/util/widgets/empty_widget.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
 
 import '../../../../core/util/cubit/state.dart';
-import '../widgets/library_item.dart';
+import '../widgets/cat_item.dart';
 
-class LibrariesPage extends StatefulWidget {
-  const LibrariesPage({
+class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({
     Key? key,
+    required this.library,
+    required this.type,
   }) : super(key: key);
 
+  final String library;
+  final String type;
+
   @override
-  State<LibrariesPage> createState() => _LibrariesPageState();
+  State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
-class _LibrariesPageState extends State<LibrariesPage> {
+class _CategoriesPageState extends State<CategoriesPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    MainCubit.get(context).getAllLibraries();
+    MainCubit.get(context)
+        .getAllCategories(type: widget.type, library: widget.library);
   }
 
   @override
@@ -32,22 +38,23 @@ class _LibrariesPageState extends State<LibrariesPage> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return BackScaffold(
-          title: 'Libraries',
+          title: 'Categories  In ${widget.type}',
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          body: MainCubit.get(context).getAllLibraryModel != null
-              ? MainCubit.get(context).getAllLibraryModel!.libraries.isNotEmpty
+          body: MainCubit.get(context).categoriesModel != null
+              ? MainCubit.get(context).categoriesModel!.categories.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => LibraryItem(
-                          libraryModel: MainCubit.get(context)
-                              .getAllLibraryModel!
-                              .libraries[index]),
+                      itemBuilder: (context, index) => CatItem(
+                        categoryModel: MainCubit.get(context)
+                            .categoriesModel!
+                            .categories[index],
+                      ),
                       itemCount: MainCubit.get(context)
-                          .getAllLibraryModel!
-                          .libraries
+                          .categoriesModel!
+                          .categories
                           .length,
                     )
-                  : const EmptyWidget(text: 'There is no libraries yet')
+                  : const EmptyWidget(text: 'There is no types yet')
               : const LoadingWidget(),
           floatingButton: FloatingActionButton.extended(
             onPressed: () {
@@ -64,7 +71,7 @@ class _LibrariesPageState extends State<LibrariesPage> {
                     );
                   });
             },
-            label: const Text('Add Library'),
+            label: const Text('Add Type'),
             icon: const Icon(Icons.add),
             backgroundColor: HexColor(mainColor),
           ),

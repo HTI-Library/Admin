@@ -5,9 +5,9 @@ import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library_admin/core/util/widgets/main_scaffold.dart';
-import 'package:hti_library_admin/features/account/widget/btn_my_account.dart';
 
 import '../../../../../core/util/cubit/state.dart';
+import '../../../../../core/util/widgets/btn_my_account.dart';
 
 class SettingPages extends StatelessWidget {
   const SettingPages({Key? key}) : super(key: key);
@@ -150,7 +150,7 @@ class SettingPages extends StatelessWidget {
                           });
                       // navigateTo(context, LanguagePage());
                     },
-                    text: '${appTranslation(context).language}',
+                    text: appTranslation(context).language,
                     imagePath: "",
                   ),
                   space10Vertical,
@@ -202,7 +202,7 @@ class SettingPages extends StatelessWidget {
                                         MainCubit.get(context)
                                             .changeMode(value: true);
                                       },
-                                      text: '${appTranslation(context).dark}',
+                                      text: appTranslation(context).dark,
                                       imagePath: "dark_mode",
                                     ),
                                   ],
@@ -212,7 +212,7 @@ class SettingPages extends StatelessWidget {
                           });
                       // navigateTo(context, ThemesPage());
                     },
-                    text: '${appTranslation(context).themes}',
+                    text: appTranslation(context).themes,
                     imagePath: "",
                   ),
                 ],

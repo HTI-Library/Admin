@@ -279,14 +279,18 @@ class RepoImplementation extends Repository {
     required String code,
     required String name,
   }) async {
+    Map<String, dynamic> map = <String, dynamic>{
+      'data': {"name": name, "code": code}
+    };
+
+    FormData staticData = FormData();
+    FormData data = FormData();
+
+    staticData.fields.add(MapEntry('data', name));
+    staticData.fields.add(MapEntry('code', code));
     return await dioHelper.post(
       url: createLibraryUrl,
-      data: {
-        'data': {
-          'name': name,
-          'code': code,
-        },
-      },
+      data: staticData,
     );
   }
 

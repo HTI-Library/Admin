@@ -30,7 +30,7 @@ const String grey = '#898989';
 const String green = '#125c03';
 // const String blueGrey = '#e1e7f0';
 // const String black_e = '#282828';
-const String surface = '#f5f5f5';
+const String surface = '#ffffff';
 const String greyWhite = '#8fe1e7f0';
 const String dialogColor = '#e1e7f0';
 const String disableButton = '#A7B1D7';
@@ -38,71 +38,6 @@ const String disableButton = '#A7B1D7';
 //dark theme
 const String secondBackground = '393d40';
 const String secondaryVariantDark = '8a8a89';
-// final ThemeData lightTheme = ThemeData(
-//   scaffoldBackgroundColor: Colors.white,
-//   appBarTheme: AppBarTheme(
-//     systemOverlayStyle: Platform.isIOS
-//         ? null
-//         : const SystemUiOverlayStyle(
-//       statusBarColor: Colors.white,
-//       statusBarIconBrightness: Brightness.dark,
-//     ),
-//     backgroundColor: Colors.white,
-//     elevation: 0.0,
-//     titleSpacing: 0.0,
-//     iconTheme: const IconThemeData(
-//       color: Colors.black,
-//       size: 20.0,
-//     ),
-//     titleTextStyle: const TextStyle(
-//       color: Colors.black,
-//       fontWeight: FontWeight.bold,
-//     ),
-//   ),
-//   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//     backgroundColor: Colors.white,
-//     elevation: 50.0,
-//     selectedItemColor: HexColor(mainColor),
-//     unselectedItemColor: Colors.grey[400],
-//     type: BottomNavigationBarType.fixed,
-//     selectedLabelStyle: const TextStyle(
-//       height: 1.5,
-//     ),
-//   ),
-//   primarySwatch: MaterialColor(int.parse('0xff$mainColor'), color),
-// );
-
-final ThemeData darkTheme = ThemeData(
-  scaffoldBackgroundColor: HexColor('1B1C30'),
-  appBarTheme: AppBarTheme(
-    systemOverlayStyle: Platform.isIOS
-        ? null
-        : const SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarIconBrightness: Brightness.dark,
-          ),
-    backgroundColor: Colors.transparent,
-    elevation: 0.0,
-    titleSpacing: 20.0,
-    iconTheme: const IconThemeData(
-      color: Colors.white,
-      size: 20.0,
-    ),
-  ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: HexColor('1B1C30'),
-    elevation: 50.0,
-    selectedItemColor: HexColor(mainColor),
-    //FFF047
-    //FFEC00
-    unselectedItemColor: Colors.grey[400],
-    type: BottomNavigationBarType.fixed,
-    selectedLabelStyle: const TextStyle(
-      height: 1.5,
-    ),
-  ),
-  primarySwatch: MaterialColor(int.parse('0xff$mainColor'), color),
-);
 
 const Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),

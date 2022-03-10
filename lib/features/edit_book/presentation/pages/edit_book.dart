@@ -81,72 +81,54 @@ class EditBook extends StatelessWidget {
                       AppTextFormField(
                         type: TextInputType.name,
                         hint: 'Library',
-                        callbackHandle: (controller) {
-                          controller = libraryController;
-                        },
+                        textEditingController: libraryController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
                         hint: 'Book Type',
-                        callbackHandle: (controller) {
-                          controller = typeController;
-                        },
+                        textEditingController: typeController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
                         hint: 'Book Name',
-                        callbackHandle: (controller) {
-                          controller = bookNameController;
-                        },
+                        textEditingController: bookNameController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
                         hint: 'Book Edition',
-                        callbackHandle: (controller) {
-                          controller = bookEditionController;
-                        },
+                        textEditingController: bookEditionController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
                         hint: 'Book Author',
-                        callbackHandle: (controller) {
-                          controller = bookAuthorController;
-                        },
+                        textEditingController: bookAuthorController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
                         hint: 'Book Pages',
-                        callbackHandle: (controller) {
-                          controller = pagesController;
-                        },
+                        textEditingController: pagesController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         hint: 'Book Categories',
-                        callbackHandle: (controller) {
-                          controller = bookCategoryController;
-                        },
+                        textEditingController: bookCategoryController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
                         hint: 'Book Number',
-                        callbackHandle: (controller) {
-                          controller = bookNumberController;
-                        },
+                        textEditingController: bookNumberController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
                         hint: 'Book Copies',
-                        callbackHandle: (controller) {
-                          controller = numberOfCopiesController;
-                        },
+                        textEditingController: numberOfCopiesController,
                       ),
                       space15Vertical,
                       AppButton(

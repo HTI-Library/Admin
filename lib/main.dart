@@ -98,6 +98,7 @@ class _MyAppState extends State<MyApp> {
             )
             ..checkInternet()
             ..checkConnectivity()
+            // ..createLibrary(code: 'code', name: 'name')
             // ..createBook(
             //     library: 'a',
             //     type: 'b',

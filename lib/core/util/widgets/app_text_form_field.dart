@@ -13,7 +13,7 @@ class AppTextFormField extends StatefulWidget {
   final Widget? icon;
   final String hint;
   final bool isPassword;
-  final Function callbackHandle;
+  final TextEditingController textEditingController;
   final ValueChanged<String>? onChanged;
   final TextInputType type;
   final TextInputAction? textInputAction;
@@ -27,7 +27,7 @@ class AppTextFormField extends StatefulWidget {
     this.type = TextInputType.text,
     this.isPassword = false,
     this.onChanged,
-    required this.callbackHandle,
+    required this.textEditingController,
   }) : super(key: key);
 
   @override
@@ -35,13 +35,10 @@ class AppTextFormField extends StatefulWidget {
 }
 
 class _AppTextFormFieldState extends State<AppTextFormField> {
-  final TextEditingController textEditingController = TextEditingController();
   bool isShown = true;
 
   @override
   Widget build(BuildContext context) {
-    widget.callbackHandle(textEditingController);
-
     return BlocBuilder<MainCubit, MainState>(
       builder: (BuildContext context, state) {
         return Container(
@@ -62,7 +59,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   color: HexColor(mainColor),
                 ),
             keyboardType: widget.type,
-            controller: textEditingController,
+            controller: widget.textEditingController,
             obscureText: widget.isPassword ? isShown : false,
             onChanged: widget.onChanged,
             textInputAction: widget.textInputAction,
@@ -88,6 +85,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                     color: HexColor(mainColor),
                   ),
               hintText: widget.hint,
+              labelText: widget.label,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
               ),
