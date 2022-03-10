@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -165,6 +166,7 @@ class TypeItem extends StatelessWidget {
                                                   color: HexColor(greyWhite),
                                                   child: IconButton(
                                                     onPressed: () {
+                                                      Navigator.pop(context);
                                                       MainCubit.get(context)
                                                           .deleteType(
                                                         typeID: typeModel.id,

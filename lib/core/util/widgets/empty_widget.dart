@@ -25,8 +25,10 @@ class EmptyWidget extends StatelessWidget {
             image:  AssetImage(
               'assets/images/$image',
             ),
+            width: MediaQuery.of(context).size.width /1.5,
+            height: MediaQuery.of(context).size.width /1.5,
           ),
-          space10Vertical,
+          space20Vertical,
           Text(
             text,
             style: Theme.of(context).textTheme.bodyText2!.copyWith(

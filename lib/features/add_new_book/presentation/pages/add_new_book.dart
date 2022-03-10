@@ -45,26 +45,32 @@ class AddNewBook extends StatelessWidget {
                         'Add Book',
                         style: Theme.of(context).textTheme.headline6,
                       ),
+                      space15Vertical,
                       Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
-                          Icon(
-                            Icons.book_rounded,
-                            size: MediaQuery.of(context).size.width / 1.2,
+                          Image(
+                            image: const AssetImage(
+                              'assets/images/placeholder.jpg',
+                            ),
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: MediaQuery.of(context).size.width / 2 * 1.6,
+                            fit: BoxFit.cover,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 70.0),
+                            padding: const EdgeInsets.only(bottom: 40.0),
                             child: AppButton(
-                              width: MediaQuery.of(context).size.width / 3.2,
+                              width: MediaQuery.of(context).size.width / 3,
                               height: 35.0,
                               color: HexColor(dialogColor),
-                              label: 'Upload Image',
+                              label: 'Upload',
                               textColor: HexColor(mainColor),
                               onPress: () {},
                             ),
                           ),
                         ],
                       ),
+                      space15Vertical,
                       MyBtnAccount(
                         voidCallback: () {},
                         text: 'Upload PDF',
@@ -125,15 +131,13 @@ class AddNewBook extends StatelessWidget {
                       ),
                       space15Vertical,
                       AppButton(
-                        width: MediaQuery.of(context).size.width / 3.2,
+                        width: MediaQuery.of(context).size.width / 3,
                         height: 35.0,
                         color: HexColor(mainColor),
                         label: 'ADD',
                         textColor: HexColor(dialogColor),
                         onPress: () {
-                          if (formKe.currentState!.validate()) {
-
-                          }
+                          if (formKe.currentState!.validate()) {}
                         },
                       ),
                       space30Vertical,

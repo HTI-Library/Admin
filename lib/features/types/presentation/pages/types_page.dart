@@ -32,22 +32,38 @@ class _TypesPageState extends State<TypesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainCubit, MainState>(
+    return BlocConsumer<MainCubit, MainState>(
+      listener: (context, state) {
+        if (state is DeleteTypeSuccess) {
+          MainCubit.get(context).getAllTypes(library: widget.library);
+        }
+      },
       builder: (context, state) {
         return BackScaffold(
           title: 'Types In ${widget.library}',
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: MainCubit.get(context).getAllTypesModel != null
               ? MainCubit.get(context).getAllTypesModel!.types.isNotEmpty
-                  ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => TypeItem(
-                        typeModel: MainCubit.get(context)
-                            .getAllTypesModel!
-                            .types[index],
-                      ),
-                      itemCount:
-                          MainCubit.get(context).getAllTypesModel!.types.length,
+                  ? Column(
+                      children: [
+                        if (state is DeleteTypeLoading ||
+                            state is DeleteTypeLoading)
+                          const LinearProgressIndicator(),
+                        Expanded(
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) => TypeItem(
+                              typeModel: MainCubit.get(context)
+                                  .getAllTypesModel!
+                                  .types[index],
+                            ),
+                            itemCount: MainCubit.get(context)
+                                .getAllTypesModel!
+                                .types
+                                .length,
+                          ),
+                        ),
+                      ],
                     )
                   : const EmptyWidget(text: 'There is no types yet')
               : const LoadingWidget(),

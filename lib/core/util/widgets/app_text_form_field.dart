@@ -85,7 +85,6 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                     color: HexColor(mainColor),
                   ),
               hintText: widget.hint,
-              labelText: widget.label,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
               ),

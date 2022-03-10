@@ -4,6 +4,7 @@ import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 import 'package:hti_library_admin/core/util/widgets/default_text_button.dart';
+import 'package:hti_library_admin/features/edit_book/presentation/pages/edit_book.dart';
 
 class BookItem extends StatelessWidget {
   const BookItem({Key? key, required this.model}) : super(key: key);
@@ -91,7 +92,9 @@ class BookItem extends StatelessWidget {
                       child: AppButton(
                         height: 35.0,
                         label: appTranslation(context).edit,
-                        onPress: () {},
+                        onPress: () {
+                          navigateTo(context, EditBook());
+                        },
                       ),
                     ),
                   ],

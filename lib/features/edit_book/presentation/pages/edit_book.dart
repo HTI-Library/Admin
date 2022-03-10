@@ -132,7 +132,7 @@ class EditBook extends StatelessWidget {
                       ),
                       space15Vertical,
                       AppButton(
-                        width: MediaQuery.of(context).size.width / 3.2,
+                        width: MediaQuery.of(context).size.width / 3,
                         height: 35.0,
                         color: HexColor(mainColor),
                         label: 'SAVE',
