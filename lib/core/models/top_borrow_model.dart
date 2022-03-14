@@ -12,7 +12,7 @@ class TopBorrowModel {
   factory TopBorrowModel.fromJson(Map<String, dynamic> json) {
     return TopBorrowModel(
       books:
-          List.from(json['books']).map((e) => SimpleBook.fromJson(e)).toList(),
+      List.from(json['books']).map((e) => SimpleBook.fromJson(e)).toList(),
       allBooks: json['allBooks'] ?? 0,
     );
   }

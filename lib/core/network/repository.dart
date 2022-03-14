@@ -9,10 +9,29 @@ abstract class Repository {
 
   Future<Response> getAllLibrariesRepo();
 
+  Future<Response> getBooksInBorrowRepo({
+    required bool inBorrow,
+    required int page,
+  });
+
   Future<Response> createUserRepo({
     required String email,
     required String name,
     required String password,
+  });
+
+  Future<Response> bookDetailsRepo({
+    required String bookId,
+  });
+
+  Future<Response> createCategoryRepo({
+    required String library,
+    required String name,
+    required String type,
+  });
+
+  Future<Response> startBorrowTimeRepo({
+    required String borrowID,
   });
 
   Future<Response> createBookRepo({
@@ -203,26 +222,30 @@ class RepoImplementation extends Repository {
     required String classificationNum,
     required String overview,
   }) async {
+    FormData staticData = FormData();
+    List author = [
+      {"name": "mina 1"},
+      {"name": "mina 2"},
+      {"name": "mina 3"}
+    ];
+    String stringAuthor = author.toString();
+
+    staticData.fields.add(const MapEntry('library', 'a'));
+    staticData.fields.add(const MapEntry('type', 'b'));
+    staticData.fields.add(const MapEntry('category', 'category1'));
+    staticData.fields.add(const MapEntry('name', 'name form'));
+    staticData.fields.add(const MapEntry('amount', '12'));
+    staticData.fields.add(const MapEntry('overview', 'test over view text'));
+    staticData.fields.add(MapEntry('auther', stringAuthor));
+    staticData.fields.add(const MapEntry('rate', '2.7'));
+    staticData.fields.add(const MapEntry('edition', '2'));
+    staticData.fields.add(const MapEntry('pages', '200'));
+    staticData.fields.add(const MapEntry('bookNum', '51'));
+    staticData.fields.add(const MapEntry('classificationNum', '251.2'));
+
     return await dioHelper.post(
       url: createBookUrl,
-      data: {
-        'data': {
-          'library': library,
-          'type': type,
-          'name': name,
-          'rate': rate,
-          'edition': edition,
-          'auther': [
-            {'name': auther}
-          ],
-          'pages': pages,
-          'category': category,
-          'bookNum': bookNum,
-          'amount': amount,
-          'overview': overview,
-          'classificationNum': classificationNum,
-        },
-      },
+      data: staticData,
     );
   }
 
@@ -401,6 +424,64 @@ class RepoImplementation extends Repository {
       query: {
         'categoryID': catId,
       },
+    );
+  }
+
+  @override
+  Future<Response> createCategoryRepo({
+    required String library,
+    required String name,
+    required String type,
+  }) async {
+    FormData staticData = FormData();
+    staticData.fields.add(const MapEntry('library', 'a'));
+    staticData.fields.add(const MapEntry('type', 'b'));
+    staticData.fields.add(const MapEntry('name', 'category101'));
+
+    return await dioHelper.post(
+      url: createCategoryUrl,
+      data: FormData.fromMap(
+        {
+          'library': library,
+          'type': type,
+          'name': name,
+        },
+      ),
+    );
+  }
+
+  @override
+  Future<Response> bookDetailsRepo({
+    required String bookId,
+  }) async {
+    return await dioHelper.get(
+      url: bookDetailsUrl,
+      query: {
+        'book_id': bookId,
+      },
+    );
+  }
+
+  @override
+  Future<Response> getBooksInBorrowRepo({
+    required bool inBorrow,
+    required int page,
+  }) async {
+    return await dioHelper.get(
+      url: booksInBorrowUrl,
+      query: {
+        'inBorrow': inBorrow,
+        'page': page,
+      },
+    );
+  }
+
+  @override
+  Future<Response> startBorrowTimeRepo({
+    required String borrowID,
+  }) async {
+    return await dioHelper.post(
+      url: startBorrowTimeUrl,
     );
   }
 }

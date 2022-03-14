@@ -1,4 +1,5 @@
-import 'package:hti_library_admin/core/models/top_borrow_model.dart';
+import 'auther_model.dart';
+import 'top_borrow_model.dart';
 
 class BookDetailsModel {
   final BookDetails book;
@@ -16,12 +17,15 @@ class BookDetailsModel {
   factory BookDetailsModel.fromJson(Map<String, dynamic> json) {
     return BookDetailsModel(
       book: BookDetails.fromJson(json['book']),
-      sameCategory:
-          List.from(json['same_category']).map((e) => SimpleBook.fromJson(e)).toList(),
-      sameAuthor:
-      List.from(json['same_auther']).map((e) => SimpleBook.fromJson(e)).toList(),
-      sameEdition:
-      List.from(json['same_edition']).map((e) => SimpleBook.fromJson(e)).toList(),
+      sameCategory: List.from(json['same_category'])
+          .map((e) => SimpleBook.fromJson(e))
+          .toList(),
+      sameAuthor: List.from(json['same_auther'])
+          .map((e) => SimpleBook.fromJson(e))
+          .toList(),
+      sameEdition: List.from(json['same_edition'])
+          .map((e) => SimpleBook.fromJson(e))
+          .toList(),
     );
   }
 
@@ -38,30 +42,38 @@ class BookDetailsModel {
 class BookDetails {
   late final String id;
   late final String name;
-  late final int amount;
+  late final num amount;
   late final String overview;
-  late final String authors;
-  late final int rate;
+  late final List<Author> authors;
+  late final num rate;
   late final String edition;
-  late final int pages;
+  late final num pages;
   late final String category;
-  late final int topBorrow;
+  late final String library;
+  late final String type;
+  late final String bookNum;
+  late final String classificationNum;
+  late final num topBorrow;
   late final String bookImage;
   late final String bookLink;
   late final String createdAt;
   late final String updatedAt;
-  late final int __v;
+  late final num __v;
 
   BookDetails.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
     name = json['name'] ?? '';
     amount = json['amount'] ?? 0;
     overview = json['overview'] ?? '';
-    authors = json['auther'] ?? '';
+    authors = List.from(json['auther']).map((e) => Author.fromJson(e)).toList();
     rate = json['rate'] ?? 0;
     edition = json['edition'] ?? '';
     pages = json['pages'] ?? 0;
     category = json['category'] ?? '';
+    library = json['library'] ?? '';
+    type = json['type'] ?? '';
+    bookNum = json['bookNum'] ?? '';
+    classificationNum = json['classificationNum'] ?? '';
     topBorrow = json['top_Borrow'] ?? 0;
     bookImage = json['bookImage'] ?? '';
     bookLink = json['bookLink'] ?? '';

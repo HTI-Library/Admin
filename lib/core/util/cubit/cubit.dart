@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/error/exceptions.dart';
+import 'package:hti_library_admin/core/models/book_details_model.dart';
+import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/models/categories_model.dart';
 import 'package:hti_library_admin/core/models/get_all_library_model.dart';
 import 'package:hti_library_admin/core/models/get_all_types_model.dart';
@@ -552,6 +554,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteBook------------success');
       emit(DeleteBookSuccess());
+      getAllBooks(page: 1);
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -990,5 +993,117 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // deleteCategory ------------------- end
+
+  /// createCategory ------------------- start
+
+  void createCategory({
+    required String library,
+    required String name,
+    required String type,
+  }) async {
+    debugPrint('createCategory------------loading');
+    emit(CreateCategoryLoading());
+    await _repository
+        .createCategoryRepo(
+      type: type,
+      library: library,
+      name: name,
+    )
+        .then((value) {
+      // success
+      debugPrint('createCategory------------success');
+      emit(CreateCategorySuccess());
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('createCategory------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('createCategory------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// createCategory ------------------- end
+
+  /// bookDetails ------------------- start
+
+  BookDetailsModel? bookModel;
+
+  Future<void> bookDetails({required String bookId}) async {
+    bookModel = null;
+    debugPrint('bookDetails------------loading');
+    emit(BookDetailsLoading());
+    await _repository
+        .bookDetailsRepo(
+      bookId: bookId,
+    )
+        .then((value) {
+      // success
+      bookModel = BookDetailsModel.fromJson(value.data);
+      debugPrint(bookModel!.book.bookImage);
+      debugPrint('bookDetails------------success');
+      emit(BookDetailsSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('bookDetails------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// bookDetails ------------------- end
+
+  /// getBooksInBorrow ------------------- start
+  BorrowModel? borrowModelDelivered;
+  BorrowModel? borrowModelOrdered;
+
+  void getBooksInBorrowTrue({
+    required int page,
+  }) async {
+    debugPrint('getBooksInBorrow------------loading');
+    emit(GetBooksInBorrowLoading());
+    await _repository
+        .getBooksInBorrowRepo(
+      page: page,
+      inBorrow: true,
+    )
+        .then((value) {
+      borrowModelDelivered = BorrowModel.fromJson(value.data);
+      // success
+      debugPrint('getBooksInBorrow------------success');
+      emit(GetBooksInBorrowSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getBooksInBorrow------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+  void getBooksInBorrowFalse({
+    required int page,
+  }) async {
+    debugPrint('getBooksInBorrow------------loading');
+    emit(GetBooksInBorrowLoading());
+    await _repository
+        .getBooksInBorrowRepo(
+      page: page,
+      inBorrow: false,
+    )
+        .then((value) {
+      borrowModelOrdered = BorrowModel.fromJson(value.data);
+      // success
+      debugPrint('getBooksInBorrow------------success');
+      emit(GetBooksInBorrowSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getBooksInBorrow------------error');
+      debugPrint(error.toString());
+      emit(Error(error.toString()));
+    });
+  }
+
+// getBooksInBorrow ------------------- end
 
 }

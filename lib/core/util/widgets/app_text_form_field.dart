@@ -84,7 +84,12 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
                     color: HexColor(mainColor),
                   ),
+              labelStyle: Theme.of(context).textTheme.caption!.copyWith(
+                color: HexColor(mainColor),
+                height: 5
+              ),
               hintText: widget.hint,
+              labelText: widget.label,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
               ),

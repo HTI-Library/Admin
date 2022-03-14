@@ -98,6 +98,9 @@ class _MyAppState extends State<MyApp> {
             )
             ..checkInternet()
             ..checkConnectivity()
+            ..getBooksInBorrowTrue(page: 1)
+            ..getBooksInBorrowFalse(page: 1)
+            // ..createCategory(library: 'a', name: 'name', type: 'b')
             // ..createLibrary(code: 'code', name: 'name')
             // ..createBook(
             //     library: 'a',

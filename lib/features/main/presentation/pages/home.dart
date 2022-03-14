@@ -4,8 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
-import 'package:hti_library_admin/core/util/widgets/order_book_item.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
+import 'package:hti_library_admin/core/util/widgets/order_book_item.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 controller: MainCubit.get(context).controller,
                 padding: EdgeInsets.zero,
-                unselectedLabelColor: HexColor(mainColor),
+                unselectedLabelColor: HexColor(grey),
                 isScrollable: true,
                 indicatorColor: HexColor(mainColor),
                 labelColor: HexColor(mainColor),
@@ -55,32 +55,31 @@ class Home extends StatelessWidget {
                   controller: MainCubit.get(context).controller,
                   children: [
                     Container(
-                      child: MainCubit.get(context).getAllBooksModel != null
+                      child: MainCubit.get(context).borrowModelOrdered != null
                           ? ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) => OrderBookItem(
                                 model: MainCubit.get(context)
-                                    .getAllBooksModel!
+                                    .borrowModelOrdered!
                                     .books[index],
                               ),
                               itemCount: MainCubit.get(context)
-                                  .getAllBooksModel!
+                                  .borrowModelOrdered!
                                   .books
                                   .length,
                             )
                           : const LoadingWidget(),
                     ),
                     Container(
-                      child: MainCubit.get(context).getAllBooksModel != null
+                      child: MainCubit.get(context).borrowModelDelivered != null
                           ? ListView.builder(
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) => OrderBookItem(
                                 model: MainCubit.get(context)
-                                    .getAllBooksModel!
+                                    .borrowModelDelivered!
                                     .books[index],
                               ),
-                              itemCount: MainCubit.get(context)
-                                  .getAllBooksModel!
+                              itemCount: MainCubit.get(context).borrowModelDelivered!
                                   .books
                                   .length,
                             )

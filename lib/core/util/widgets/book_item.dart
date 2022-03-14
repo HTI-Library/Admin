@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
+import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 import 'package:hti_library_admin/core/util/widgets/default_text_button.dart';
 import 'package:hti_library_admin/features/edit_book/presentation/pages/edit_book.dart';
@@ -82,7 +83,9 @@ class BookItem extends StatelessWidget {
                         onPress: () {
                           showDialog(
                             context: context,
-                            builder: (context) => const DeleteBookDialog(),
+                            builder: (context) => DeleteBookDialog(
+                              bookId: model.id,
+                            ),
                           );
                         },
                       ),
@@ -93,7 +96,7 @@ class BookItem extends StatelessWidget {
                         height: 35.0,
                         label: appTranslation(context).edit,
                         onPress: () {
-                          navigateTo(context, EditBook());
+                          navigateTo(context, EditBook(bookId: model.id,));
                         },
                       ),
                     ),
@@ -109,7 +112,8 @@ class BookItem extends StatelessWidget {
 }
 
 class DeleteBookDialog extends StatelessWidget {
-  const DeleteBookDialog({Key? key}) : super(key: key);
+  const DeleteBookDialog({Key? key, required this.bookId}) : super(key: key);
+  final String bookId;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +148,10 @@ class DeleteBookDialog extends StatelessWidget {
                 }),
             DefaultTextButton(
               label: appTranslation(context).delete,
-              onPress: () {},
+              onPress: () {
+                MainCubit.get(context).deleteBook(bookId: bookId);
+                Navigator.pop(context);
+              },
               style: Theme.of(context).textTheme.button!.copyWith(
                     color: HexColor(red),
                   ),

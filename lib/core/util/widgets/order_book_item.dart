@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:hti_library_admin/core/models/top_borrow_model.dart';
+import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 
 class OrderBookItem extends StatelessWidget {
   const OrderBookItem({Key? key, required this.model}) : super(key: key);
-  final SimpleBook model;
+  final BorrowDataModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,12 @@ class OrderBookItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Ehab Borae',
+                        model.userName,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        '42018064',
+                        model.userEmail,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
@@ -80,10 +80,10 @@ class OrderBookItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Image(
-                    image: NetworkImage(model.bookImage),
+                    image: NetworkImage(model.book.bookImage),
                     height: MediaQuery.of(context).size.width / 3.9 * 1.6,
                     width: MediaQuery.of(context).size.width / 3.9,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 space10Horizontal,
@@ -93,45 +93,28 @@ class OrderBookItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.name,
+                        model.book.name,
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        '${appTranslation(context).author} : ${model.authors}',
+                        '${appTranslation(context).author} : ${model.book.authors[0].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        'Edition : ${model.edition}',
+                        'Edition : ${model.book.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
-                        '${appTranslation(context).pagesNum} : ${model.pages}',
+                        '${appTranslation(context).pagesNum} : ${model.book.pages}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: AppButton(
-                                height: 35.0,
-                                color: HexColor(greyWhite),
-                                label: appTranslation(context).cancel,
-                                textColor: HexColor(mainColor),
-                                onPress: () {},),
-                          ),
-                          space10Horizontal,
-                          Expanded(
-                            child: AppButton(
-                              height: 35.0,
-                              label: appTranslation(context).confirm,
-                              onPress: () {},
-                            ),
-                          ),
-                        ],
+                      AppButton(
+                        height: 35.0,
+                        label: appTranslation(context).confirm,
+                        onPress: () {},
                       ),
                     ],
                   ),

@@ -4,13 +4,13 @@ class Author {
 
   Author.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? '';
-    authorName = json['autherName'] ?? '';
+    authorName = json['name'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['id'] = id;
-    _data['autherName'] = authorName;
+    _data['name'] = authorName;
     return _data;
   }
 }

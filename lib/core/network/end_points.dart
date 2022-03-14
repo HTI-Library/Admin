@@ -18,3 +18,7 @@ const editTypeUrl = 'edit_type';
 const getAllTypesUrl = 'types';
 const deleteTypeUrl = 'type';
 const deleteCategoryUrl = 'category';
+const createCategoryUrl = 'create_category';
+const bookDetailsUrl = 'get_book';
+const booksInBorrowUrl = 'in_borrow';
+const startBorrowTimeUrl = 'start_borrow_time';

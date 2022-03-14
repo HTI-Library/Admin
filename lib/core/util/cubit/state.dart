@@ -154,3 +154,15 @@ class DeleteTypeSuccess extends MainState {}
 class DeleteCategoryLoading extends MainState {}
 
 class DeleteCategorySuccess extends MainState {}
+
+class CreateCategoryLoading extends MainState {}
+
+class CreateCategorySuccess extends MainState {}
+
+class BookDetailsLoading extends MainState {}
+
+class BookDetailsSuccess extends MainState {}
+
+class GetBooksInBorrowLoading extends MainState {}
+
+class GetBooksInBorrowSuccess extends MainState {}
