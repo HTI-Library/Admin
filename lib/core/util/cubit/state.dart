@@ -175,4 +175,8 @@ class ReturnBorrowLoading extends MainState {}
 
 class ReturnBorrowSuccess extends MainState {}
 
+class GetCatBooksLoading extends MainState {}
+
+class GetCatBooksSuccess extends MainState {}
+
 

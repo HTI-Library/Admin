@@ -147,11 +147,12 @@ class LibraryItem extends StatelessWidget {
                                                   color: HexColor(greyWhite),
                                                   child: IconButton(
                                                     onPressed: () {
-                                                      // MainCubit.get(context)
-                                                      //     .deleteLibrary(
-                                                      //   library:
-                                                      //       libraryModel.id,
-                                                      // );
+                                                      Navigator.pop(context);
+                                                      MainCubit.get(context)
+                                                          .deleteLibrary(
+                                                        library:
+                                                            libraryModel.id,
+                                                      );
                                                     },
                                                     icon: Icon(
                                                       Icons.delete_rounded,

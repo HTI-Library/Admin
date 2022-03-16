@@ -8,8 +8,13 @@ import 'package:hti_library_admin/core/util/widgets/default_text_button.dart';
 import 'package:hti_library_admin/features/edit_book/presentation/pages/edit_book.dart';
 
 class BookItem extends StatelessWidget {
-  const BookItem({Key? key, required this.model}) : super(key: key);
+  const BookItem({
+    Key? key,
+    required this.model,
+    required this.getBooksMethod,
+  }) : super(key: key);
   final SimpleBook model;
+  final VoidCallback getBooksMethod;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +90,7 @@ class BookItem extends StatelessWidget {
                             context: context,
                             builder: (context) => DeleteBookDialog(
                               bookId: model.id,
+                              getBooksMethod: getBooksMethod,
                             ),
                           );
                         },
@@ -96,7 +102,11 @@ class BookItem extends StatelessWidget {
                         height: 35.0,
                         label: appTranslation(context).edit,
                         onPress: () {
-                          navigateTo(context, EditBook(bookId: model.id,));
+                          navigateTo(
+                              context,
+                              EditBook(
+                                bookId: model.id,
+                              ));
                         },
                       ),
                     ),
@@ -112,8 +122,13 @@ class BookItem extends StatelessWidget {
 }
 
 class DeleteBookDialog extends StatelessWidget {
-  const DeleteBookDialog({Key? key, required this.bookId}) : super(key: key);
+  const DeleteBookDialog({
+    Key? key,
+    required this.bookId,
+    required this.getBooksMethod,
+  }) : super(key: key);
   final String bookId;
+  final VoidCallback getBooksMethod;
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +165,7 @@ class DeleteBookDialog extends StatelessWidget {
               label: appTranslation(context).delete,
               onPress: () {
                 MainCubit.get(context).deleteBook(bookId: bookId);
+                getBooksMethod();
                 Navigator.pop(context);
               },
               style: Theme.of(context).textTheme.button!.copyWith(

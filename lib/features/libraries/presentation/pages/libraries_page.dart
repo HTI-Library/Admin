@@ -36,18 +36,32 @@ class _LibrariesPageState extends State<LibrariesPage> {
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: MainCubit.get(context).getAllLibraryModel != null
               ? MainCubit.get(context).getAllLibraryModel!.libraries.isNotEmpty
-                  ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => LibraryItem(
-                          libraryModel: MainCubit.get(context)
-                              .getAllLibraryModel!
-                              .libraries[index]),
-                      itemCount: MainCubit.get(context)
-                          .getAllLibraryModel!
-                          .libraries
-                          .length,
+                  ? Column(
+                      children: [
+                        if (state is GetAllLibrariesLoading)
+                          const LinearProgressIndicator(),
+                        Expanded(
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              MainCubit.get(context).getAllLibraries();
+                            },
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => LibraryItem(
+                                  libraryModel: MainCubit.get(context)
+                                      .getAllLibraryModel!
+                                      .libraries[index]),
+                              itemCount: MainCubit.get(context)
+                                  .getAllLibraryModel!
+                                  .libraries
+                                  .length,
+                            ),
+                          ),
+                        ),
+                      ],
                     )
-                  : const EmptyWidget(text: 'There is no libraries yet')
+                  : const EmptyWidget(
+                      text: 'There is no libraries yet',
+                    )
               : const LoadingWidget(),
           floatingButton: FloatingActionButton.extended(
             onPressed: () {

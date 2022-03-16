@@ -554,7 +554,6 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteBook------------success');
       emit(DeleteBookSuccess());
-      getAllBooks(page: 1);
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -812,6 +811,7 @@ class MainCubit extends Cubit<MainState> {
   GetAllLibraryModel? getAllLibraryModel;
 
   void getAllLibraries() async {
+    getAllLibraryModel = null;
     debugPrint('getAllLibraries------------loading');
     emit(GetAllLibrariesLoading());
     await _repository.getAllLibrariesRepo().then((value) {
@@ -840,6 +840,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteLibrary------------success');
       emit(DeleteLibrarySuccess());
+      getAllLibraries();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -1161,5 +1162,40 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // returnBorrow ------------------- end
+
+  /// getCatBooks ------------------- start
+  TopBorrowModel? getCatBooksModel;
+
+  void getCatBooks({
+    required String category,
+    required String library,
+    required String type,
+  }) async {
+    getCatBooksModel = null;
+    debugPrint('getCatBooks------------loading');
+    emit(GetCatBooksLoading());
+    await _repository
+        .getCatBooksRepo(
+      type: type,
+      library: library,
+      category: category,
+    )
+        .then((value) {
+      // success
+      getCatBooksModel = TopBorrowModel.fromJson(value.data);
+      debugPrint('getCatBooks------------success');
+      emit(GetCatBooksSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getCatBooks------------error');
+      debugPrint(error.toString());
+      ServerException exception = error as ServerException;
+      debugPrint('getCatBooks------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// getCatBooks ------------------- end
 
 }

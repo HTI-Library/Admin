@@ -4,7 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
-import 'package:hti_library_admin/core/util/widgets/empty_widget.dart';
+import 'package:hti_library_admin/core/util/widgets/empty_widget_with_reload.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
 import 'package:hti_library_admin/core/util/widgets/order_book_item.dart';
 
@@ -85,27 +85,12 @@ class Home extends StatelessWidget {
                                         .length,
                                   ),
                                 )
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const Expanded(
-                                      child: EmptyWidget(
-                                          text: 'No books to present'),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: FloatingActionButton.extended(
-                                        elevation: 0.0,
-                                        backgroundColor: HexColor(mainColor),
-                                        onPressed: () {
-                                          MainCubit.get(context)
-                                              .getBooksInBorrowFalse(page: 1);
-                                        },
-                                        label: const Text('Reload'),
-                                        icon: const Icon(Icons.refresh_rounded),
-                                      ),
-                                    ),
-                                  ],
+                              : EmptyWidgetReload(
+                                  emptyText: 'No books to present',
+                                  onPressed: () {
+                                    MainCubit.get(context)
+                                        .getBooksInBorrowFalse(page: 1);
+                                  },
                                 )
                           : const LoadingWidget(),
                     ),
@@ -134,27 +119,12 @@ class Home extends StatelessWidget {
                                         .length,
                                   ),
                                 )
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const Expanded(
-                                      child: EmptyWidget(
-                                          text: 'No books to present'),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: FloatingActionButton.extended(
-                                        elevation: 0.0,
-                                        backgroundColor: HexColor(mainColor),
-                                        onPressed: () {
-                                          MainCubit.get(context)
-                                              .getBooksInBorrowTrue(page: 1);
-                                        },
-                                        label: const Text('Reload'),
-                                        icon: const Icon(Icons.refresh_rounded),
-                                      ),
-                                    ),
-                                  ],
+                              : EmptyWidgetReload(
+                                  emptyText: 'No books to present',
+                                  onPressed: () {
+                                    MainCubit.get(context)
+                                        .getBooksInBorrowTrue(page: 1);
+                                  },
                                 )
                           : const LoadingWidget(),
                     ),
