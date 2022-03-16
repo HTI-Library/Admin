@@ -34,6 +34,10 @@ abstract class Repository {
     required String borrowID,
   });
 
+  Future<Response> returnBorrowRepo({
+    required String borrowID,
+  });
+
   Future<Response> createBookRepo({
     required String library,
     required String type,
@@ -481,7 +485,16 @@ class RepoImplementation extends Repository {
     required String borrowID,
   }) async {
     return await dioHelper.post(
-      url: startBorrowTimeUrl,
+      url: '$startBorrowTimeUrl?borrowID=$borrowID',
+    );
+  }
+
+  @override
+  Future<Response> returnBorrowRepo({
+    required String borrowID,
+  }) async {
+    return await dioHelper.post(
+      url: '$returnBookUrl?borrow_id=$borrowID',
     );
   }
 }

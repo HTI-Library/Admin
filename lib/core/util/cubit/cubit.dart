@@ -1106,4 +1106,60 @@ class MainCubit extends Cubit<MainState> {
 
 // getBooksInBorrow ------------------- end
 
+  /// startBorrowTime ------------------- start
+
+  void startBorrowTime({required String borrowID}) async {
+    debugPrint('startBorrowTime------------loading');
+    emit(StartBorrowTimeLoading());
+    await _repository
+        .startBorrowTimeRepo(
+      borrowID: borrowID,
+    )
+        .then((value) {
+      // success
+      debugPrint('startBorrowTime------------success');
+      emit(StartBorrowTimeSuccess());
+      getBooksInBorrowFalse(page: 1);
+      getBooksInBorrowTrue(page: 1);
+    }).catchError((error) {
+      // error
+      debugPrint('startBorrowTime------------error');
+      debugPrint(error.toString());
+      ServerException exception = error as ServerException;
+      debugPrint('startBorrowTime------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// startBorrowTime ------------------- end
+
+  /// returnBorrow ------------------- start
+
+  void returnBorrow({required String borrowID}) async {
+    debugPrint('returnBorrow------------loading');
+    emit(ReturnBorrowLoading());
+    await _repository
+        .returnBorrowRepo(
+      borrowID: borrowID,
+    )
+        .then((value) {
+      // success
+      debugPrint('returnBorrow------------success');
+      emit(ReturnBorrowSuccess());
+      getBooksInBorrowFalse(page: 1);
+      getBooksInBorrowTrue(page: 1);
+    }).catchError((error) {
+      // error
+      debugPrint('returnBorrow------------error');
+      debugPrint(error.toString());
+      ServerException exception = error as ServerException;
+      debugPrint('returnBorrow------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// returnBorrow ------------------- end
+
 }
