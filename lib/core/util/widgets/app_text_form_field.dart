@@ -67,7 +67,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               border: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: MainCubit.get(context).isDark
-                      ? HexColor(grey)
+                      ? HexColor(darkBlue)
                       : secondaryVariant,
                 ),
                 borderRadius: BorderRadius.circular(10.0),

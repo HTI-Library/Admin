@@ -56,7 +56,7 @@ class MainCubit extends Cubit<MainState> {
   }
 
   // dark colors
-  String scaffoldBackground = '333739';
+  String scaffoldBackground = '15202b';
 
   String mainColorDark = 'ffffff';
   String mainColorVariantDark = '8a8a89';
@@ -125,7 +125,7 @@ class MainCubit extends Cubit<MainState> {
         backgroundColor: HexColor(surface),
         elevation: 0.0,
         selectedItemColor: HexColor(mainColor),
-        unselectedItemColor: HexColor(grey),
+        unselectedItemColor: HexColor(darkBlue),
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(
           height: 1.5,
@@ -223,7 +223,7 @@ class MainCubit extends Cubit<MainState> {
           size: 20.0,
         ),
         titleTextStyle: TextStyle(
-          color: HexColor(grey),
+          color: HexColor(darkBlue),
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -231,7 +231,7 @@ class MainCubit extends Cubit<MainState> {
         backgroundColor: HexColor(scaffoldBackground),
         elevation: 0.0,
         selectedItemColor: HexColor(mainColor),
-        unselectedItemColor: HexColor(grey),
+        unselectedItemColor: HexColor(darkBlue),
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(
           height: 1.5,

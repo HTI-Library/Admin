@@ -2,7 +2,9 @@
 
   "myProfile": "Profile",
   "notification": "Notifications",
+  "notificationNo": "You don't have any notification",
   "myMessage": "My Massages",
+  "myMessageNo": "You don't have any message",
   "calender": "Calender",
   "setting": "settings",
   "changeLanguage": "Change Language",
@@ -34,6 +36,8 @@
   "bookName": "Book Name",
   "author": "Author",
   "pagesNum": "Pages Num",
+  "edition": "Edition",
+  "noSave": "You don't have any favourite books ",
 
   "yes": "Yes",
   "no": "No",
@@ -41,10 +45,21 @@
   "password": "Password",
   "id": "ID",
 
+  "home": "Home",
+  "categories": "Categories",
+  "saved": "Favourite",
+  "account": "Account",
+
+  "myBorrowBook": "Borrowed Books",
+  "myReturnBook": "Returned Books",
+
   "cancel": "Cancel",
   "confirm": "Confirm",
   "delete": "Delete",
   "edit": "Edit",
   "deleteBook": "Delete Book ?",
+  "addLibrary": "Add Library",
+
+
   "logIn": "Login"
 }

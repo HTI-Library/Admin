@@ -4,6 +4,8 @@ import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 
+import '../cubit/cubit.dart';
+
 class OrderBookItem extends StatelessWidget {
   const OrderBookItem({Key? key, required this.model}) : super(key: key);
   final BorrowDataModel model;
@@ -18,7 +20,9 @@ class OrderBookItem extends StatelessWidget {
         end: 15.0,
       ),
       decoration: BoxDecoration(
-        color: HexColor(greyWhite),
+        color: MainCubit.get(context).isDark
+            ? HexColor(greyWhite)
+            : HexColor(greyWhite),
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
@@ -98,12 +102,12 @@ class OrderBookItem extends StatelessWidget {
                         maxLines: 1,
                       ),
                       Text(
-                        '${appTranslation(context).author} : ${model.book.authors[0].authorName}',
+                        '${appTranslation(context).author}   : ${model.book.authors[0].authorName}',
                         style: Theme.of(context).textTheme.subtitle2,
                         maxLines: 1,
                       ),
                       Text(
-                        'Edition : ${model.book.edition}',
+                        '${appTranslation(context).edition}  : ${model.book.edition}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(

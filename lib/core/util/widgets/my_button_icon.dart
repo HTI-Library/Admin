@@ -56,7 +56,7 @@ class MyButtonIcon extends StatelessWidget {
             if (assetsShow)
               SvgPicture.asset(
                 'assets/images/$imageAssets.svg',
-                color: HexColor(grey),
+                color: HexColor(darkBlue),
                 width: 16.0,
                 height: 16.0,
               ),

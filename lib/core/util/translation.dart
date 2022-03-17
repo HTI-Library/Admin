@@ -1,7 +1,10 @@
 class TranslationModel {
+
   late String myProfile;
   late String notification;
+  late String notificationNo;
   late String myMessage;
+  late String myMessageNo;
   late String calender;
   late String setting;
   late String changeLanguage;
@@ -33,27 +36,37 @@ class TranslationModel {
   late String bookName;
   late String author;
   late String pagesNum;
+  late String edition;
   late String yes;
   late String no;
   late String loginToLibrary;
   late String password;
   late String id;
+  late String home;
+  late String categories;
+  late String saved;
+  late String account;
+  late String myBorrowBook;
+  // late String myReturnBook;
+  late String noSave;
 
-  late String logIn;
+
   late String cancel;
   late String confirm;
   late String delete;
   late String deleteBook;
   late String edit;
+  late String addLibrary;
+
+
+
+  late String logIn;
+
+
 
   TranslationModel.fromJson(Map<String, dynamic> json) {
     changeLanguage = json['changeLanguage'];
-    delete = json['delete'];
-    deleteBook = json['deleteBook'];
-    edit = json['edit'];
     logIn = json['logIn'];
-    cancel = json['cancel'];
-    confirm = json['confirm'];
     arabic = json['arabic'];
     english = json['english'];
     setting = json['setting'];
@@ -61,7 +74,9 @@ class TranslationModel {
     themes = json['themes'];
     myProfile = json['myProfile'];
     notification = json['notification'];
+    notificationNo = json['notificationNo'];
     myMessage = json['myMessage'];
+    myMessageNo = json['myMessageNo'];
     calender = json['calender'];
     info = json['info'];
     privacyPolicy = json['privacyPolicy'];
@@ -84,6 +99,7 @@ class TranslationModel {
     doYouWantToLogout = json['doYouWantToLogout'];
     author = json['author'];
     pagesNum = json['pagesNum'];
+    edition = json['edition'];
     yes = json['yes'];
     no = json['no'];
     loginToLibrary = json['loginToLibrary'];
@@ -92,5 +108,22 @@ class TranslationModel {
     available = json['available'];
     unavailable = json['unavailable'];
     bookName = json['bookName'];
+    myBorrowBook = json['myBorrowBook'];
+    // myReturnBook = json['myReturnBook'];
+
+    home = json['home'];
+    categories = json['categories'];
+    saved = json['saved'];
+    noSave = json['noSave'];
+    account = json['account'];
+
+
+    delete = json['delete'];
+    deleteBook = json['deleteBook'];
+    edit = json['edit'];
+    cancel = json['cancel'];
+    confirm = json['confirm'];
+    addLibrary = json['addLibrary'];
+
   }
 }

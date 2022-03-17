@@ -57,7 +57,9 @@ class MainPage extends StatelessWidget {
                 MainCubit.get(context).bottomChanged(index);
               },
               unselectedLabelStyle: TextStyle(
-                color: HexColor(grey),
+                color: MainCubit.get(context).isDark
+                    ? HexColor(darkBlue)
+                    : HexColor(darkBlue),
                 height: 15.0,
                 fontSize: 1.0,
               ),
@@ -87,7 +89,9 @@ class MainPage extends StatelessWidget {
                       top: 10.0,
                     ),
                     child: AssetSvg(
-                      color: HexColor(mainColor),
+                      color: MainCubit.get(context).isDark
+                          ? HexColor(mainColor)
+                          : HexColor(mainColor),
                       imagePath: MainCubit.get(context).currentIndex == 1
                           ? 'message_account_solid'
                           : 'message_account',

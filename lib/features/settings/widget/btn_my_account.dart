@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/widgets/asset_svg.dart';
 
 import '../../../core/util/constants.dart';
+import '../../../core/util/cubit/cubit.dart';
 
 class MyBtnAccount extends StatelessWidget {
   final VoidCallback voidCallback;
@@ -66,7 +67,9 @@ class MyBtnAccount extends StatelessWidget {
                 if (!isCenter) const Spacer(),
                 AssetSvg(
                   imagePath: imagePath!,
-                  color: HexColor(mainColor),
+                  color: MainCubit.get(context).isDark
+                      ? HexColor(mainColor)
+                      : HexColor(mainColor),
                   size: 23,
                 )
               ],

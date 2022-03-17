@@ -64,7 +64,7 @@ class _LibrariesPageState extends State<LibrariesPage> {
                     );
                   });
             },
-            label: const Text('Add Library'),
+            label: Text('${appTranslation(context).addLibrary}'),
             icon: const Icon(Icons.add),
             backgroundColor: HexColor(mainColor),
           ),

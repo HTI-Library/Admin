@@ -15,7 +15,7 @@ import 'cubit/cubit.dart';
 const String serverFailureMessage = 'Server Failure';
 const String cacheFailureMessage = 'Cache Failure';
 
-const String mainColor = '00439c';
+const String mainColor = '008fd3';
 const String secondary = '005C89';
 // const String secondColor = 'da7339';
 // const String thirdColor = '1da1f2';
@@ -26,12 +26,12 @@ const Color starColor = Colors.amber;
 // const String productBackground = '#F8F8F8';
 // const String green = '#1fcd6c';
 const String red = '#F21A0E';
-const String grey = '#898989';
+const String darkBlue = '#15202b';
 const String green = '#125c03';
 // const String blueGrey = '#e1e7f0';
 // const String black_e = '#282828';
 const String surface = '#ffffff';
-const String greyWhite = '#8fe1e7f0';
+const String greyWhite = '#203440';
 const String dialogColor = '#e1e7f0';
 const String disableButton = '#A7B1D7';
 
@@ -149,13 +149,13 @@ String displayTranslatedText({
 
 Widget myDivider(context) => Divider(
       height: 0.0,
-      color: HexColor(grey),
+      color: HexColor(darkBlue),
     );
 
 Widget bigDivider(context) => Container(
       width: double.infinity,
       height: 4.0,
-      color: HexColor(grey),
+      color: HexColor(darkBlue),
     );
 
 const space3Vertical = SizedBox(

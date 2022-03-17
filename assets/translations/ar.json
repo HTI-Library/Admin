@@ -1,6 +1,9 @@
 {
+
   "myProfile": "الملف الشخصى",
   "notification": "الإشعارات",
+  "notificationNo": "لا يوجد لديك أي إشعارات",
+  "myMessageNo": "لا يوجد لديك أي رسائل",
   "myMessage": "رسائلى",
   "calender": "التقويم",
   "setting": "الإعدادات",
@@ -18,7 +21,7 @@
   "logOut": "تسجيل الخروج",
   "search": "بحث",
   "topBorrowBooks": "الأكثر استعارة",
-  "recentlyReturned": "المُسترج حديثاً",
+  "recentlyReturned": "المُعاد حديثاً",
   "htiMaterial": "كتب المعهد",
   "graduationProjects": "مشاريع تخرج",
   "available": "متاح",
@@ -29,20 +32,39 @@
   "moreEditionOfThisBook": "اصدارات أكثر من هذا الكتاب",
   "moreBooksFromThisCategory": "كتب أكثر من هذه الفئة",
   "moreBooksFromThisAuthor": "كتب أكثر لهذا المؤلف",
+
   "doYouWantToLogout": "هل تريد تسجيل الخروج؟",
   "bookName": "اسم الكتاب",
   "author": "المؤلف",
   "pagesNum": "صفحات",
+  "edition": "الإصدار",
+  "noSave": "لا توجد لديك اي كتب مفضلة",
+
   "youDonthavenotifications": "لا توجد لديك اي إشعارات",
+
+
   "yes": "نعم",
   "no": "لا",
   "loginToLibrary": "تسجيل الدخول الي المكتبة",
   "password": "كلمة المرور",
   "id": "الرقم الاكاديمي",
+
+  "home": "الشاشة الرئيسية",
+  "categories": "الأقسام",
+  "saved": "المحفوظات",
+  "account": "حسابي",
+  "myBorrowBook": "الكتب المُستعارة",
+  "myReturnBook": "الكتب المٌعادة",
+
+
   "cancel": "الغاء",
   "confirm": "تاكيد",
   "delete": "حذف",
   "edit": "تعديل",
   "deleteBook": "حذف الكتاب ؟",
+  "addLibrary": "اضف مكتبة",
+
+
+
   "logIn": "تسجيل الدخول"
 }
