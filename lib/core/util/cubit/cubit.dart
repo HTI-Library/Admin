@@ -100,6 +100,7 @@ class MainCubit extends Cubit<MainState> {
     family = isRtl ? 'Roboto' : 'Roboto';
 
     lightTheme = ThemeData(
+      primaryColor: HexColor(mainColor),
       scaffoldBackgroundColor: HexColor(surface),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
@@ -207,6 +208,7 @@ class MainCubit extends Cubit<MainState> {
     );
 
     darkTheme = ThemeData(
+      primaryColor: HexColor(surface),
       scaffoldBackgroundColor: HexColor(scaffoldBackground),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
