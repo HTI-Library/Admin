@@ -100,6 +100,7 @@ class MainCubit extends Cubit<MainState> {
     family = isRtl ? 'Roboto' : 'Roboto';
 
     lightTheme = ThemeData(
+      primaryColor: HexColor(mainColor),
       scaffoldBackgroundColor: HexColor(surface),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
@@ -207,6 +208,7 @@ class MainCubit extends Cubit<MainState> {
     );
 
     darkTheme = ThemeData(
+      primaryColor: HexColor(surface),
       scaffoldBackgroundColor: HexColor(scaffoldBackground),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
@@ -554,7 +556,6 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteBook------------success');
       emit(DeleteBookSuccess());
-      getAllBooks(page: 1);
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -812,6 +813,7 @@ class MainCubit extends Cubit<MainState> {
   GetAllLibraryModel? getAllLibraryModel;
 
   void getAllLibraries() async {
+    getAllLibraryModel = null;
     debugPrint('getAllLibraries------------loading');
     emit(GetAllLibrariesLoading());
     await _repository.getAllLibrariesRepo().then((value) {
@@ -840,6 +842,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteLibrary------------success');
       emit(DeleteLibrarySuccess());
+      getAllLibraries();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -1105,5 +1108,96 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // getBooksInBorrow ------------------- end
+
+  /// startBorrowTime ------------------- start
+
+  void startBorrowTime({required String borrowID}) async {
+    debugPrint('startBorrowTime------------loading');
+    emit(StartBorrowTimeLoading());
+    await _repository
+        .startBorrowTimeRepo(
+      borrowID: borrowID,
+    )
+        .then((value) {
+      // success
+      debugPrint('startBorrowTime------------success');
+      emit(StartBorrowTimeSuccess());
+      getBooksInBorrowFalse(page: 1);
+      getBooksInBorrowTrue(page: 1);
+    }).catchError((error) {
+      // error
+      debugPrint('startBorrowTime------------error');
+      debugPrint(error.toString());
+      ServerException exception = error as ServerException;
+      debugPrint('startBorrowTime------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// startBorrowTime ------------------- end
+
+  /// returnBorrow ------------------- start
+
+  void returnBorrow({required String borrowID}) async {
+    debugPrint('returnBorrow------------loading');
+    emit(ReturnBorrowLoading());
+    await _repository
+        .returnBorrowRepo(
+      borrowID: borrowID,
+    )
+        .then((value) {
+      // success
+      debugPrint('returnBorrow------------success');
+      emit(ReturnBorrowSuccess());
+      getBooksInBorrowFalse(page: 1);
+      getBooksInBorrowTrue(page: 1);
+    }).catchError((error) {
+      // error
+      debugPrint('returnBorrow------------error');
+      debugPrint(error.toString());
+      ServerException exception = error as ServerException;
+      debugPrint('returnBorrow------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// returnBorrow ------------------- end
+
+  /// getCatBooks ------------------- start
+  TopBorrowModel? getCatBooksModel;
+
+  void getCatBooks({
+    required String category,
+    required String library,
+    required String type,
+  }) async {
+    getCatBooksModel = null;
+    debugPrint('getCatBooks------------loading');
+    emit(GetCatBooksLoading());
+    await _repository
+        .getCatBooksRepo(
+      type: type,
+      library: library,
+      category: category,
+    )
+        .then((value) {
+      // success
+      getCatBooksModel = TopBorrowModel.fromJson(value.data);
+      debugPrint('getCatBooks------------success');
+      emit(GetCatBooksSuccess());
+    }).catchError((error) {
+      // error
+      debugPrint('getCatBooks------------error');
+      debugPrint(error.toString());
+      ServerException exception = error as ServerException;
+      debugPrint('getCatBooks------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// getCatBooks ------------------- end
 
 }

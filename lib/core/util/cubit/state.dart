@@ -166,3 +166,17 @@ class BookDetailsSuccess extends MainState {}
 class GetBooksInBorrowLoading extends MainState {}
 
 class GetBooksInBorrowSuccess extends MainState {}
+
+class StartBorrowTimeLoading extends MainState {}
+
+class StartBorrowTimeSuccess extends MainState {}
+
+class ReturnBorrowLoading extends MainState {}
+
+class ReturnBorrowSuccess extends MainState {}
+
+class GetCatBooksLoading extends MainState {}
+
+class GetCatBooksSuccess extends MainState {}
+
+

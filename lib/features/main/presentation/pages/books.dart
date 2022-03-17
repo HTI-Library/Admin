@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/book_item.dart';
+import 'package:hti_library_admin/core/util/widgets/empty_widget_with_reload.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
 
 import '../../../../core/util/cubit/state.dart';
@@ -15,26 +16,42 @@ class Books extends StatelessWidget {
       builder: (context, state) {
         return Container(
           child: MainCubit.get(context).getAllBooksModel != null
-              ? Column(
-                  children: [
-                    if (state is DeleteBookLoading || state is GetAllBooksLoading)
-                      const LinearProgressIndicator(),
-                    Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => BookItem(
-                          model: MainCubit.get(context)
-                              .getAllBooksModel!
-                              .books[index],
+              ? MainCubit.get(context).getAllBooksModel!.books.isNotEmpty
+                  ? Column(
+                      children: [
+                        if (state is DeleteBookLoading ||
+                            state is GetAllBooksLoading)
+                          const LinearProgressIndicator(),
+                        Expanded(
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              return MainCubit.get(context)
+                                  .getAllBooks(page: 1);
+                            },
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => BookItem(
+                                getBooksMethod: () {
+                                  MainCubit.get(context).getAllBooks(page: 1);
+                                },
+                                model: MainCubit.get(context)
+                                    .getAllBooksModel!
+                                    .books[index],
+                              ),
+                              itemCount: MainCubit.get(context)
+                                  .getAllBooksModel!
+                                  .books
+                                  .length,
+                            ),
+                          ),
                         ),
-                        itemCount: MainCubit.get(context)
-                            .getAllBooksModel!
-                            .books
-                            .length,
-                      ),
-                    ),
-                  ],
-                )
+                      ],
+                    )
+                  : EmptyWidgetReload(
+                      emptyText: 'No books to present',
+                      onPressed: () {
+                        MainCubit.get(context).getAllBooks(page: 1);
+                      },
+                    )
               : const LoadingWidget(),
         );
       },

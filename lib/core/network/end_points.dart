@@ -22,3 +22,4 @@ const createCategoryUrl = 'create_category';
 const bookDetailsUrl = 'get_book';
 const booksInBorrowUrl = 'in_borrow';
 const startBorrowTimeUrl = 'start_borrow_time';
+const returnBookUrl = 'return_book';

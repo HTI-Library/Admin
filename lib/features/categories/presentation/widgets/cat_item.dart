@@ -7,6 +7,7 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 import 'package:hti_library_admin/core/util/widgets/app_text_form_field.dart';
+import 'package:hti_library_admin/features/cat_books/presentation/pages/cat_book_page.dart';
 
 class CatItem extends StatelessWidget {
   CatItem({Key? key, required this.categoryModel}) : super(key: key);
@@ -21,7 +22,6 @@ class CatItem extends StatelessWidget {
       builder: (context, state) {
         return Container(
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          height: 73.0,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -34,7 +34,14 @@ class CatItem extends StatelessWidget {
           ),
           child: InkWell(
             borderRadius: BorderRadius.circular(10.0),
-            onTap: () {},
+            onTap: () {
+              navigateTo(
+                  context,
+                  CatBookPage(
+                      type: categoryModel.type,
+                      library: categoryModel.library,
+                      category: categoryModel.name));
+            },
             child: Padding(
               padding: const EdgeInsetsDirectional.only(
                 start: 15.0,

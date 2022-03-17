@@ -1,14 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
+import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 
-import '../cubit/cubit.dart';
+import '../cubit/state.dart';
 
 class OrderBookItem extends StatelessWidget {
-  const OrderBookItem({Key? key, required this.model}) : super(key: key);
+  const OrderBookItem({
+    Key? key,
+    required this.model,
+    required this.orders,
+  }) : super(key: key);
   final BorrowDataModel model;
+  final bool orders;
 
   @override
   Widget build(BuildContext context) {

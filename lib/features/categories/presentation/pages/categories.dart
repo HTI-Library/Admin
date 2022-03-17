@@ -54,17 +54,22 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             state is DeleteCategoryLoading)
                           const LinearProgressIndicator(),
                         Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) => CatItem(
-                              categoryModel: MainCubit.get(context)
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              MainCubit.get(context).getAllCategories(
+                                  type: widget.type, library: widget.library);
+                            },
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => CatItem(
+                                categoryModel: MainCubit.get(context)
+                                    .categoriesModel!
+                                    .categories[index],
+                              ),
+                              itemCount: MainCubit.get(context)
                                   .categoriesModel!
-                                  .categories[index],
+                                  .categories
+                                  .length,
                             ),
-                            itemCount: MainCubit.get(context)
-                                .categoriesModel!
-                                .categories
-                                .length,
                           ),
                         ),
                       ],
@@ -86,7 +91,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     );
                   });
             },
-            label: const Text('Add Type'),
+            label: const Text('Add Category'),
             icon: const Icon(Icons.add),
             backgroundColor: HexColor(mainColor),
           ),

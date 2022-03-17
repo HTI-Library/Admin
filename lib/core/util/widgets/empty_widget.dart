@@ -10,8 +10,7 @@ class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
     Key? key,
     required this.text,
-     this.image = 'empty.png',
-
+    this.image = 'empty.png',
   }) : super(key: key);
 
   @override
@@ -25,8 +24,8 @@ class EmptyWidget extends StatelessWidget {
             image:  AssetImage(
               'assets/images/$image',
             ),
-            width: MediaQuery.of(context).size.width /1.5,
-            height: MediaQuery.of(context).size.width /1.5,
+            width: MediaQuery.of(context).size.width / 1.5,
+            height: MediaQuery.of(context).size.width / 1.5,
           ),
           space20Vertical,
           Text(

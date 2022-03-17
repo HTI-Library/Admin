@@ -75,7 +75,7 @@ class MainPage extends StatelessWidget {
                       top: 10.0,
                     ),
                     child: AssetSvg(
-                      color: HexColor(mainColor),
+                      color: Theme.of(context).primaryColor,
                       imagePath: MainCubit.get(context).currentIndex == 0
                           ? 'home_soled'
                           : 'home',
@@ -114,7 +114,7 @@ class MainPage extends StatelessWidget {
                       MainCubit.get(context).currentIndex == 2
                           ? Icons.book_rounded
                           : Icons.book_outlined,
-                      color: HexColor(mainColor),
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                   label: 'Books',
@@ -128,7 +128,7 @@ class MainPage extends StatelessWidget {
                       MainCubit.get(context).currentIndex == 3
                           ? Icons.settings_rounded
                           : Icons.settings_outlined,
-                      color: HexColor(mainColor),
+                      color: Theme.of(context).primaryColor,
                     ),
                     // child: AssetSvg(
                     //   color: HexColor(mainColor),

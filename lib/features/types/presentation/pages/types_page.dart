@@ -50,17 +50,22 @@ class _TypesPageState extends State<TypesPage> {
                             state is DeleteTypeLoading)
                           const LinearProgressIndicator(),
                         Expanded(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) => TypeItem(
-                              typeModel: MainCubit.get(context)
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              MainCubit.get(context)
+                                  .getAllTypes(library: widget.library);
+                            },
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => TypeItem(
+                                typeModel: MainCubit.get(context)
+                                    .getAllTypesModel!
+                                    .types[index],
+                              ),
+                              itemCount: MainCubit.get(context)
                                   .getAllTypesModel!
-                                  .types[index],
+                                  .types
+                                  .length,
                             ),
-                            itemCount: MainCubit.get(context)
-                                .getAllTypesModel!
-                                .types
-                                .length,
                           ),
                         ),
                       ],

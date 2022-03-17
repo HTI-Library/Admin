@@ -14,6 +14,12 @@ abstract class Repository {
     required int page,
   });
 
+  Future<Response> getCatBooksRepo({
+    required String category,
+    required String library,
+    required String type,
+  });
+
   Future<Response> createUserRepo({
     required String email,
     required String name,
@@ -31,6 +37,10 @@ abstract class Repository {
   });
 
   Future<Response> startBorrowTimeRepo({
+    required String borrowID,
+  });
+
+  Future<Response> returnBorrowRepo({
     required String borrowID,
   });
 
@@ -353,7 +363,7 @@ class RepoImplementation extends Repository {
     return await dioHelper.delete(
       url: deleteLibraryUrl,
       query: {
-        'library': library,
+        'libraryID': library,
       },
     );
   }
@@ -481,7 +491,32 @@ class RepoImplementation extends Repository {
     required String borrowID,
   }) async {
     return await dioHelper.post(
-      url: startBorrowTimeUrl,
+      url: '$startBorrowTimeUrl?borrowID=$borrowID',
+    );
+  }
+
+  @override
+  Future<Response> returnBorrowRepo({
+    required String borrowID,
+  }) async {
+    return await dioHelper.post(
+      url: '$returnBookUrl?borrow_id=$borrowID',
+    );
+  }
+
+  @override
+  Future<Response> getCatBooksRepo({
+    required String category,
+    required String library,
+    required String type,
+  }) async {
+    return await dioHelper.get(
+      url: deleteCategoryUrl,
+      query: {
+        'category': category,
+        'library': library,
+        'type': type,
+      },
     );
   }
 }

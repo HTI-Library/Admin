@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
+import 'package:hti_library_admin/core/util/widgets/empty_widget_with_reload.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
 import 'package:hti_library_admin/core/util/widgets/order_book_item.dart';
 
@@ -18,6 +19,11 @@ class Home extends StatelessWidget {
           length: 2,
           child: Column(
             children: [
+              if (state is GetBooksInBorrowLoading)
+                const LinearProgressIndicator(),
+              if (state is StartBorrowTimeLoading)
+                const LinearProgressIndicator(),
+              if (state is ReturnBorrowLoading) const LinearProgressIndicator(),
               TabBar(
                 labelStyle: Theme.of(context).textTheme.subtitle2,
                 labelPadding: EdgeInsets.zero,
@@ -56,33 +62,70 @@ class Home extends StatelessWidget {
                   children: [
                     Container(
                       child: MainCubit.get(context).borrowModelOrdered != null
-                          ? ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) => OrderBookItem(
-                                model: MainCubit.get(context)
-                                    .borrowModelOrdered!
-                                    .books[index],
-                              ),
-                              itemCount: MainCubit.get(context)
+                          ? MainCubit.get(context)
                                   .borrowModelOrdered!
                                   .books
-                                  .length,
-                            )
+                                  .isNotEmpty
+                              ? RefreshIndicator(
+                                  onRefresh: () async {
+                                    return MainCubit.get(context)
+                                        .getBooksInBorrowFalse(page: 1);
+                                  },
+                                  child: ListView.builder(
+                                    itemBuilder: (context, index) =>
+                                        OrderBookItem(
+                                      orders: true,
+                                      model: MainCubit.get(context)
+                                          .borrowModelOrdered!
+                                          .books[index],
+                                    ),
+                                    itemCount: MainCubit.get(context)
+                                        .borrowModelOrdered!
+                                        .books
+                                        .length,
+                                  ),
+                                )
+                              : EmptyWidgetReload(
+                                  emptyText: 'No books to present',
+                                  onPressed: () {
+                                    MainCubit.get(context)
+                                        .getBooksInBorrowFalse(page: 1);
+                                  },
+                                )
                           : const LoadingWidget(),
                     ),
                     Container(
                       child: MainCubit.get(context).borrowModelDelivered != null
-                          ? ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) => OrderBookItem(
-                                model: MainCubit.get(context)
-                                    .borrowModelDelivered!
-                                    .books[index],
-                              ),
-                              itemCount: MainCubit.get(context).borrowModelDelivered!
+                          ? MainCubit.get(context)
+                                  .borrowModelDelivered!
                                   .books
-                                  .length,
-                            )
+                                  .isNotEmpty
+                              ? RefreshIndicator(
+                                  onRefresh: () async {
+                                    return MainCubit.get(context)
+                                        .getBooksInBorrowTrue(page: 1);
+                                  },
+                                  child: ListView.builder(
+                                    itemBuilder: (context, index) =>
+                                        OrderBookItem(
+                                      orders: false,
+                                      model: MainCubit.get(context)
+                                          .borrowModelDelivered!
+                                          .books[index],
+                                    ),
+                                    itemCount: MainCubit.get(context)
+                                        .borrowModelDelivered!
+                                        .books
+                                        .length,
+                                  ),
+                                )
+                              : EmptyWidgetReload(
+                                  emptyText: 'No books to present',
+                                  onPressed: () {
+                                    MainCubit.get(context)
+                                        .getBooksInBorrowTrue(page: 1);
+                                  },
+                                )
                           : const LoadingWidget(),
                     ),
                   ],
