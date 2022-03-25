@@ -763,6 +763,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('createLibrary------------success');
       emit(CreateLibrarySuccess());
+      getAllLibraries();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -795,6 +796,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('editLibrary------------success');
       emit(EditLibrarySuccess());
+      getAllLibraries();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -873,6 +875,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('createType------------success');
       emit(CreateTypeSuccess());
+      getAllTypes(library: library);
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -1016,6 +1019,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('createCategory------------success');
       emit(CreateCategorySuccess());
+      getAllCategories(library: library, type: type);
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -1200,4 +1204,41 @@ class MainCubit extends Cubit<MainState> {
 
 // getCatBooks ------------------- end
 
+
+  /// editCat ------------------- start
+
+  void editCat({
+    required String library,
+    required String name,
+    required String categoryID,
+    required String type,
+  }) async {
+    debugPrint('editCat------------loading');
+    emit(EditCatLoading());
+    await _repository
+        .editCatRepo(
+      type: type,
+      library: library,
+      name: name,
+      categoryID: categoryID,
+    )
+        .then((value) {
+      // success
+      debugPrint('editCat------------success');
+      emit(EditCatSuccess());
+      getAllCategories(library: library, type: type);
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('editCat------------Error');
+      ServerException exception = error as ServerException;
+      debugPrint('editCat------------ServerException error');
+      debugPrint(exception.error);
+      emit(Error(error.toString()));
+    });
+  }
+
+// editCat ------------------- end
+
 }
+

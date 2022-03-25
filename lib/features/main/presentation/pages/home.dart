@@ -23,7 +23,8 @@ class Home extends StatelessWidget {
                 const LinearProgressIndicator(),
               if (state is StartBorrowTimeLoading)
                 const LinearProgressIndicator(),
-              if (state is ReturnBorrowLoading) const LinearProgressIndicator(),
+              if (state is ReturnBorrowLoading)
+                const LinearProgressIndicator(),
               TabBar(
                 labelStyle: Theme.of(context).textTheme.subtitle2,
                 labelPadding: EdgeInsets.zero,

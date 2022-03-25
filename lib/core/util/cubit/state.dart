@@ -179,4 +179,8 @@ class GetCatBooksLoading extends MainState {}
 
 class GetCatBooksSuccess extends MainState {}
 
+class EditCatLoading extends MainState {}
+
+class EditCatSuccess extends MainState {}
+
 

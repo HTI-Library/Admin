@@ -165,7 +165,20 @@ class CatItem extends StatelessWidget {
                                               Expanded(
                                                   child: AppButton(
                                                 label: 'SAVE',
-                                                onPress: () {},
+                                                onPress: () {
+                                                  Navigator.pop(context);
+                                                  MainCubit.get(context)
+                                                      .editCat(
+                                                          library:
+                                                              libraryController
+                                                                  .text,
+                                                          name: nameController
+                                                              .text,
+                                                          categoryID:
+                                                              categoryModel.id,
+                                                          type: typeController
+                                                              .text);
+                                                },
                                                 width: 100.0,
                                               )),
                                               space15Horizontal,

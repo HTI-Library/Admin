@@ -24,7 +24,7 @@ class LibraryItem extends StatelessWidget {
       builder: (context, state) {
         return Container(
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          height: 50.0,
+          // height: 50.0,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -47,6 +47,8 @@ class LibraryItem extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsetsDirectional.only(
                 start: 15.0,
+                top: 10.0,
+                bottom: 10.0,
                 end: 10.0,
               ),
               child: Row(
@@ -131,7 +133,10 @@ class LibraryItem extends StatelessWidget {
                                               Expanded(
                                                   child: AppButton(
                                                 label: 'SAVE',
-                                                onPress: () {},
+                                                onPress: () {
+                                                  Navigator.pop(context);
+                                                  MainCubit.get(context).editLibrary(name: nameController.text,code: codeController.text,libraryID: libraryModel.id);
+                                                },
                                                 width: 100.0,
                                               )),
                                               space15Horizontal,

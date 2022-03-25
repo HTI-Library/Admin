@@ -126,7 +126,15 @@ class OrderBookItem extends StatelessWidget {
                       AppButton(
                         height: 35.0,
                         label: appTranslation(context).confirm,
-                        onPress: () {},
+                        onPress: () {
+                          if (orders) {
+                            MainCubit.get(context)
+                                .startBorrowTime(borrowID: model.borrowID);
+                          } else {
+                            MainCubit.get(context)
+                                .returnBorrow(borrowID: model.borrowID);
+                          }
+                        },
                       ),
                     ],
                   ),
