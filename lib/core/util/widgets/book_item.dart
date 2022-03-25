@@ -91,7 +91,7 @@ class BookItem extends StatelessWidget {
                     Expanded(
                       child: AppButton(
                         height: 35.0,
-                        color: Theme.of(context).primaryColorDark,
+                        color: HexColor(surface),
                         label: appTranslation(context).delete,
                         textColor: HexColor(red),
                         onPress: () {

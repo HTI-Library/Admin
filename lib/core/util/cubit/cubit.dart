@@ -31,17 +31,30 @@ class MainCubit extends Cubit<MainState> {
 
   MainCubit({
     required Repository repository,
-  })  : _repository = repository,
+  })
+      : _repository = repository,
         super(Empty());
 
   static MainCubit get(context) => BlocProvider.of(context);
   TabController? controller;
   int currentIndex = 0;
-  List<String> mainPageTitles = [
-    'Home',
-    'Messages',
-    'Books',
-    'Settings',
+  List<Map> mainPageTitles = [
+    {
+      'en': 'Home',
+      'ar': 'الرئيسية',
+    },
+    {
+      'en': 'Messages',
+      'ar': 'المحادثات',
+    },
+    {
+      'en': 'Books',
+      'ar': 'الكتب',
+    },
+    {
+      'en': 'Settings',
+      'ar': 'الاعدادات',
+    },
   ];
   List<Widget> mainPages = [
     const Home(),
@@ -111,9 +124,9 @@ class MainCubit extends Cubit<MainState> {
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-                statusBarColor: HexColor(surface),
-                statusBarIconBrightness: Brightness.dark,
-              ),
+          statusBarColor: HexColor(surface),
+          statusBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: HexColor(surface),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -223,9 +236,9 @@ class MainCubit extends Cubit<MainState> {
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-                statusBarColor: HexColor(scaffoldBackground),
-                statusBarIconBrightness: Brightness.light,
-              ),
+          statusBarColor: HexColor(scaffoldBackground),
+          statusBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: HexColor(scaffoldBackground),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -631,18 +644,18 @@ class MainCubit extends Cubit<MainState> {
     emit(CreateBookLoading());
     await _repository
         .createBookRepo(
-            library: library,
-            type: type,
-            name: name,
-            edition: edition,
-            rate: rate,
-            auther: auther,
-            pages: pages,
-            category: category,
-            bookNum: bookNum,
-            amount: amount,
-            classificationNum: classificationNum,
-            overview: overview)
+        library: library,
+        type: type,
+        name: name,
+        edition: edition,
+        rate: rate,
+        auther: auther,
+        pages: pages,
+        category: category,
+        bookNum: bookNum,
+        amount: amount,
+        classificationNum: classificationNum,
+        overview: overview)
         .then((value) {
       // success
       debugPrint('createBook------------success');
@@ -688,7 +701,9 @@ class MainCubit extends Cubit<MainState> {
 
 // search ------------------- end
 
-  var currentMonth = DateTime.now().month;
+  var currentMonth = DateTime
+      .now()
+      .month;
 
   void setSelectedMonth(int value) {
     currentMonth = value;

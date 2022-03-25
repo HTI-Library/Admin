@@ -42,11 +42,16 @@ class MainPage extends StatelessWidget {
                 ),
               ],
               title: Text(
-                MainCubit.get(context)
-                    .mainPageTitles[MainCubit.get(context).currentIndex],
+                MainCubit.get(context).isRtl
+                    ? MainCubit.get(context)
+                            .mainPageTitles[MainCubit.get(context).currentIndex]
+                        ['ar']
+                    : MainCubit.get(context)
+                            .mainPageTitles[MainCubit.get(context).currentIndex]
+                        ['en'],
                 style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: Theme.of(context).primaryColor,
-                ),
+                      color: Theme.of(context).primaryColor,
+                    ),
               ),
               titleSpacing: 16.0,
             ),
