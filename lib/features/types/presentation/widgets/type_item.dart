@@ -23,7 +23,6 @@ class TypeItem extends StatelessWidget {
       builder: (context, state) {
         return Container(
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          height: 60.0,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -38,11 +37,12 @@ class TypeItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             onTap: () {
               navigateTo(
-                  context,
-                  CategoriesPage(
-                    library: typeModel.library,
-                    type: typeModel.name,
-                  ));
+                context,
+                CategoriesPage(
+                  library: typeModel.library,
+                  type: typeModel.name,
+                ),
+              );
             },
             child: Padding(
               padding: const EdgeInsetsDirectional.only(
@@ -150,7 +150,10 @@ class TypeItem extends StatelessWidget {
                                               Expanded(
                                                   child: AppButton(
                                                 label: 'SAVE',
-                                                onPress: () {},
+                                                onPress: () {
+                                                  Navigator.pop(context);
+                                                  MainCubit.get(context).editType(name: nameController.text,library: libraryController.text,typeID: typeModel.id);
+                                                },
                                                 width: 100.0,
                                               )),
                                               space15Horizontal,

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
+import 'package:hti_library_admin/core/util/widgets/app_button.dart';
+import 'package:hti_library_admin/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library_admin/core/util/widgets/empty_widget.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
@@ -25,12 +27,18 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController libraryController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     MainCubit.get(context)
         .getAllCategories(type: widget.type, library: widget.library);
+
+    libraryController.text = widget.library;
+    typeController.text = widget.type;
   }
 
   @override
@@ -51,7 +59,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ? Column(
                       children: [
                         if (state is GetAllCategoriesLoading ||
-                            state is DeleteCategoryLoading)
+                            state is DeleteCategoryLoading|| state is EditCatLoading|| state is CreateCategoryLoading)
                           const LinearProgressIndicator(),
                         Expanded(
                           child: RefreshIndicator(
@@ -81,13 +89,83 @@ class _CategoriesPageState extends State<CategoriesPage> {
               showModalBottomSheet<void>(
                   context: context,
                   isScrollControlled: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
                   ),
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  backgroundColor:
+                  Theme.of(context).scaffoldBackgroundColor,
                   builder: (context) {
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.5,
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context)
+                            .viewInsets
+                            .bottom,
+                      ),
+                      child: SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    bottom: 15.0),
+                                height: 4,
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width /
+                                    5,
+                                decoration: BoxDecoration(
+                                  color: HexColor(mainColor),
+                                  borderRadius:
+                                  BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              AppTextFormField(
+                                type: TextInputType.name,
+                                hint: 'Name',
+                                textEditingController:
+                                nameController,
+                              ),
+                              space15Vertical,
+                              AppTextFormField(
+                                type: TextInputType.name,
+                                hint: 'Type',
+                                textEditingController:
+                                typeController,
+                              ),
+                              space15Vertical,
+                              AppTextFormField(
+                                type: TextInputType.name,
+                                hint: 'Library',
+                                textEditingController:
+                                libraryController,
+                              ),
+                              space30Vertical,
+                              AppButton(
+                                label: 'SAVE',
+                                onPress: () {
+                                  Navigator.pop(context);
+                                  MainCubit.get(context)
+                                      .createCategory(
+                                      library:
+                                      libraryController
+                                          .text,
+                                      name: nameController
+                                          .text,
+                                      type: typeController
+                                          .text);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   });
             },

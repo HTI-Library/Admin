@@ -61,17 +61,21 @@ class MyBtnAccount extends StatelessWidget {
                 Text(
                   text,
                   textAlign: TextAlign.end,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(color:textColor == null ? Theme.of(context).primaryColorDark : textColor,fontSize: fontSize,),
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        color: textColor ?? HexColor(mainColor),
+                        fontSize: fontSize,
+                      ),
                 ),
                 space10Horizontal,
                 if (!isCenter) const Spacer(),
-                AssetSvg(
-                  imagePath: imagePath!,
-                  color: MainCubit.get(context).isDark
-                      ? HexColor(mainColorL)
-                      : HexColor(mainColorL),
-                  size: 23,
-                )
+                if (imagePath != '')
+                  AssetSvg(
+                    imagePath: imagePath!,
+                    color: MainCubit.get(context).isDark
+                        ? HexColor(mainColor)
+                        : HexColor(mainColor),
+                    size: 23,
+                  )
               ],
             ),
           ),

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
+import 'package:hti_library_admin/core/util/widgets/app_button.dart';
+import 'package:hti_library_admin/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library_admin/core/util/widgets/empty_widget.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
@@ -23,11 +25,15 @@ class TypesPage extends StatefulWidget {
 }
 
 class _TypesPageState extends State<TypesPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController libraryController = TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     MainCubit.get(context).getAllTypes(library: widget.library);
+    libraryController.text = widget.library;
   }
 
   @override
@@ -46,8 +52,9 @@ class _TypesPageState extends State<TypesPage> {
               ? MainCubit.get(context).getAllTypesModel!.types.isNotEmpty
                   ? Column(
                       children: [
-                        if (state is DeleteTypeLoading ||
-                            state is DeleteTypeLoading)
+                        if (state is EditTypeLoading ||
+                            state is DeleteTypeLoading ||
+                            state is CreateTypeLoading)
                           const LinearProgressIndicator(),
                         Expanded(
                           child: RefreshIndicator(
@@ -77,13 +84,62 @@ class _TypesPageState extends State<TypesPage> {
               showModalBottomSheet<void>(
                   context: context,
                   isScrollControlled: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
                   ),
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   builder: (context) {
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.5,
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      ),
+                      child: SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 15.0),
+                                height: 4,
+                                width: MediaQuery.of(context).size.width / 5,
+                                decoration: BoxDecoration(
+                                  color: HexColor(mainColor),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              AppTextFormField(
+                                type: TextInputType.name,
+                                hint: 'Name',
+                                textEditingController: nameController,
+                              ),
+                              space15Vertical,
+                              AppTextFormField(
+                                type: TextInputType.name,
+                                hint: 'Library',
+                                textEditingController: libraryController,
+                              ),
+                              space30Vertical,
+                              AppButton(
+                                label: 'SAVE',
+                                onPress: () {
+                                  Navigator.pop(context);
+                                  MainCubit.get(context).createType(
+                                    library: libraryController.text,
+                                    name: nameController.text,
+                                  );
+                                  libraryController.clear();
+                                  nameController.clear();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   });
             },

@@ -81,6 +81,14 @@ abstract class Repository {
     required String typeID,
   });
 
+
+  Future<Response> editCatRepo({
+    required String library,
+    required String name,
+    required String categoryID,
+    required String type,
+  });
+
   Future<Response> getAllTypesRepo({
     required String library,
   });
@@ -232,30 +240,43 @@ class RepoImplementation extends Repository {
     required String classificationNum,
     required String overview,
   }) async {
-    FormData staticData = FormData();
+    // FormData staticData = FormData();
     List author = [
-      {"name": "mina 1"},
-      {"name": "mina 2"},
-      {"name": "mina 3"}
+      {"name": "mina 1"}
     ];
-    String stringAuthor = author.toString();
+    // String stringAuthor = author.toString();
 
-    staticData.fields.add(const MapEntry('library', 'a'));
-    staticData.fields.add(const MapEntry('type', 'b'));
-    staticData.fields.add(const MapEntry('category', 'category1'));
-    staticData.fields.add(const MapEntry('name', 'name form'));
-    staticData.fields.add(const MapEntry('amount', '12'));
-    staticData.fields.add(const MapEntry('overview', 'test over view text'));
-    staticData.fields.add(MapEntry('auther', stringAuthor));
-    staticData.fields.add(const MapEntry('rate', '2.7'));
-    staticData.fields.add(const MapEntry('edition', '2'));
-    staticData.fields.add(const MapEntry('pages', '200'));
-    staticData.fields.add(const MapEntry('bookNum', '51'));
-    staticData.fields.add(const MapEntry('classificationNum', '251.2'));
+    // staticData.fields.add(const MapEntry('library', 'a'));
+    // staticData.fields.add(const MapEntry('type', 'b'));
+    // staticData.fields.add(const MapEntry('category', 'category1'));
+    // staticData.fields.add(const MapEntry('name', 'name form'));
+    // staticData.fields.add(const MapEntry('amount', '12'));
+    // staticData.fields.add(const MapEntry('overview', 'test over view text'));
+    // staticData.fields.add(MapEntry('auther', stringAuthor));
+    // staticData.fields.add(const MapEntry('rate', '2.7'));
+    // staticData.fields.add(const MapEntry('edition', '2'));
+    // staticData.fields.add(const MapEntry('pages', '200'));
+    // staticData.fields.add(const MapEntry('bookNum', '51'));
+    // staticData.fields.add(const MapEntry('classificationNum', '251.2'));
 
     return await dioHelper.post(
       url: createBookUrl,
-      data: staticData,
+      data: FormData.fromMap({
+        'name': 'name',
+        'amount': 'amount',
+        'overview': 'overview',
+        'auther': [
+          {"name": "mina 1"}
+        ],
+        'rate': 2.5,
+        'edition': 1,
+        'pages': 200,
+        'library': 'aaa',
+        'type': 'ssbs',
+        'category': 'name',
+        'bookNum': 117,
+        'classificationNum': 620.2,
+      }),
     );
   }
 
@@ -316,18 +337,13 @@ class RepoImplementation extends Repository {
     required String code,
     required String name,
   }) async {
-    Map<String, dynamic> map = <String, dynamic>{
-      'data': {"name": name, "code": code}
-    };
 
-    FormData staticData = FormData();
-    FormData data = FormData();
-
-    staticData.fields.add(MapEntry('data', name));
-    staticData.fields.add(MapEntry('code', code));
     return await dioHelper.post(
       url: createLibraryUrl,
-      data: staticData,
+      data: FormData.fromMap({
+        'name': name,
+        'code': code,
+      }),
     );
   }
 
@@ -339,13 +355,11 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.post(
       url: editLibraryUrl,
-      data: {
-        'data': {
-          'name': name,
-          'code': code,
-        },
+      data: FormData.fromMap({
+        'name': name,
+        'code': code,
         'libraryID': libraryID,
-      },
+      }),
     );
   }
 
@@ -375,12 +389,10 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.post(
       url: createTypeUrl,
-      data: {
-        'data': {
-          'name': name,
-          'library': library,
-        },
-      },
+      data: FormData.fromMap({
+        'name': name,
+        'library': library,
+      }),
     );
   }
 
@@ -392,13 +404,11 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.post(
       url: createTypeUrl,
-      data: {
-        'data': {
-          'name': name,
-          'library': library,
-        },
+      data: FormData.fromMap({
+        'name': name,
+        'library': library,
         'typeID': typeID,
-      },
+      }),
     );
   }
 
@@ -443,10 +453,10 @@ class RepoImplementation extends Repository {
     required String name,
     required String type,
   }) async {
-    FormData staticData = FormData();
-    staticData.fields.add(const MapEntry('library', 'a'));
-    staticData.fields.add(const MapEntry('type', 'b'));
-    staticData.fields.add(const MapEntry('name', 'category101'));
+    // FormData staticData = FormData();
+    // staticData.fields.add(const MapEntry('library', 'a'));
+    // staticData.fields.add(const MapEntry('type', 'b'));
+    // staticData.fields.add(const MapEntry('name', 'category101'));
 
     return await dioHelper.post(
       url: createCategoryUrl,
@@ -519,4 +529,27 @@ class RepoImplementation extends Repository {
       },
     );
   }
+
+
+  @override
+  Future<Response> editCatRepo({
+    required String library,
+    required String name,
+    required String categoryID,
+    required String type,
+  }) async {
+    return await dioHelper.post(
+      url: editCat,
+      data: FormData.fromMap(
+        {
+          'library': library,
+          'type': type,
+          'name': name,
+          'categoryID': categoryID,
+        },
+      ),
+    );
+  }
+
 }
+
