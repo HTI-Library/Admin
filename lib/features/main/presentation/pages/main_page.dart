@@ -27,7 +27,7 @@ class MainPage extends StatelessWidget {
                   icon: Icon(
                     Icons.note_add_outlined,
                     size: 20.0,
-                    color: HexColor(mainColorL),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 IconButton(
@@ -37,14 +37,16 @@ class MainPage extends StatelessWidget {
                   icon: AssetSvg(
                     imagePath: 'search',
                     size: 20.0,
-                    color: HexColor(mainColorL),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
               title: Text(
                 MainCubit.get(context)
                     .mainPageTitles[MainCubit.get(context).currentIndex],
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
               titleSpacing: 16.0,
             ),
@@ -89,9 +91,7 @@ class MainPage extends StatelessWidget {
                       top: 10.0,
                     ),
                     child: AssetSvg(
-                      color: MainCubit.get(context).isDark
-                          ? HexColor(mainColorL)
-                          : HexColor(mainColorL),
+                      color: Theme.of(context).primaryColor,
                       imagePath: MainCubit.get(context).currentIndex == 1
                           ? 'message_account_solid'
                           : 'message_account',

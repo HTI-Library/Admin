@@ -62,7 +62,7 @@ class MyBtnAccount extends StatelessWidget {
                   text,
                   textAlign: TextAlign.end,
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                        color: textColor ?? HexColor(mainColor),
+                        color: textColor ?? Theme.of(context).primaryColor,
                         fontSize: fontSize,
                       ),
                 ),
@@ -71,9 +71,7 @@ class MyBtnAccount extends StatelessWidget {
                 if (imagePath != '')
                   AssetSvg(
                     imagePath: imagePath!,
-                    color: MainCubit.get(context).isDark
-                        ? HexColor(mainColor)
-                        : HexColor(mainColor),
+                    color: Theme.of(context).primaryColor,
                     size: 23,
                   )
               ],

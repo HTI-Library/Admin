@@ -220,7 +220,7 @@ class CatItem extends StatelessWidget {
                         icon: Icon(
                           Icons.edit_rounded,
                           size: 16.0,
-                          color: HexColor(mainColorL),
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),

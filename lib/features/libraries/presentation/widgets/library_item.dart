@@ -28,7 +28,7 @@ class LibraryItem extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: HexColor(greyWhite),
+            color: Theme.of(context).primaryColorLight,
           ),
           margin: const EdgeInsetsDirectional.only(
             bottom: 15.0,
@@ -58,7 +58,7 @@ class LibraryItem extends StatelessWidget {
                     libraryModel.name,
                     textAlign: TextAlign.end,
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                          color: HexColor(mainColorL),
+                          color: Theme.of(context).primaryColor,
                           fontSize: 14.0,
                         ),
                   ),
@@ -69,7 +69,7 @@ class LibraryItem extends StatelessWidget {
                     child: Material(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       borderRadius: BorderRadius.circular(10.0),
-                      color: HexColor(greyWhite),
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       child: IconButton(
                         onPressed: () {
                           nameController.text = libraryModel.name;
@@ -179,7 +179,7 @@ class LibraryItem extends StatelessWidget {
                         icon: Icon(
                           Icons.edit_rounded,
                           size: 16.0,
-                          color: HexColor(mainColorL),
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),

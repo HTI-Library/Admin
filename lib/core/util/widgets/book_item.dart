@@ -26,7 +26,7 @@ class BookItem extends StatelessWidget {
         end: 15.0,
       ),
       decoration: BoxDecoration(
-        color: HexColor(greyWhite),
+        color: Theme.of(context).primaryColorLight,
         borderRadius: BorderRadius.circular(10.0),
       ),
       padding: const EdgeInsets.symmetric(
@@ -58,21 +58,30 @@ class BookItem extends StatelessWidget {
               children: [
                 Text(
                   model.name,
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
+                    fontWeight: FontWeight.w600,
+                  ),
                   maxLines: 1,
                 ),
                 Text(
                   '${appTranslation(context).author}   : ${model.authors[0].authorName}',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
+                  ),
                   maxLines: 1,
                 ),
                 Text(
                   '${appTranslation(context).edition}  : ${model.edition}',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
+                  ),
                 ),
                 Text(
                   '${appTranslation(context).pagesNum} : ${model.pages}',
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
+                  ),
                 ),
                 const Spacer(),
                 Row(
@@ -82,7 +91,7 @@ class BookItem extends StatelessWidget {
                     Expanded(
                       child: AppButton(
                         height: 35.0,
-                        color: HexColor(greyWhite),
+                        color: Theme.of(context).primaryColorDark,
                         label: appTranslation(context).delete,
                         textColor: HexColor(red),
                         onPress: () {

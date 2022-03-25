@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library_admin/core/util/widgets/main_scaffold.dart';
+import 'package:hti_library_admin/features/settings/widget/btn_my_account.dart';
 
-import '../../../../core/util/widgets/btn_my_account.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({Key? key}) : super(key: key);

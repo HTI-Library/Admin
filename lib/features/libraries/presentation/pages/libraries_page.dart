@@ -98,7 +98,7 @@ class _LibrariesPageState extends State<LibrariesPage> {
                                 height: 4,
                                 width: MediaQuery.of(context).size.width / 5,
                                 decoration: BoxDecoration(
-                                  color: HexColor(mainColor),
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
@@ -134,7 +134,7 @@ class _LibrariesPageState extends State<LibrariesPage> {
             },
             label: Text(appTranslation(context).addLibrary),
             icon: const Icon(Icons.add),
-            backgroundColor: HexColor(mainColorL),
+            backgroundColor: Theme.of(context).primaryColor,
           ),
         );
       },

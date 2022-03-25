@@ -121,7 +121,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                     .width /
                                     5,
                                 decoration: BoxDecoration(
-                                  color: HexColor(mainColor),
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius:
                                   BorderRadius.circular(10.0),
                                 ),

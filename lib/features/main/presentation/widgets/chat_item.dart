@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/util/constants.dart';
+import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 
 class ChatItem extends StatelessWidget {
   const ChatItem({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class ChatItem extends StatelessWidget {
           const EdgeInsetsDirectional.only(start: 15.0, end: 15.0, top: 15.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
-        color: HexColor(greyWhite),
+        color: Theme.of(context).primaryColorLight,
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(8.0),
@@ -35,21 +36,23 @@ class ChatItem extends StatelessWidget {
                     Text(
                       'Ehab Borae',
                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: HexColor(black),
+                            color: MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
                           ),
                       maxLines: 1,
                     ),
                     Text(
                       'message text sssssss ss sssss ssss sssss sssss sssss',
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: HexColor(black),
+                            color:MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
                           ),
                       maxLines: 1,
                     ),
                     space5Vertical,
                     Text(
                       '12/10/2022',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                        color:  MainCubit.get(context).isDark ? HexColor(surface):HexColor(black),
+                      ),
                       maxLines: 1,
                     ),
                   ],

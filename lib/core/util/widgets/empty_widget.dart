@@ -20,7 +20,7 @@ class EmptyWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image(
-            color: HexColor(darkBlue),
+            color: Theme.of(context).primaryColor,
             image:  AssetImage(
               'assets/images/$image',
             ),
@@ -31,7 +31,7 @@ class EmptyWidget extends StatelessWidget {
           Text(
             text,
             style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  color: HexColor(darkBlue),
+                  color: Theme.of(context).primaryColor,
                 ),
           ),
         ],

@@ -6,7 +6,7 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 import 'package:hti_library_admin/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
-import 'package:hti_library_admin/core/util/widgets/btn_my_account.dart';
+import 'package:hti_library_admin/features/settings/widget/btn_my_account.dart';
 
 import '../../../../core/util/cubit/state.dart';
 

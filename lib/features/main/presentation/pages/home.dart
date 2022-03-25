@@ -33,8 +33,8 @@ class Home extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 unselectedLabelColor: HexColor(darkBlue),
                 isScrollable: true,
-                indicatorColor: HexColor(mainColorL),
-                labelColor: HexColor(mainColorL),
+                indicatorColor: Theme.of(context).primaryColor,
+                labelColor: Theme.of(context).primaryColor,
                 indicatorSize: TabBarIndicatorSize.label,
                 enableFeedback: true,
                 tabs: [

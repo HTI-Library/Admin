@@ -108,7 +108,7 @@ class _TypesPageState extends State<TypesPage> {
                                 height: 4,
                                 width: MediaQuery.of(context).size.width / 5,
                                 decoration: BoxDecoration(
-                                  color: HexColor(mainColor),
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
