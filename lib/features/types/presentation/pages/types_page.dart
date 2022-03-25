@@ -145,7 +145,7 @@ class _TypesPageState extends State<TypesPage> {
             },
             label: const Text('Add Type'),
             icon: const Icon(Icons.add),
-            backgroundColor: HexColor(mainColor),
+            backgroundColor: HexColor(mainColorL),
           ),
         );
       },

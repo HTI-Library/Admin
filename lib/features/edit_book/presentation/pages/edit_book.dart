@@ -117,7 +117,7 @@ class _EditBookState extends State<EditBook> {
                                     child: Icon(
                                       Icons.edit_rounded,
                                       size: 16.0,
-                                      color: HexColor(mainColor),
+                                      color: HexColor(mainColorL),
                                     ),
                                   ),
                                 ),
@@ -195,7 +195,7 @@ class _EditBookState extends State<EditBook> {
                             AppButton(
                               width: MediaQuery.of(context).size.width / 3,
                               height: 35.0,
-                              color: HexColor(mainColor),
+                              color: HexColor(mainColorL),
                               label: 'SAVE',
                               textColor: HexColor(dialogColor),
                               onPress: () {

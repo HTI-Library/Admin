@@ -73,7 +73,7 @@ class MyButtonIcon extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        border: stroke ? Border.all(color: HexColor(mainColor)) : null,
+        border: stroke ? Border.all(color: HexColor(mainColorL)) : null,
         color: color,
       ),
     );

@@ -48,8 +48,8 @@ class SettingPages extends StatelessWidget {
                                   topRight: Radius.circular(10.0),
                                 ),
                                 color: MainCubit.get(context).isDark
-                                    ? HexColor(secondBackground)
-                                    : HexColor(surface),
+                                  ? HexColor(secondBackground)
+                                  : HexColor(surface),
                               ),
                               child: Padding(
                                 padding: EdgeInsets.only(
@@ -69,7 +69,7 @@ class SettingPages extends StatelessWidget {
                                             BorderRadius.circular(10.0),
                                       ),
                                       child: Material(
-                                        color: HexColor(greyWhite),
+                                        color: Theme.of(context).primaryColorLight,
                                         child: InkWell(
                                           onTap: () {
                                             MainCubit.get(context)
@@ -111,7 +111,7 @@ class SettingPages extends StatelessWidget {
                                             BorderRadius.circular(10.0),
                                       ),
                                       child: Material(
-                                        color: HexColor(greyWhite),
+                                        color: Theme.of(context).primaryColorLight,
                                         child: InkWell(
                                           onTap: () {
                                             MainCubit.get(context)
@@ -193,7 +193,7 @@ class SettingPages extends StatelessWidget {
                                         MainCubit.get(context)
                                             .changeMode(value: false);
                                       },
-                                      text: '${appTranslation(context).light}',
+                                      text: appTranslation(context).light,
                                       imagePath: 'sun_mode',
                                     ),
                                     space10Vertical,

@@ -63,7 +63,7 @@ class TypeItem extends StatelessWidget {
                           textAlign: TextAlign.end,
                           style:
                               Theme.of(context).textTheme.headline6!.copyWith(
-                                    color: HexColor(mainColor),
+                                    color: HexColor(mainColorL),
                                   ),
                           maxLines: 1,
                         ),
@@ -72,7 +72,7 @@ class TypeItem extends StatelessWidget {
                           typeModel.library,
                           textAlign: TextAlign.end,
                           style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: HexColor(mainColor),
+                                color: HexColor(mainColorL),
                                 fontSize: 14.0,
                               ),
                           maxLines: 1,
@@ -126,7 +126,7 @@ class TypeItem extends StatelessWidget {
                                                     .width /
                                                 5,
                                             decoration: BoxDecoration(
-                                              color: HexColor(mainColor),
+                                              color: HexColor(mainColorL),
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
@@ -195,7 +195,7 @@ class TypeItem extends StatelessWidget {
                         icon: Icon(
                           Icons.edit_rounded,
                           size: 16.0,
-                          color: HexColor(mainColor),
+                          color: HexColor(mainColorL),
                         ),
                       ),
                     ),

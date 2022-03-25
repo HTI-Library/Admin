@@ -18,16 +18,16 @@ class EmptyWidgetReload extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const Expanded(
-          child: EmptyWidget(text: 'No books to present'),
+         Expanded(
+          child: EmptyWidget(text:  appTranslation(context).noBooksToPresent),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: FloatingActionButton.extended(
             elevation: 0.0,
-            backgroundColor: HexColor(mainColor),
+            backgroundColor: Theme.of(context).primaryColor,
             onPressed: onPressed,
-            label: const Text('Reload'),
+            label:  Text(appTranslation(context).reload),
             icon: const Icon(Icons.refresh_rounded),
           ),
         ),

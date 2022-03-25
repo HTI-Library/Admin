@@ -47,10 +47,10 @@ class MyBtnAccount extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        border: stroke ? Border.all(color: HexColor(mainColor)) : null,
+        border: stroke ? Border.all(color: HexColor(mainColorL)) : null,
       ),
       child: Material(
-        color: color ?? HexColor(greyWhite),
+        color: color ?? Theme.of(context).primaryColorLight,
         child: InkWell(
           onTap: voidCallback,
           child: Padding(

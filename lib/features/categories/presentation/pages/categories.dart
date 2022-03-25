@@ -171,7 +171,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             },
             label: const Text('Add Category'),
             icon: const Icon(Icons.add),
-            backgroundColor: HexColor(mainColor),
+            backgroundColor: HexColor(mainColorL),
           ),
         );
       },

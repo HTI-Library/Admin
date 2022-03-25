@@ -33,25 +33,25 @@ class Home extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 unselectedLabelColor: HexColor(darkBlue),
                 isScrollable: true,
-                indicatorColor: HexColor(mainColor),
-                labelColor: HexColor(mainColor),
+                indicatorColor: HexColor(mainColorL),
+                labelColor: HexColor(mainColorL),
                 indicatorSize: TabBarIndicatorSize.label,
                 enableFeedback: true,
                 tabs: [
                   Container(
-                    height: 22.0,
+                    height: 32.0,
                     alignment: AlignmentDirectional.center,
                     width: MediaQuery.of(context).size.width / 2,
-                    child: const Tab(
-                      text: 'ORDERS',
+                    child:  Tab(
+                      text: appTranslation(context).orders,
                     ),
                   ),
                   Container(
-                    height: 22.0,
+                    height: 32.0,
                     alignment: AlignmentDirectional.center,
                     width: MediaQuery.of(context).size.width / 2,
-                    child: const Tab(
-                      text: 'DELIVERIES',
+                    child:  Tab(
+                      text:  appTranslation(context).deliveries,
                     ),
                   ),
                 ],
@@ -87,7 +87,7 @@ class Home extends StatelessWidget {
                                   ),
                                 )
                               : EmptyWidgetReload(
-                                  emptyText: 'No books to present',
+                                  emptyText:  appTranslation(context).noBooksToPresent,
                                   onPressed: () {
                                     MainCubit.get(context)
                                         .getBooksInBorrowFalse(page: 1);

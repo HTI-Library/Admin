@@ -78,7 +78,7 @@ class Settings extends StatelessWidget {
                   voidCallback: () {
                     navigateTo(context, const LibrariesPage());
                   },
-                  text: 'Libraries',
+                  text: appTranslation(context).libraries,
                   // text: appTranslation(context).setting,
                   imagePath: '',
                 ),

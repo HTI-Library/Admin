@@ -22,7 +22,7 @@ class LastSearchItem extends StatelessWidget {
           vertical: 6.0,
         ),
         decoration: BoxDecoration(
-          color: HexColor(greyWhite),
+          color: Theme.of(context).primaryColorLight,
           borderRadius: BorderRadius.circular(6.0),
         ),
         child: Text(

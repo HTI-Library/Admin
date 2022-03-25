@@ -45,7 +45,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           // height: 49.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: HexColor(greyWhite),
+            color: Theme.of(context).primaryColorLight,
           ),
           child: TextFormField(
             validator: (String? value) {
@@ -56,7 +56,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               }
             },
             style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                  color: HexColor(mainColor),
+                  color: Theme.of(context).primaryColorDark,
                 ),
             keyboardType: widget.type,
             controller: widget.textEditingController,
@@ -82,10 +82,10 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                 borderSide: BorderSide.none,
               ),
               hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: HexColor(mainColor),
+                    color: HexColor(mainColorL),
                   ),
               labelStyle: Theme.of(context).textTheme.caption!.copyWith(
-                color: HexColor(mainColor),
+                color: Theme.of(context).primaryColorDark,
                 height: 5
               ),
               hintText: widget.hint,
