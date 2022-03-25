@@ -90,7 +90,7 @@ class SavedItem extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: AssetSvg(
                           imagePath: 'save_soled',
-                          color: HexColor(mainColor),
+                          color: HexColor(mainColorL),
                         ),
                             )),
                       ),

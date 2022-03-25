@@ -32,13 +32,13 @@ class SeeMoreItem extends StatelessWidget {
                   text,
                   maxLines: 1,
                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: HexColor(mainColor),
+                        color: HexColor(mainColorL),
                       ),
                 ),
               ),
               AssetSvg(
                 imagePath: 'arrow_right',
-                color: HexColor(mainColor),
+                color: HexColor(mainColorL),
                 size: 18.0,
               )
             ],

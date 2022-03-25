@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/book_item.dart';
 import 'package:hti_library_admin/core/util/widgets/empty_widget_with_reload.dart';
@@ -47,7 +48,7 @@ class Books extends StatelessWidget {
                       ],
                     )
                   : EmptyWidgetReload(
-                      emptyText: 'No books to present',
+                      emptyText: appTranslation(context).noBooksToPresent,
                       onPressed: () {
                         MainCubit.get(context).getAllBooks(page: 1);
                       },

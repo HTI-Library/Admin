@@ -63,6 +63,13 @@
   "edit": "تعديل",
   "deleteBook": "حذف الكتاب ؟",
   "addLibrary": "اضف مكتبة",
+  "libraries": "المكتبات",
+  "noBooksToPresent": "لا توجد كتب لعرضها",
+  "reload": "اعادة التحميل",
+  "orders": "طلبات الاستعارة",
+  "deliveries": "طلبات الاعادة",
+  "addBook": "أضف كتاب",
+  "upload": "حمل صورة",
 
 
 

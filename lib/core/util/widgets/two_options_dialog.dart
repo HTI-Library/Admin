@@ -70,7 +70,7 @@ class TwoOptionsDialog extends Dialog {
                       child: DefaultTextButton(
                         style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           fontWeight: FontWeight.w400,
-                          color: HexColor(mainColor),
+                          color: HexColor(mainColorL),
                         ), onPress: popButtonVoidCallback, label: popButtonText,
                       ),
                     ),

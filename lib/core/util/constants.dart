@@ -13,7 +13,16 @@ import 'cubit/cubit.dart';
 const String serverFailureMessage = 'Server Failure';
 const String cacheFailureMessage = 'Cache Failure';
 
-const String mainColor = '008fd3';
+
+/// Dark Mode Colors
+const String mainColorD = '008fd3';
+const String secondaryColorD = '203440';
+const String textColorD = '008fd3';
+
+
+
+/// Light Mode Colors
+const String mainColorL = '00439c';
 const String secondary = '005C89';
 // const String secondColor = 'da7339';
 // const String thirdColor = '1da1f2';
@@ -29,7 +38,7 @@ const String green = '#125c03';
 // const String blueGrey = '#e1e7f0';
 // const String black_e = '#282828';
 const String surface = '#ffffff';
-const String greyWhite = '#203440';
+const String greyWhite = '#e1e7f0';
 const String dialogColor = '#e1e7f0';
 const String disableButton = '#A7B1D7';
 

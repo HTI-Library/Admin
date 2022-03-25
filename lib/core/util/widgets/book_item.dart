@@ -150,7 +150,7 @@ class DeleteBookDialog extends StatelessWidget {
       title: Text(
         appTranslation(context).deleteBook,
         style: Theme.of(context).textTheme.headline6!.copyWith(
-              color: HexColor(mainColor),
+              color: HexColor(mainColorL),
             ),
       ),
       actions: [

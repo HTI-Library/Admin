@@ -56,7 +56,7 @@ class LibraryItem extends StatelessWidget {
                     libraryModel.name,
                     textAlign: TextAlign.end,
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                          color: HexColor(mainColor),
+                          color: HexColor(mainColorL),
                           fontSize: 14.0,
                         ),
                   ),
@@ -107,7 +107,7 @@ class LibraryItem extends StatelessWidget {
                                                     .width /
                                                 5,
                                             decoration: BoxDecoration(
-                                              color: HexColor(mainColor),
+                                              color: HexColor(mainColorL),
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
@@ -174,7 +174,7 @@ class LibraryItem extends StatelessWidget {
                         icon: Icon(
                           Icons.edit_rounded,
                           size: 16.0,
-                          color: HexColor(mainColor),
+                          color: HexColor(mainColorL),
                         ),
                       ),
                     ),

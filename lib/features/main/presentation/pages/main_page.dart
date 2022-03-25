@@ -27,7 +27,7 @@ class MainPage extends StatelessWidget {
                   icon: Icon(
                     Icons.note_add_outlined,
                     size: 20.0,
-                    color: HexColor(mainColor),
+                    color: HexColor(mainColorL),
                   ),
                 ),
                 IconButton(
@@ -37,7 +37,7 @@ class MainPage extends StatelessWidget {
                   icon: AssetSvg(
                     imagePath: 'search',
                     size: 20.0,
-                    color: HexColor(mainColor),
+                    color: HexColor(mainColorL),
                   ),
                 ),
               ],
@@ -90,8 +90,8 @@ class MainPage extends StatelessWidget {
                     ),
                     child: AssetSvg(
                       color: MainCubit.get(context).isDark
-                          ? HexColor(mainColor)
-                          : HexColor(mainColor),
+                          ? HexColor(mainColorL)
+                          : HexColor(mainColorL),
                       imagePath: MainCubit.get(context).currentIndex == 1
                           ? 'message_account_solid'
                           : 'message_account',

@@ -23,7 +23,7 @@ class SearchPage extends StatelessWidget {
                 hint: 'Search',
                 icon: AssetSvg(
                   imagePath: 'search',
-                  color: HexColor(mainColor),
+                  color: Theme.of(context).primaryColorDark,
                 ),
                 textEditingController: searchController,
               ),

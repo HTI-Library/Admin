@@ -42,7 +42,7 @@ class AddNewBook extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Add Book',
+                        appTranslation(context).addBook,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       space15Vertical,
@@ -63,8 +63,8 @@ class AddNewBook extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 3,
                               height: 35.0,
                               color: HexColor(dialogColor),
-                              label: 'Upload',
-                              textColor: HexColor(mainColor),
+                              label:  appTranslation(context).upload,
+                              textColor: HexColor(mainColorL),
                               onPress: () {},
                             ),
                           ),
@@ -133,7 +133,7 @@ class AddNewBook extends StatelessWidget {
                       AppButton(
                         width: MediaQuery.of(context).size.width / 3,
                         height: 35.0,
-                        color: HexColor(mainColor),
+                        color: Theme.of(context).primaryColor,
                         label: 'ADD',
                         textColor: HexColor(dialogColor),
                         onPress: () {

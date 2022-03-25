@@ -6,7 +6,7 @@
   "myMessage": "My Massages",
   "myMessageNo": "You don't have any message",
   "calender": "Calender",
-  "setting": "settings",
+  "setting": "Settings",
   "changeLanguage": "Change Language",
   "language": "language",
   "arabic": "Arabic",
@@ -59,6 +59,13 @@
   "edit": "Edit",
   "deleteBook": "Delete Book ?",
   "addLibrary": "Add Library",
+  "libraries": "Libraries",
+  "noBooksToPresent": "No books to present",
+  "reload": "Reload",
+  "orders": "ORDERS",
+  "deliveries": "DELIVERIES",
+  "addBook": "Add Book",
+  "upload": "Upload Photo",
 
 
   "logIn": "Login"

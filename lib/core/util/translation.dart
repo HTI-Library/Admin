@@ -57,6 +57,13 @@ class TranslationModel {
   late String deleteBook;
   late String edit;
   late String addLibrary;
+  late String libraries;
+  late String noBooksToPresent;
+  late String reload;
+  late String orders;
+  late String deliveries;
+  late String addBook;
+  late String upload;
 
 
 
@@ -124,6 +131,13 @@ class TranslationModel {
     cancel = json['cancel'];
     confirm = json['confirm'];
     addLibrary = json['addLibrary'];
+    libraries = json['libraries'];
+    noBooksToPresent = json['noBooksToPresent'];
+    reload = json['reload'];
+    orders = json['orders'];
+    deliveries = json['deliveries'];
+    addBook = json['addBook'];
+    upload = json['upload'];
 
   }
 }

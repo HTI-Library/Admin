@@ -47,10 +47,10 @@ class MyBtnAccount extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        border: stroke ? Border.all(color: HexColor(mainColor)) : null,
+        border: stroke ? Border.all(color: HexColor(mainColorL)) : null,
       ),
       child: Material(
-        color: color ?? HexColor(greyWhite),
+        color: color ?? Theme.of(context).primaryColorLight,
         child: InkWell(
           onTap: voidCallback,
           child: Padding(
@@ -61,15 +61,15 @@ class MyBtnAccount extends StatelessWidget {
                 Text(
                   text,
                   textAlign: TextAlign.end,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(color:textColor == null ? HexColor(mainColor) : textColor,fontSize: fontSize,),
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(color:textColor == null ? Theme.of(context).primaryColorDark : textColor,fontSize: fontSize,),
                 ),
                 space10Horizontal,
                 if (!isCenter) const Spacer(),
                 AssetSvg(
                   imagePath: imagePath!,
                   color: MainCubit.get(context).isDark
-                      ? HexColor(mainColor)
-                      : HexColor(mainColor),
+                      ? HexColor(mainColorL)
+                      : HexColor(mainColorL),
                   size: 23,
                 )
               ],

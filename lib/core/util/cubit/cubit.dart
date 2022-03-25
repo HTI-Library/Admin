@@ -100,7 +100,11 @@ class MainCubit extends Cubit<MainState> {
     family = isRtl ? 'Roboto' : 'Roboto';
 
     lightTheme = ThemeData(
-      primaryColor: HexColor(mainColor),
+      primaryColor: HexColor(mainColorL),
+      primaryColorLight: HexColor(greyWhite),
+      primaryColorDark: HexColor(mainColorL),
+
+
       scaffoldBackgroundColor: HexColor(surface),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
@@ -125,14 +129,14 @@ class MainCubit extends Cubit<MainState> {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: HexColor(surface),
         elevation: 0.0,
-        selectedItemColor: HexColor(mainColor),
+        selectedItemColor: HexColor(mainColorL),
         unselectedItemColor: HexColor(darkBlue),
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(
           height: 1.5,
         ),
       ),
-      primarySwatch: MaterialColor(int.parse('0xff$mainColor'), color),
+      primarySwatch: MaterialColor(int.parse('0xff$mainColorL'), color),
       textTheme: TextTheme(
         headline5: TextStyle(
           fontSize: 24.0,
@@ -187,7 +191,7 @@ class MainCubit extends Cubit<MainState> {
           fontSize: 15.0,
           fontFamily: family,
           fontWeight: FontWeight.w400,
-          color: HexColor(mainColor),
+          color: HexColor(mainColorL),
           height: 1.4,
         ),
         caption: TextStyle(
@@ -208,7 +212,11 @@ class MainCubit extends Cubit<MainState> {
     );
 
     darkTheme = ThemeData(
-      primaryColor: HexColor(surface),
+      primaryColor: HexColor(mainColorD),
+      primaryColorLight: HexColor(secondaryColorD),
+      primaryColorDark: HexColor(textColorD),
+
+
       scaffoldBackgroundColor: HexColor(scaffoldBackground),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
@@ -232,14 +240,14 @@ class MainCubit extends Cubit<MainState> {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: HexColor(scaffoldBackground),
         elevation: 0.0,
-        selectedItemColor: HexColor(mainColor),
+        selectedItemColor: HexColor(mainColorL),
         unselectedItemColor: HexColor(darkBlue),
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(
           height: 1.5,
         ),
       ),
-      primarySwatch: MaterialColor(int.parse('0xff$mainColor'), color),
+      primarySwatch: MaterialColor(int.parse('0xff$mainColorL'), color),
       textTheme: TextTheme(
         headline5: TextStyle(
           fontSize: 24.0,
