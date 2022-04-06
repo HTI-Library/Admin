@@ -1,3 +1,4 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -39,6 +40,9 @@ class _EditBookState extends State<EditBook> {
 
   TextEditingController numberOfCopiesController = TextEditingController();
 
+  TextEditingController classificationNumController = TextEditingController();
+  TextEditingController overviewController = TextEditingController();
+
   GlobalKey<FormState> formKe = GlobalKey<FormState>();
 
   void getBookData() {
@@ -63,6 +67,11 @@ class _EditBookState extends State<EditBook> {
 
     numberOfCopiesController.text =
         MainCubit.get(context).bookModel!.book.amount.toString();
+
+    overviewController.text = MainCubit.get(context).bookModel!.book.overview;
+
+    classificationNumController.text = MainCubit.get(context).bookModel!.book.classificationNum;
+
   }
 
   @override
@@ -191,16 +200,56 @@ class _EditBookState extends State<EditBook> {
                               label: 'Book Copies',
                               textEditingController: numberOfCopiesController,
                             ),
+                            space8Vertical,
+                            AppTextFormField(
+                              type: TextInputType.number,
+                              hint: 'Classification Number',
+                              textEditingController:
+                                  classificationNumController,
+                            ),
+                            space8Vertical,
+                            AppTextFormField(
+                              type: TextInputType.text,
+                              hint: 'Overview',
+                              textEditingController: overviewController,
+                            ),
                             space15Vertical,
-                            AppButton(
-                              width: MediaQuery.of(context).size.width / 3,
-                              height: 35.0,
-                              color: HexColor(mainColorL),
-                              label: 'SAVE',
-                              textColor: HexColor(dialogColor),
-                              onPress: () {
-                                if (formKe.currentState!.validate()) {}
-                              },
+                            BuildCondition(
+                              condition:  state is EditBookLoading,
+                              builder: (context) => const Center(child: CircularProgressIndicator()),
+                              fallback: (context) => AppButton(
+                                width: MediaQuery.of(context).size.width / 3,
+                                height: 35.0,
+                                color: HexColor(mainColorL),
+                                label: 'SAVE',
+                                textColor: HexColor(dialogColor),
+                                onPress: () {
+                                  if (formKe.currentState!.validate()) {
+                                    MainCubit.get(context).editBook(
+                                      bookId: MainCubit.get(context)
+                                          .bookModel!
+                                          .book
+                                          .id,
+                                      library: libraryController.text,
+                                      type: typeController.text,
+                                      name: bookNameController.text == MainCubit.get(context).bookModel!.book.name ? null : bookNameController.text,
+                                      edition:
+                                          num.parse(bookEditionController.text),
+                                      rate: 0,
+                                      auther: bookAuthorController.text,
+                                      pages: num.parse(pagesController.text),
+                                      category: bookCategoryController.text,
+                                      bookNum:
+                                          num.parse(bookNumberController.text),
+                                      amount: num.parse(
+                                          numberOfCopiesController.text),
+                                      classificationNum:
+                                          classificationNumController.text,
+                                      overview: overviewController.text,
+                                    );
+                                  }
+                                },
+                              ),
                             ),
                             space30Vertical,
                           ],

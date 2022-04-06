@@ -62,7 +62,6 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             controller: widget.textEditingController,
             obscureText: widget.isPassword ? isShown : false,
             onChanged: widget.onChanged,
-            textInputAction: widget.textInputAction,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -81,15 +80,15 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               focusedErrorBorder: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
+              labelText: widget.hint,
+              labelStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+                color: HexColor(mainColorL),
+                height: 4,
+              ),
+              hintText: widget.hint,
               hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
                     color: HexColor(mainColorL),
                   ),
-              labelStyle: Theme.of(context).textTheme.caption!.copyWith(
-                color: Theme.of(context).primaryColorDark,
-                height: 5
-              ),
-              hintText: widget.hint,
-              labelText: widget.label,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
               ),

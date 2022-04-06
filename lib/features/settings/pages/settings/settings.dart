@@ -64,8 +64,8 @@ class Settings extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  child: Image.asset('assets/images/hti_logo.png'),
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/hti_logo.png'),
                   radius: 55,
                 ),
                 space20Vertical,

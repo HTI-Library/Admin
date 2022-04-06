@@ -81,7 +81,6 @@ abstract class Repository {
     required String typeID,
   });
 
-
   Future<Response> editCatRepo({
     required String library,
     required String name,
@@ -100,7 +99,7 @@ abstract class Repository {
   Future<Response> editBookRepo({
     required String library,
     required String type,
-    required String name,
+    String? name,
     required num edition,
     required num rate,
     required String auther,
@@ -240,42 +239,21 @@ class RepoImplementation extends Repository {
     required String classificationNum,
     required String overview,
   }) async {
-    // FormData staticData = FormData();
-    List author = [
-      {"name": "mina 1"}
-    ];
-    // String stringAuthor = author.toString();
-
-    // staticData.fields.add(const MapEntry('library', 'a'));
-    // staticData.fields.add(const MapEntry('type', 'b'));
-    // staticData.fields.add(const MapEntry('category', 'category1'));
-    // staticData.fields.add(const MapEntry('name', 'name form'));
-    // staticData.fields.add(const MapEntry('amount', '12'));
-    // staticData.fields.add(const MapEntry('overview', 'test over view text'));
-    // staticData.fields.add(MapEntry('auther', stringAuthor));
-    // staticData.fields.add(const MapEntry('rate', '2.7'));
-    // staticData.fields.add(const MapEntry('edition', '2'));
-    // staticData.fields.add(const MapEntry('pages', '200'));
-    // staticData.fields.add(const MapEntry('bookNum', '51'));
-    // staticData.fields.add(const MapEntry('classificationNum', '251.2'));
-
     return await dioHelper.post(
       url: createBookUrl,
       data: FormData.fromMap({
-        'name': 'name',
-        'amount': 'amount',
-        'overview': 'overview',
-        'auther': [
-          {"name": "mina 1"}
-        ],
-        'rate': 2.5,
-        'edition': 1,
-        'pages': 200,
-        'library': 'aaa',
-        'type': 'ssbs',
-        'category': 'name',
-        'bookNum': 117,
-        'classificationNum': 620.2,
+        'name': name,
+        'amount': amount,
+        'overview': overview,
+        'auther[0][name]': auther,
+        'rate': rate,
+        'edition': edition,
+        'pages': pages,
+        'library': library,
+        'type': type,
+        'category': category,
+        'bookNum': bookNum,
+        'classificationNum': classificationNum,
       }),
     );
   }
@@ -284,7 +262,7 @@ class RepoImplementation extends Repository {
   Future<Response> editBookRepo({
     required String library,
     required String type,
-    required String name,
+    String? name,
     required num edition,
     required num rate,
     required String auther,
@@ -298,25 +276,21 @@ class RepoImplementation extends Repository {
   }) async {
     return await dioHelper.post(
       url: editBookUrl,
-      data: {
-        'data': {
-          'library': library,
-          'type': type,
-          'name': name,
-          'rate': rate,
-          'edition': edition,
-          'auther': [
-            {'name': auther}
-          ],
-          'pages': pages,
-          'category': category,
-          'bookNum': bookNum,
-          'amount': amount,
-          'overview': overview,
-          'classificationNum': classificationNum,
-        },
+      data: FormData.fromMap({
+        if (name != null) 'name': name,
+        'amount': amount,
+        'overview': overview,
+        'auther[0][name]': auther,
+        'rate': rate,
+        'edition': edition,
+        'pages': pages,
+        'library': library,
+        'type': type,
+        'category': category,
+        'bookNum': bookNum,
+        'classificationNum': classificationNum,
         'book_id': bookId,
-      },
+      }),
     );
   }
 
@@ -337,7 +311,6 @@ class RepoImplementation extends Repository {
     required String code,
     required String name,
   }) async {
-
     return await dioHelper.post(
       url: createLibraryUrl,
       data: FormData.fromMap({
@@ -530,7 +503,6 @@ class RepoImplementation extends Repository {
     );
   }
 
-
   @override
   Future<Response> editCatRepo({
     required String library,
@@ -550,6 +522,4 @@ class RepoImplementation extends Repository {
       ),
     );
   }
-
 }
-

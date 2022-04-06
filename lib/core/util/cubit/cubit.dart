@@ -31,8 +31,7 @@ class MainCubit extends Cubit<MainState> {
 
   MainCubit({
     required Repository repository,
-  })
-      : _repository = repository,
+  })  : _repository = repository,
         super(Empty());
 
   static MainCubit get(context) => BlocProvider.of(context);
@@ -117,16 +116,15 @@ class MainCubit extends Cubit<MainState> {
       primaryColorLight: HexColor(greyWhite),
       primaryColorDark: HexColor(mainColorL),
 
-
       scaffoldBackgroundColor: HexColor(surface),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-          statusBarColor: HexColor(surface),
-          statusBarIconBrightness: Brightness.dark,
-        ),
+                statusBarColor: HexColor(surface),
+                statusBarIconBrightness: Brightness.dark,
+              ),
         backgroundColor: HexColor(surface),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -229,16 +227,15 @@ class MainCubit extends Cubit<MainState> {
       primaryColorLight: HexColor(secondaryColorD),
       primaryColorDark: HexColor(textColorD),
 
-
       scaffoldBackgroundColor: HexColor(scaffoldBackground),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-          statusBarColor: HexColor(scaffoldBackground),
-          statusBarIconBrightness: Brightness.light,
-        ),
+                statusBarColor: HexColor(scaffoldBackground),
+                statusBarIconBrightness: Brightness.light,
+              ),
         backgroundColor: HexColor(scaffoldBackground),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -476,9 +473,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createUser------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createUser------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -498,9 +493,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllUsers------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllUsers------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -522,9 +515,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteUser------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteUser------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -553,9 +544,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllBooks------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllBooks------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -581,9 +570,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteBook------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteBook------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -615,9 +602,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllCategories------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllCategories------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -644,18 +629,18 @@ class MainCubit extends Cubit<MainState> {
     emit(CreateBookLoading());
     await _repository
         .createBookRepo(
-        library: library,
-        type: type,
-        name: name,
-        edition: edition,
-        rate: rate,
-        auther: auther,
-        pages: pages,
-        category: category,
-        bookNum: bookNum,
-        amount: amount,
-        classificationNum: classificationNum,
-        overview: overview)
+            library: library,
+            type: type,
+            name: name,
+            edition: edition,
+            rate: rate,
+            auther: auther,
+            pages: pages,
+            category: category,
+            bookNum: bookNum,
+            amount: amount,
+            classificationNum: classificationNum,
+            overview: overview)
         .then((value) {
       // success
       debugPrint('createBook------------success');
@@ -664,9 +649,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createBook------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createBook------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -692,18 +675,13 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('search------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('search------------ServerException error');
-      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }
 
 // search ------------------- end
 
-  var currentMonth = DateTime
-      .now()
-      .month;
+  var currentMonth = DateTime.now().month;
 
   void setSelectedMonth(int value) {
     currentMonth = value;
@@ -722,7 +700,7 @@ class MainCubit extends Cubit<MainState> {
   void editBook({
     required String library,
     required String type,
-    required String name,
+    String? name,
     required num edition,
     required num rate,
     required String auther,
@@ -760,9 +738,6 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editBook------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editBook------------ServerException error');
-      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }
@@ -791,9 +766,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createLibrary------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createLibrary------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -824,9 +797,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editLibrary------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editLibrary------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -850,9 +821,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllLibraries------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllLibraries------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -872,9 +841,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteLibrary------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteLibrary------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -903,9 +870,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createType------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createType------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -935,9 +900,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editType------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editType------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -963,9 +926,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllTypes------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllTypes------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -988,9 +949,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteType------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteType------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1014,9 +973,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteCategory------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteCategory------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1047,9 +1004,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createCategory------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createCategory------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1155,9 +1110,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint('startBorrowTime------------error');
       debugPrint(error.toString());
-      ServerException exception = error as ServerException;
-      debugPrint('startBorrowTime------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1183,9 +1136,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint('returnBorrow------------error');
       debugPrint(error.toString());
-      ServerException exception = error as ServerException;
-      debugPrint('returnBorrow------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1218,15 +1169,12 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint('getCatBooks------------error');
       debugPrint(error.toString());
-      ServerException exception = error as ServerException;
-      debugPrint('getCatBooks------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
 
 // getCatBooks ------------------- end
-
 
   /// editCat ------------------- start
 
@@ -1254,9 +1202,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editCat------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editCat------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1264,4 +1210,3 @@ class MainCubit extends Cubit<MainState> {
 // editCat ------------------- end
 
 }
-
