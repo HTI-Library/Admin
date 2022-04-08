@@ -190,5 +190,12 @@ class PickPdfSuccess extends MainState {}
 
 class ClearPickedPdfSuccess extends MainState {}
 
+class BlockUserLoading extends MainState {}
 
+class BlockUserSuccess extends MainState {}
+
+class UnblockUserLoading extends MainState {}
+
+class UnblockUserSuccess extends MainState {}
+class OpenSearch extends MainState {}
 

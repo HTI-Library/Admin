@@ -16,8 +16,8 @@ class UserItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder <MainCubit, MainState>(
-      builder: (context, state){
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
         return Container(
           margin: const EdgeInsetsDirectional.only(
             start: 15.0,
@@ -35,8 +35,8 @@ class UserItem extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundColor:
-                    model.blocked ? HexColor(red) : HexColor(green),
-                    radius: 37,
+                        model.blocked ? HexColor(red).withOpacity(.6) : HexColor(green).withOpacity(.6),
+                    radius: 38,
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(model.avatar),
                       radius: 35.0,
@@ -144,9 +144,15 @@ class UserItem extends StatelessWidget {
               Row(
                 children: [
                   AppButton(
-                    width: MediaQuery.of(context).size.width-100,
-                    label: 'Block',
-                    onPress: () {},
+                    width: MediaQuery.of(context).size.width - 150,
+                    label: model.blocked ? 'Unblock' : 'Block',
+                    onPress: () {
+                      if(model.blocked){
+                        MainCubit.get(context).unblockUser(studentID: model.email);
+                      }else{
+                        MainCubit.get(context).blockUser(studentID: model.email);
+                      }
+                    },
                   ),
                   space10Horizontal,
                   SizedBox(
@@ -156,7 +162,27 @@ class UserItem extends StatelessWidget {
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       borderRadius: BorderRadius.circular(10.0),
                       color: Theme.of(context).primaryColor.withOpacity(.1),
-                      child:  IconButton(
+                      child: IconButton(
+                        onPressed: () {
+                          makePhoneCall(model.phone);
+                        },
+                        icon: Icon(
+                          Icons.call_rounded,
+                          size: 16.0,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  space10Horizontal,
+                  SizedBox(
+                    height: 40.0,
+                    width: 40.0,
+                    child: Material(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Theme.of(context).primaryColor.withOpacity(.1),
+                      child: IconButton(
                         onPressed: () {
                           MainCubit.get(context).deleteUser(uId: model.id);
                         },

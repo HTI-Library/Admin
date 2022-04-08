@@ -406,15 +406,22 @@ class MainCubit extends Cubit<MainState> {
     required String email,
     required String name,
     required String password,
+    required String phone,
   }) async {
     debugPrint('createUser------------loading');
     emit(CreateUserLoading());
     await _repository
-        .createUserRepo(email: email, name: name, password: password)
+        .createUserRepo(
+      email: email,
+      name: name,
+      password: password,
+      phone: phone,
+    )
         .then((value) {
       // success
       debugPrint('createUser------------success');
       emit(CreateUserSuccess());
+      getAllUsers();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
@@ -428,6 +435,7 @@ class MainCubit extends Cubit<MainState> {
 
   /// getAllUsers ------------------- start
   AllUsersModel? allUsersModel;
+
   void getAllUsers() async {
     debugPrint('getAllUsers------------loading');
     emit(GetAllUsersLoading());
@@ -1210,4 +1218,64 @@ class MainCubit extends Cubit<MainState> {
 
 // pick pdf ------------ end
 
+  /// blockUser ------------------- start
+
+  void blockUser({
+    required String studentID,
+  }) async {
+    debugPrint('blockUser------------loading');
+    emit(BlockUserLoading());
+    await _repository
+        .blockUserRepo(
+      studentID: studentID,
+    )
+        .then((value) {
+      // success
+      debugPrint('blockUser------------success');
+      emit(BlockUserSuccess());
+      getAllUsers();
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('blockUser------------Error');
+
+      emit(Error(error.toString()));
+    });
+  }
+
+// blockUser ------------------- end
+
+  /// unblockUser ------------------- start
+
+  void unblockUser({
+    required String studentID,
+  }) async {
+    debugPrint('unblockUser------------loading');
+    emit(UnblockUserLoading());
+    await _repository
+        .unblockUserRepo(
+      studentID: studentID,
+    )
+        .then((value) {
+      // success
+      debugPrint('unblockUser------------success');
+      emit(UnblockUserSuccess());
+      getAllUsers();
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('unblockUser------------Error');
+
+      emit(Error(error.toString()));
+    });
+  }
+
+// unblockUser ------------------- end
+
+  bool isSearch = false;
+
+  void openSearch() {
+    isSearch = !isSearch;
+    emit(OpenSearch());
+  }
 }

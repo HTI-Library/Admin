@@ -26,6 +26,7 @@ abstract class Repository {
     required String email,
     required String name,
     required String password,
+    required String phone,
   });
 
   Future<Response> bookDetailsRepo({
@@ -146,6 +147,12 @@ abstract class Repository {
   Future<Response> deleteBookRepo({
     required String bookId,
   });
+  Future<Response> blockUserRepo({
+    required String studentID,
+  });
+  Future<Response> unblockUserRepo({
+    required String studentID,
+  });
 }
 
 class RepoImplementation extends Repository {
@@ -169,6 +176,7 @@ class RepoImplementation extends Repository {
     required String email,
     required String name,
     required String password,
+    required String phone,
   }) async {
     return await dioHelper.post(
       url: createUserUrl,
@@ -176,6 +184,7 @@ class RepoImplementation extends Repository {
         'email': email,
         'name': name,
         'password': password,
+        'phone': phone,
       },
     );
   }
@@ -552,4 +561,25 @@ class RepoImplementation extends Repository {
       ),
     );
   }
+
+
+  @override
+  Future<Response> blockUserRepo({
+    required String studentID,
+  }) async {
+    return await dioHelper.post(
+      url: '$blockUserUrl?studentID=$studentID',
+    );
+  }
+
+  @override
+  Future<Response> unblockUserRepo({
+    required String studentID,
+  }) async {
+    return await dioHelper.post(
+      url: '$removeBlockUrl?studentID=$studentID',
+    );
+  }
+
+
 }

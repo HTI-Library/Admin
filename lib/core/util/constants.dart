@@ -144,6 +144,16 @@ void signOut(context) {
   });
 }
 
+Future<void> makePhoneCall(String phoneNumber) async {
+  final Uri launchUri = Uri(
+    scheme: 'tel',
+    path: phoneNumber,
+  );
+  await launch(launchUri.toString()).catchError((error) {
+    showToast(message: error.toString(), toastStates: ToastStates.ERROR);
+  });
+}
+
 TranslationModel appTranslation(context) =>
     MainCubit.get(context).translationModel;
 
