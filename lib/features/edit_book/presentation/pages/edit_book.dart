@@ -7,6 +7,7 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 import 'package:hti_library_admin/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
+import 'package:hti_library_admin/core/util/widgets/dialog_change_photo.dart';
 import 'package:hti_library_admin/core/util/widgets/loading.dart';
 import 'package:hti_library_admin/features/settings/widget/btn_my_account.dart';
 
@@ -107,6 +108,16 @@ class _EditBookState extends State<EditBook> {
                             Stack(
                               alignment: AlignmentDirectional.bottomEnd,
                               children: [
+                                if (MainCubit.get(context).imageFile != null)
+                                  Image(
+                                    image:
+                                    FileImage(MainCubit.get(context).imageFile!),
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    height:
+                                    MediaQuery.of(context).size.width / 2 * 1.6,
+                                    fit: BoxFit.cover,
+                                  ),
+                                if (MainCubit.get(context).imageFile == null)
                                 Image(
                                   image: NetworkImage(MainCubit.get(context)
                                       .bookModel!
@@ -118,26 +129,88 @@ class _EditBookState extends State<EditBook> {
                                       1.6,
                                   fit: BoxFit.cover,
                                 ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: CircleAvatar(
-                                    backgroundColor: HexColor(greyWhite),
-                                    radius: 16.0,
-                                    child: Icon(
-                                      Icons.edit_rounded,
-                                      size: 16.0,
-                                      color: HexColor(mainColorL),
+                                Wrap(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                            const DialogChangePhoto());
+                                      },
+                                      icon: CircleAvatar(
+                                        backgroundColor: HexColor(greyWhite),
+                                        radius: 16.0,
+                                        child: Icon(
+                                          Icons.edit_rounded,
+                                          size: 16.0,
+                                          color: HexColor(mainColorL),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    if (MainCubit.get(context).imageFile != null)
+                                    IconButton(
+                                      onPressed: () {
+                                        MainCubit.get(context).clearSelectedImage();
+                                      },
+                                      icon: CircleAvatar(
+                                        backgroundColor: HexColor(greyWhite),
+                                        radius: 16.0,
+                                        child: Icon(
+                                          Icons.delete_rounded,
+                                          size: 16.0,
+                                          color: HexColor(red),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                             space15Vertical,
-                            MyBtnAccount(
-                              voidCallback: () {},
-                              text: 'Upload PDF',
-                              imagePath: 'info',
-                            ),
+                            if (MainCubit.get(context).pdfFile != null)
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width - 88,
+                                    child: MyBtnAccount(
+                                      voidCallback: () {
+                                        MainCubit.get(context).pickPdf();
+                                      },
+                                      text: 'Upload PDF',
+                                      imagePath: 'info',
+                                    ),
+                                  ),
+                                  space8Horizontal,
+                                  SizedBox(
+                                    height: 50.0,
+                                    width: 50.0,
+                                    child: Material(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      color: HexColor(greyWhite),
+                                      child: IconButton(
+                                        onPressed: () {
+                                          MainCubit.get(context).clearPickedPdf();
+                                        },
+                                        icon: Icon(
+                                          Icons.delete_rounded,
+                                          size: 16.0,
+                                          color: HexColor(red),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (MainCubit.get(context).pdfFile == null)
+                              MyBtnAccount(
+                                voidCallback: () {
+                                  MainCubit.get(context).pickPdf();
+                                },
+                                text: 'Upload PDF',
+                                imagePath: 'info',
+                              ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.name,

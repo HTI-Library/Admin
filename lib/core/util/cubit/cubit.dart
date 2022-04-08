@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
-import 'package:hti_library_admin/core/error/exceptions.dart';
 import 'package:hti_library_admin/core/models/book_details_model.dart';
 import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/models/categories_model.dart';
@@ -399,61 +399,6 @@ class MainCubit extends Cubit<MainState> {
     emit(InternetState());
   }
 
-  PickedFile? imageFile;
-
-  void openGallery(BuildContext context) async {
-    await ImagePicker()
-        .getImage(
-      source: ImageSource.gallery,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  void openCamera(BuildContext context) async {
-    await ImagePicker()
-        .getImage(
-      source: ImageSource.camera,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  //TODO pick photo ------------ start
-  // final ImagePicker _picker = ImagePicker();
-  // File? imageFile;
-  //
-  // void selectImage() async {
-  //   _picker.pickImage(source: ImageSource.gallery).then((value) {
-  //     imageFile = File(value!.path);
-  //   });
-  //
-  //   emit(PickImageSuccessState());
-  // }
-  //
-  // File? cameraFile;
-  //
-  // void selectCamera() async {
-  //   _picker.pickImage(source: ImageSource.camera).then((value) {
-  //     cameraFile = File(value!.path);
-  //   });
-  //
-  //   emit(PickImageSuccessState());
-  // }
-  //TODO pick photo ------------ end
-
   /// createUser ------------------- start
 
   void createUser({
@@ -629,6 +574,8 @@ class MainCubit extends Cubit<MainState> {
     emit(CreateBookLoading());
     await _repository
         .createBookRepo(
+            image: imageFile,
+            pdf: pdfFile,
             library: library,
             type: type,
             name: name,
@@ -716,6 +663,8 @@ class MainCubit extends Cubit<MainState> {
     emit(EditBookLoading());
     await _repository
         .editBookRepo(
+      image: imageFile,
+      pdf: pdfFile,
       library: library,
       type: type,
       name: name,
@@ -1017,6 +966,9 @@ class MainCubit extends Cubit<MainState> {
 
   Future<void> bookDetails({required String bookId}) async {
     bookModel = null;
+    pdfFile = null;
+    imageFile = null;
+
     debugPrint('bookDetails------------loading');
     emit(BookDetailsLoading());
     await _repository
@@ -1208,5 +1160,51 @@ class MainCubit extends Cubit<MainState> {
   }
 
 // editCat ------------------- end
+
+  /// pick photo ------------ start
+  final ImagePicker _picker = ImagePicker();
+  File? imageFile;
+
+  void selectImage(context) async {
+    _picker.pickImage(source: ImageSource.gallery).then((value) {
+      imageFile = File(value!.path);
+      emit(PickImageSuccessState());
+    });
+    Navigator.pop(context);
+  }
+
+  void selectCamera(context) async {
+    _picker.pickImage(source: ImageSource.camera).then((value) {
+      imageFile = File(value!.path);
+      emit(PickImageSuccessState());
+    });
+
+    Navigator.pop(context);
+  }
+
+  void clearSelectedImage() {
+    imageFile = null;
+    emit(ClearImageSuccessState());
+  }
+
+// pick photo ------------ end
+
+  /// pick pdf ------------ start
+
+  File? pdfFile;
+
+  void pickPdf() async {
+    await FilePicker.platform.pickFiles().then((value) {
+      pdfFile = File(value!.files.single.path!);
+      emit(PickPdfSuccess());
+    });
+  }
+
+  void clearPickedPdf() {
+    pdfFile = null;
+    emit(ClearPickedPdfSuccess());
+  }
+
+// pick pdf ------------ end
 
 }

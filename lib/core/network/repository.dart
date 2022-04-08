@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:hti_library_admin/core/network/remote/dio_helper.dart';
 
@@ -45,6 +47,8 @@ abstract class Repository {
   });
 
   Future<Response> createBookRepo({
+    File? image,
+    File? pdf,
     required String library,
     required String type,
     required String name,
@@ -109,6 +113,8 @@ abstract class Repository {
     required num amount,
     required String classificationNum,
     required String overview,
+    File? image,
+    File? pdf,
     required String bookId,
   });
 
@@ -238,10 +244,22 @@ class RepoImplementation extends Repository {
     required num amount,
     required String classificationNum,
     required String overview,
+    File? image,
+    File? pdf,
   }) async {
     return await dioHelper.post(
       url: createBookUrl,
       data: FormData.fromMap({
+        if (image != null)
+          'book': await MultipartFile.fromFile(
+            image.path,
+            filename: Uri.file(image.path).pathSegments.last,
+          ),
+        if (pdf != null)
+          'book': await MultipartFile.fromFile(
+            pdf.path,
+            filename: Uri.file(pdf.path).pathSegments.last,
+          ),
         'name': name,
         'amount': amount,
         'overview': overview,
@@ -273,10 +291,22 @@ class RepoImplementation extends Repository {
     required String classificationNum,
     required String overview,
     required String bookId,
+    File? image,
+    File? pdf,
   }) async {
     return await dioHelper.post(
       url: editBookUrl,
       data: FormData.fromMap({
+        if (image != null)
+          'book': await MultipartFile.fromFile(
+            image.path,
+            filename: Uri.file(image.path).pathSegments.last,
+          ),
+        if (pdf != null)
+          'book': await MultipartFile.fromFile(
+            pdf.path,
+            filename: Uri.file(pdf.path).pathSegments.last,
+          ),
         if (name != null) 'name': name,
         'amount': amount,
         'overview': overview,

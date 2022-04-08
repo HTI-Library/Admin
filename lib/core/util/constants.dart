@@ -237,6 +237,11 @@ const space5Horizontal = SizedBox(
   width: 5.0,
 );
 
+
+const space8Horizontal = SizedBox(
+  width: 8.0,
+);
+
 const space10Horizontal = SizedBox(
   width: 10.0,
 );
