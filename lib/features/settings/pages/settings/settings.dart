@@ -8,6 +8,7 @@ import 'package:hti_library_admin/features/s_f_calender/widget/meeting.dart';
 import 'package:hti_library_admin/features/types/presentation/pages/types_page.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../../users/presentation/pages/users.dart';
 import '../../widget/btn_my_account.dart';
 import '../info/info.dart';
 import '../setting/presntation/setting.dart';
@@ -79,6 +80,15 @@ class Settings extends StatelessWidget {
                     navigateTo(context, const LibrariesPage());
                   },
                   text: appTranslation(context).libraries,
+                  // text: appTranslation(context).setting,
+                  imagePath: '',
+                ),
+                space10Vertical,
+                MyBtnAccount(
+                  voidCallback: () {
+                    navigateTo(context, const UsersPage());
+                  },
+                  text: appTranslation(context).users,
                   // text: appTranslation(context).setting,
                   imagePath: '',
                 ),

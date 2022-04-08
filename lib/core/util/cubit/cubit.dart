@@ -13,6 +13,7 @@ import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/models/categories_model.dart';
 import 'package:hti_library_admin/core/models/get_all_library_model.dart';
 import 'package:hti_library_admin/core/models/get_all_types_model.dart';
+import 'package:hti_library_admin/core/models/login_model.dart';
 import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
@@ -426,12 +427,13 @@ class MainCubit extends Cubit<MainState> {
   // createUser ------------------- end
 
   /// getAllUsers ------------------- start
-
+  AllUsersModel? allUsersModel;
   void getAllUsers() async {
     debugPrint('getAllUsers------------loading');
     emit(GetAllUsersLoading());
     await _repository.getAllUsersRepo().then((value) {
       // success
+      allUsersModel = AllUsersModel.fromJson(value.data);
       debugPrint('getAllUsers------------success');
       emit(GetAllUsersSuccess());
     }).catchError((error) {
@@ -456,6 +458,7 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteUser------------success');
       emit(DeleteUserSuccess());
+      getAllUsers();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
