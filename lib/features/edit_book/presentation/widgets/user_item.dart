@@ -6,6 +6,7 @@ import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
+import 'package:hti_library_admin/core/util/widgets/app_icon_button.dart';
 
 class UserItem extends StatelessWidget {
   const UserItem({
@@ -34,8 +35,9 @@ class UserItem extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor:
-                        model.blocked ? HexColor(red).withOpacity(.6) : HexColor(green).withOpacity(.6),
+                    backgroundColor: model.blocked
+                        ? HexColor(red).withOpacity(.6)
+                        : HexColor(green).withOpacity(.6),
                     radius: 38,
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(model.avatar),
@@ -66,11 +68,12 @@ class UserItem extends StatelessWidget {
                   Column(
                     children: [
                       Container(
+                        width: 40.0,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 6.0),
+                            horizontal: 8.0, vertical: 4.0),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(6.0),
                           color: Theme.of(context).primaryColor.withOpacity(.1),
                         ),
                         child: Row(
@@ -90,11 +93,12 @@ class UserItem extends StatelessWidget {
                       ),
                       space3Vertical,
                       Container(
+                        width: 40.0,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 6.0),
+                            horizontal: 8.0, vertical: 4.0),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(6.0),
                           color: Theme.of(context).primaryColor.withOpacity(.1),
                         ),
                         child: Row(
@@ -114,11 +118,12 @@ class UserItem extends StatelessWidget {
                       ),
                       space3Vertical,
                       Container(
+                        width: 40.0,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0, vertical: 6.0),
+                            horizontal: 8.0, vertical: 4.0),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(6.0),
                           color: Theme.of(context).primaryColor.withOpacity(.1),
                         ),
                         child: Row(
@@ -147,52 +152,29 @@ class UserItem extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 150,
                     label: model.blocked ? 'Unblock' : 'Block',
                     onPress: () {
-                      if(model.blocked){
-                        MainCubit.get(context).unblockUser(studentID: model.email);
-                      }else{
-                        MainCubit.get(context).blockUser(studentID: model.email);
+                      if (model.blocked) {
+                        MainCubit.get(context)
+                            .unblockUser(studentID: model.email);
+                      } else {
+                        MainCubit.get(context)
+                            .blockUser(studentID: model.email);
                       }
                     },
                   ),
                   space10Horizontal,
-                  SizedBox(
-                    height: 40.0,
-                    width: 40.0,
-                    child: Material(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Theme.of(context).primaryColor.withOpacity(.1),
-                      child: IconButton(
-                        onPressed: () {
-                          makePhoneCall(model.phone);
-                        },
-                        icon: Icon(
-                          Icons.call_rounded,
-                          size: 16.0,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                    ),
+                  AppIconButton(
+                    onPressed: () {
+                      makePhoneCall(model.phone);
+                    },
+                    icon: Icons.call_rounded,
                   ),
                   space10Horizontal,
-                  SizedBox(
-                    height: 40.0,
-                    width: 40.0,
-                    child: Material(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Theme.of(context).primaryColor.withOpacity(.1),
-                      child: IconButton(
-                        onPressed: () {
-                          MainCubit.get(context).deleteUser(uId: model.id);
-                        },
-                        icon: Icon(
-                          Icons.delete_rounded,
-                          size: 16.0,
-                          color: HexColor(red),
-                        ),
-                      ),
-                    ),
+                  AppIconButton(
+                    onPressed: () {
+                      MainCubit.get(context).deleteUser(uId: model.id);
+                    },
+                    icon: Icons.delete_rounded,
+                    iconColor: HexColor(red),
                   ),
                 ],
               ),
