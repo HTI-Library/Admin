@@ -27,7 +27,7 @@ class TypeItem extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: HexColor(greyWhite),
+            color: Theme.of(context).primaryColorLight,
           ),
           margin: const EdgeInsetsDirectional.only(
             bottom: 15.0,
@@ -64,7 +64,7 @@ class TypeItem extends StatelessWidget {
                           textAlign: TextAlign.end,
                           style:
                               Theme.of(context).textTheme.headline6!.copyWith(
-                                    color: HexColor(mainColorL),
+                                color: Theme.of(context).primaryColor,
                                   ),
                           maxLines: 1,
                         ),
@@ -73,7 +73,7 @@ class TypeItem extends StatelessWidget {
                           typeModel.library,
                           textAlign: TextAlign.end,
                           style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: HexColor(mainColorL),
+                            color: Theme.of(context).primaryColor,
                                 fontSize: 14.0,
                               ),
                           maxLines: 1,
