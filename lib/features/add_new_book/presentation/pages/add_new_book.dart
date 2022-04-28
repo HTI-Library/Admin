@@ -49,8 +49,8 @@ class AddNewBook extends StatelessWidget {
                       Text(
                         appTranslation(context).addBook,
                         style: Theme.of(context).textTheme.headline6?.copyWith(
-                        color: Theme.of(context).primaryColorDark,
-                        ),
+                              color: Theme.of(context).primaryColorDark,
+                            ),
                       ),
                       space15Vertical,
                       Stack(
@@ -81,7 +81,7 @@ class AddNewBook extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 3,
                               height: 35.0,
                               color: HexColor(dialogColor),
-                              label:  appTranslation(context).upload,
+                              label: appTranslation(context).upload,
                               textColor: Theme.of(context).primaryColorDark,
                               onPress: () {
                                 showDialog(
@@ -130,13 +130,6 @@ class AddNewBook extends StatelessWidget {
                           ],
                         ),
                       if (MainCubit.get(context).pdfFile == null)
-                        MyBtnAccount(
-                          voidCallback: () {
-                            MainCubit.get(context).pickPdf();
-                          },
-                          text: 'Upload PDF',
-                          imagePath: 'info',
-                        ),
                       MyBtnAccount(
                         voidCallback: () {},
                         text: appTranslation(context).uploadPdf,
@@ -215,8 +208,8 @@ class AddNewBook extends StatelessWidget {
                         fallback: (context) => AppButton(
                           width: MediaQuery.of(context).size.width / 3,
                           height: 35.0,
+                          label: appTranslation(context).addBook,
                           color: Theme.of(context).primaryColor,
-                          label: 'ADD',
                           textColor: HexColor(dialogColor),
                           onPress: () {
                             if (formKe.currentState!.validate()) {
@@ -239,17 +232,7 @@ class AddNewBook extends StatelessWidget {
                             }
                           },
                         ),
-                      AppButton(
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: 35.0,
-                        color: Theme.of(context).primaryColor,
-                        label: appTranslation(context).addBook,
-                        textColor: HexColor(dialogColor),
-                        onPress: () {
-                          if (formKe.currentState!.validate()) {}
-                        },
                       ),
-                      space30Vertical,
                     ],
                   ),
                 ),

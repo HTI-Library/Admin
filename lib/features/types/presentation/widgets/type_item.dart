@@ -64,7 +64,7 @@ class TypeItem extends StatelessWidget {
                           textAlign: TextAlign.end,
                           style:
                               Theme.of(context).textTheme.headline6!.copyWith(
-                                color: Theme.of(context).primaryColor,
+                                    color: Theme.of(context).primaryColor,
                                   ),
                           maxLines: 1,
                         ),
@@ -73,7 +73,7 @@ class TypeItem extends StatelessWidget {
                           typeModel.library,
                           textAlign: TextAlign.end,
                           style: Theme.of(context).textTheme.caption!.copyWith(
-                            color: Theme.of(context).primaryColor,
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 14.0,
                               ),
                           maxLines: 1,
@@ -84,73 +84,6 @@ class TypeItem extends StatelessWidget {
                   AppIconButton(
                     height: 40.0,
                     width: 40.0,
-                    child: Material(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: HexColor(greyWhite),
-                      child: IconButton(
-                        onPressed: () {
-                          nameController.text = typeModel.name;
-                          libraryController.text = typeModel.library;
-                          showModalBottomSheet<void>(
-                              context: context,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0),
-                                ),
-                              ),
-                              backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
-                              builder: (context) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom,
-                                  ),
-                                  child: SizedBox(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.only(
-                                                bottom: 15.0),
-                                            height: 4,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            decoration: BoxDecoration(
-                                              color: HexColor(mainColorL),
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                          ),
-                                          AppTextFormField(
-                                            type: TextInputType.name,
-                                            hint: appTranslation(context).name,
-                                            textEditingController:
-                                                nameController,
-                                          ),
-                                          space15Vertical,
-                                          AppTextFormField(
-                                            type: TextInputType.name,
-                                            hint: appTranslation(context).libraryDepartment,
-                                            textEditingController:
-                                                libraryController,
-                                          ),
-                                          space30Vertical,
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                  child: AppButton(
-                                                label: appTranslation(context).save,
                     onPressed: () {
                       nameController.text = typeModel.name;
                       libraryController.text = typeModel.library;
@@ -164,13 +97,12 @@ class TypeItem extends StatelessWidget {
                             ),
                           ),
                           backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).scaffoldBackgroundColor,
                           builder: (context) {
                             return Padding(
                               padding: EdgeInsets.only(
-                                bottom: MediaQuery.of(context)
-                                    .viewInsets
-                                    .bottom,
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom,
                               ),
                               child: SizedBox(
                                 child: Padding(
@@ -178,57 +110,60 @@ class TypeItem extends StatelessWidget {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.only(
-                                            bottom: 15.0),
+                                        margin:
+                                            const EdgeInsets.only(bottom: 15.0),
                                         height: 4,
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            5,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                         decoration: BoxDecoration(
                                           color: HexColor(mainColorL),
                                           borderRadius:
-                                          BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10.0),
                                         ),
                                       ),
                                       AppTextFormField(
                                         type: TextInputType.name,
-                                        hint: 'Name',
-                                        textEditingController:
-                                        nameController,
+                                        hint: appTranslation(context).name,
+                                        textEditingController: nameController,
                                       ),
                                       space15Vertical,
                                       AppTextFormField(
                                         type: TextInputType.name,
                                         hint: 'Library',
                                         textEditingController:
-                                        libraryController,
+                                            libraryController,
                                       ),
                                       space30Vertical,
                                       Row(
                                         children: [
                                           Expanded(
                                               child: AppButton(
-                                                label: 'SAVE',
-                                                onPress: () {
-                                                  Navigator.pop(context);
-                                                  MainCubit.get(context).editType(name: nameController.text,library: libraryController.text,typeID: typeModel.id);
-                                                },
-                                                width: 100.0,
-                                              )),
+                                            label: appTranslation(context).save,
+                                            onPress: () {
+                                              Navigator.pop(context);
+                                              MainCubit.get(context).editType(
+                                                  name: nameController.text,
+                                                  library:
+                                                      libraryController.text,
+                                                  typeID: typeModel.id);
+                                            },
+                                            width: 100.0,
+                                          )),
                                           space15Horizontal,
                                           AppIconButton(
                                             height: 40.0,
                                             width: 40.0,
-                                            backgroundColor: Theme.of(context).primaryColor.withOpacity(.15),
+                                            backgroundColor: Theme.of(context)
+                                                .primaryColor
+                                                .withOpacity(.15),
                                             iconColor: HexColor(red),
                                             onPressed: () {
                                               Navigator.pop(context);
-                                              MainCubit.get(context)
-                                                  .deleteType(
+                                              MainCubit.get(context).deleteType(
                                                 typeID: typeModel.id,
                                               );
                                             },
