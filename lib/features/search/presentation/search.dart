@@ -14,13 +14,13 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainScaffold(
       scaffold: BackScaffold(
-        title: 'Search',
+        title: '${appTranslation(context).search}',
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
               AppTextFormField(
-                hint: 'Search',
+                hint: '${appTranslation(context).search}',
                 icon: AssetSvg(
                   imagePath: 'search',
                   color: Theme.of(context).primaryColorDark,

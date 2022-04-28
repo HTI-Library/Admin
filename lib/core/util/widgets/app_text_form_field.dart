@@ -56,7 +56,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               }
             },
             style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                  color: Theme.of(context).primaryColorDark,
+                  color: Theme.of(context).primaryColorLight,
                 ),
             keyboardType: widget.type,
             controller: widget.textEditingController,
@@ -82,14 +82,14 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                 borderSide: BorderSide.none,
               ),
               hintStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: HexColor(mainColorL),
+                    color: Theme.of(context).primaryColorDark,
                   ),
               labelStyle: Theme.of(context).textTheme.caption!.copyWith(
-                color: Theme.of(context).primaryColorDark,
+                    color: Theme.of(context).primaryColorDark,
                 height: 5
               ),
-              hintText: widget.hint,
-              labelText: widget.label,
+              hintText: widget.label,
+              labelText: widget.hint,
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
               ),

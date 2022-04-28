@@ -133,14 +133,14 @@ class TypeItem extends StatelessWidget {
                                           ),
                                           AppTextFormField(
                                             type: TextInputType.name,
-                                            hint: 'Name',
+                                            hint: appTranslation(context).name,
                                             textEditingController:
                                                 nameController,
                                           ),
                                           space15Vertical,
                                           AppTextFormField(
                                             type: TextInputType.name,
-                                            hint: 'Library',
+                                            hint: appTranslation(context).libraryDepartment,
                                             textEditingController:
                                                 libraryController,
                                           ),
@@ -149,7 +149,7 @@ class TypeItem extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: AppButton(
-                                                label: 'SAVE',
+                                                label: appTranslation(context).save,
                                                 onPress: () {
                                                   Navigator.pop(context);
                                                   MainCubit.get(context).editType(name: nameController.text,library: libraryController.text,typeID: typeModel.id);

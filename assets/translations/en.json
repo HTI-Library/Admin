@@ -33,7 +33,6 @@
   "moreBooksFromThisCategory": "More Books of this Category",
   "moreBooksFromThisAuthor": "More Books from this author",
   "doYouWantToLogout": "Do you want to logout?",
-  "bookName": "Book Name",
   "author": "Author",
   "pagesNum": "Pages Num",
   "edition": "Edition",
@@ -66,6 +65,23 @@
   "deliveries": "DELIVERIES",
   "addBook": "Add Book",
   "upload": "Upload Photo",
+
+  "uploadPdf": "Upload PDF",
+  "libraryDepartment": "Library Department",
+  "bookType": "Book Type",
+  "bookName": "Book Name",
+  "bookEdition": "Book Edition",
+  "bookAuthor": "Book Author Name",
+  "bookPages": "Book Pages Number",
+  "bookCategory": "Book Category",
+  "bookNumber": "Book Number",
+  "bookCopies": "Book Copies",
+
+  "editBook": "Edit Book",
+  "save": "Save",
+
+  "name": "Name",
+  "code": "Code",
 
 
   "logIn": "Login"

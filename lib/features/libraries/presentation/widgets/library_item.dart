@@ -116,14 +116,14 @@ class LibraryItem extends StatelessWidget {
                                           ),
                                           AppTextFormField(
                                             type: TextInputType.name,
-                                            hint: 'Name',
+                                            hint: appTranslation(context).name,
                                             textEditingController:
                                                 nameController,
                                           ),
                                           space15Vertical,
                                           AppTextFormField(
                                             type: TextInputType.name,
-                                            hint: 'Code',
+                                            hint: appTranslation(context).code,
                                             textEditingController:
                                                 codeController,
                                           ),
@@ -132,7 +132,7 @@ class LibraryItem extends StatelessWidget {
                                             children: [
                                               Expanded(
                                                   child: AppButton(
-                                                label: 'SAVE',
+                                                label: appTranslation(context).save,
                                                 onPress: () {
                                                   Navigator.pop(context);
                                                   MainCubit.get(context).editLibrary(name: nameController.text,code: codeController.text,libraryID: libraryModel.id);

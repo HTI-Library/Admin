@@ -33,7 +33,6 @@ class TranslationModel {
   late String moreBooksFromThisCategory;
   late String moreBooksFromThisAuthor;
   late String doYouWantToLogout;
-  late String bookName;
   late String author;
   late String pagesNum;
   late String edition;
@@ -64,6 +63,21 @@ class TranslationModel {
   late String deliveries;
   late String addBook;
   late String upload;
+
+  late String uploadPdf;
+  late String libraryDepartment;
+  late String bookType;
+  late String bookName;
+  late String bookEdition;
+  late String bookAuthor;
+  late String bookPages;
+  late String bookCategory;
+  late String bookNumber;
+  late String bookCopies;
+  late String editBook;
+  late String save;
+  late String name;
+  late String code;
 
 
 
@@ -138,6 +152,21 @@ class TranslationModel {
     deliveries = json['deliveries'];
     addBook = json['addBook'];
     upload = json['upload'];
+
+    uploadPdf = json['uploadPdf'];
+    libraryDepartment = json['libraryDepartment'];
+    bookType = json['bookType'];
+    bookName = json['bookName'];
+    bookEdition = json['bookEdition'];
+    bookAuthor = json['bookAuthor'];
+    bookPages = json['bookPages'];
+    bookCategory = json['bookCategory'];
+    bookNumber = json['bookNumber'];
+    bookCopies = json['bookCopies'];
+    editBook = json['editBook'];
+    save = json['save'];
+    name = json['name'];
+    code = json['code'];
 
   }
 }
