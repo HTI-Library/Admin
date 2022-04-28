@@ -100,25 +100,6 @@ class _MyAppState extends State<MyApp> {
             ..checkConnectivity()
             ..getBooksInBorrowTrue(page: 1)
             ..getBooksInBorrowFalse(page: 1)
-            // ..editCat(categoryID: '623dadfa72201d9884ac5f7d',library: 'aaa',name: 'cat name',type: 'ssbs')
-            // ..editType(name: 'stest',library: 'aaa',typeID: '623daecb72201d9884ac5f9b')
-            // ..editLibrary(name: 'lib',code: '413543',libraryID: '623dafa172201d9884ac5fb3')
-            // ..createType(library:'aaa' ,name: 'test',)
-            // ..createCategory(library: 'aaa', name: 'name1', type: 'ssbs')
-            // ..createLibrary(code: 'code', name: 'name')
-            // ..createBook(
-            //     library: 'a',
-            //     type: 'b',
-            //     name: 'name ehab test',
-            //     edition: 2,
-            //     rate: 3.5,
-            //     auther: 'auther',
-            //     pages: 250,
-            //     category: 'category1',
-            //     bookNum: 117,
-            //     amount: 3,
-            //     classificationNum: '620.2',
-            //     overview: 'overview')
             ..getAllBooks(page: 1),
         ),
       ],
@@ -140,3 +121,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+//s library
+//1
+//test

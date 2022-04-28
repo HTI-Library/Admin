@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:hti_library_admin/core/network/remote/dio_helper.dart';
 
@@ -24,6 +26,7 @@ abstract class Repository {
     required String email,
     required String name,
     required String password,
+    required String phone,
   });
 
   Future<Response> bookDetailsRepo({
@@ -45,6 +48,8 @@ abstract class Repository {
   });
 
   Future<Response> createBookRepo({
+    File? image,
+    File? pdf,
     required String library,
     required String type,
     required String name,
@@ -81,7 +86,6 @@ abstract class Repository {
     required String typeID,
   });
 
-
   Future<Response> editCatRepo({
     required String library,
     required String name,
@@ -100,7 +104,7 @@ abstract class Repository {
   Future<Response> editBookRepo({
     required String library,
     required String type,
-    required String name,
+    String? name,
     required num edition,
     required num rate,
     required String auther,
@@ -110,6 +114,8 @@ abstract class Repository {
     required num amount,
     required String classificationNum,
     required String overview,
+    File? image,
+    File? pdf,
     required String bookId,
   });
 
@@ -141,6 +147,12 @@ abstract class Repository {
   Future<Response> deleteBookRepo({
     required String bookId,
   });
+  Future<Response> blockUserRepo({
+    required String studentID,
+  });
+  Future<Response> unblockUserRepo({
+    required String studentID,
+  });
 }
 
 class RepoImplementation extends Repository {
@@ -164,6 +176,7 @@ class RepoImplementation extends Repository {
     required String email,
     required String name,
     required String password,
+    required String phone,
   }) async {
     return await dioHelper.post(
       url: createUserUrl,
@@ -171,6 +184,7 @@ class RepoImplementation extends Repository {
         'email': email,
         'name': name,
         'password': password,
+        'phone': phone,
       },
     );
   }
@@ -239,43 +253,34 @@ class RepoImplementation extends Repository {
     required num amount,
     required String classificationNum,
     required String overview,
+    File? image,
+    File? pdf,
   }) async {
-    // FormData staticData = FormData();
-    List author = [
-      {"name": "mina 1"}
-    ];
-    // String stringAuthor = author.toString();
-
-    // staticData.fields.add(const MapEntry('library', 'a'));
-    // staticData.fields.add(const MapEntry('type', 'b'));
-    // staticData.fields.add(const MapEntry('category', 'category1'));
-    // staticData.fields.add(const MapEntry('name', 'name form'));
-    // staticData.fields.add(const MapEntry('amount', '12'));
-    // staticData.fields.add(const MapEntry('overview', 'test over view text'));
-    // staticData.fields.add(MapEntry('auther', stringAuthor));
-    // staticData.fields.add(const MapEntry('rate', '2.7'));
-    // staticData.fields.add(const MapEntry('edition', '2'));
-    // staticData.fields.add(const MapEntry('pages', '200'));
-    // staticData.fields.add(const MapEntry('bookNum', '51'));
-    // staticData.fields.add(const MapEntry('classificationNum', '251.2'));
-
     return await dioHelper.post(
       url: createBookUrl,
       data: FormData.fromMap({
-        'name': 'name',
-        'amount': 'amount',
-        'overview': 'overview',
-        'auther': [
-          {"name": "mina 1"}
-        ],
-        'rate': 2.5,
-        'edition': 1,
-        'pages': 200,
-        'library': 'aaa',
-        'type': 'ssbs',
-        'category': 'name',
-        'bookNum': 117,
-        'classificationNum': 620.2,
+        if (image != null)
+          'book': await MultipartFile.fromFile(
+            image.path,
+            filename: Uri.file(image.path).pathSegments.last,
+          ),
+        if (pdf != null)
+          'book': await MultipartFile.fromFile(
+            pdf.path,
+            filename: Uri.file(pdf.path).pathSegments.last,
+          ),
+        'name': name,
+        'amount': amount,
+        'overview': overview,
+        'auther[0][name]': auther,
+        'rate': rate,
+        'edition': edition,
+        'pages': pages,
+        'library': library,
+        'type': type,
+        'category': category,
+        'bookNum': bookNum,
+        'classificationNum': classificationNum,
       }),
     );
   }
@@ -284,7 +289,7 @@ class RepoImplementation extends Repository {
   Future<Response> editBookRepo({
     required String library,
     required String type,
-    required String name,
+    String? name,
     required num edition,
     required num rate,
     required String auther,
@@ -295,28 +300,36 @@ class RepoImplementation extends Repository {
     required String classificationNum,
     required String overview,
     required String bookId,
+    File? image,
+    File? pdf,
   }) async {
     return await dioHelper.post(
       url: editBookUrl,
-      data: {
-        'data': {
-          'library': library,
-          'type': type,
-          'name': name,
-          'rate': rate,
-          'edition': edition,
-          'auther': [
-            {'name': auther}
-          ],
-          'pages': pages,
-          'category': category,
-          'bookNum': bookNum,
-          'amount': amount,
-          'overview': overview,
-          'classificationNum': classificationNum,
-        },
+      data: FormData.fromMap({
+        if (image != null)
+          'book': await MultipartFile.fromFile(
+            image.path,
+            filename: Uri.file(image.path).pathSegments.last,
+          ),
+        if (pdf != null)
+          'book': await MultipartFile.fromFile(
+            pdf.path,
+            filename: Uri.file(pdf.path).pathSegments.last,
+          ),
+        if (name != null) 'name': name,
+        'amount': amount,
+        'overview': overview,
+        'auther[0][name]': auther,
+        'rate': rate,
+        'edition': edition,
+        'pages': pages,
+        'library': library,
+        'type': type,
+        'category': category,
+        'bookNum': bookNum,
+        'classificationNum': classificationNum,
         'book_id': bookId,
-      },
+      }),
     );
   }
 
@@ -337,7 +350,6 @@ class RepoImplementation extends Repository {
     required String code,
     required String name,
   }) async {
-
     return await dioHelper.post(
       url: createLibraryUrl,
       data: FormData.fromMap({
@@ -530,7 +542,6 @@ class RepoImplementation extends Repository {
     );
   }
 
-
   @override
   Future<Response> editCatRepo({
     required String library,
@@ -551,5 +562,24 @@ class RepoImplementation extends Repository {
     );
   }
 
-}
 
+  @override
+  Future<Response> blockUserRepo({
+    required String studentID,
+  }) async {
+    return await dioHelper.post(
+      url: '$blockUserUrl?studentID=$studentID',
+    );
+  }
+
+  @override
+  Future<Response> unblockUserRepo({
+    required String studentID,
+  }) async {
+    return await dioHelper.post(
+      url: '$removeBlockUrl?studentID=$studentID',
+    );
+  }
+
+
+}

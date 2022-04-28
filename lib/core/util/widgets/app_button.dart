@@ -30,7 +30,7 @@ class AppButton extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          10.0,
+          8.0,
         ),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,

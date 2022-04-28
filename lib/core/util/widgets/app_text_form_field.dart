@@ -62,7 +62,6 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             controller: widget.textEditingController,
             obscureText: widget.isPassword ? isShown : false,
             onChanged: widget.onChanged,
-            textInputAction: widget.textInputAction,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -87,9 +86,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               labelStyle: Theme.of(context).textTheme.caption!.copyWith(
                     color: Theme.of(context).primaryColorDark,
                 height: 5
-              ),
-              hintText: widget.label,
               labelText: widget.hint,
+              labelStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+                color: Theme.of(context).primaryColor,
+                height: 4,
+              ),
+              hintText: widget.hint,
+
               contentPadding: const EdgeInsetsDirectional.only(
                 start: 15.0,
               ),

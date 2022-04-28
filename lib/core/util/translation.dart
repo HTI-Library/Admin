@@ -1,5 +1,4 @@
 class TranslationModel {
-
   late String myProfile;
   late String notification;
   late String notificationNo;
@@ -46,10 +45,7 @@ class TranslationModel {
   late String saved;
   late String account;
   late String myBorrowBook;
-  // late String myReturnBook;
   late String noSave;
-
-
   late String cancel;
   late String confirm;
   late String delete;
@@ -82,7 +78,7 @@ class TranslationModel {
 
 
   late String logIn;
-
+  late String users;
 
 
   TranslationModel.fromJson(Map<String, dynamic> json) {
@@ -130,15 +126,11 @@ class TranslationModel {
     unavailable = json['unavailable'];
     bookName = json['bookName'];
     myBorrowBook = json['myBorrowBook'];
-    // myReturnBook = json['myReturnBook'];
-
     home = json['home'];
     categories = json['categories'];
     saved = json['saved'];
     noSave = json['noSave'];
     account = json['account'];
-
-
     delete = json['delete'];
     deleteBook = json['deleteBook'];
     edit = json['edit'];
@@ -168,5 +160,6 @@ class TranslationModel {
     name = json['name'];
     code = json['code'];
 
+    users = json['users'];
   }
 }

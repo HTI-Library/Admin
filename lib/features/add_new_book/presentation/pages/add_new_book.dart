@@ -1,3 +1,4 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -6,6 +7,7 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/widgets/app_button.dart';
 import 'package:hti_library_admin/core/util/widgets/app_text_form_field.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
+import 'package:hti_library_admin/core/util/widgets/dialog_change_photo.dart';
 import 'package:hti_library_admin/features/settings/widget/btn_my_account.dart';
 
 import '../../../../core/util/cubit/state.dart';
@@ -23,6 +25,9 @@ class AddNewBook extends StatelessWidget {
   TextEditingController bookCategoryController = TextEditingController();
   TextEditingController bookNumberController = TextEditingController();
   TextEditingController numberOfCopiesController = TextEditingController();
+  TextEditingController classificationNumController = TextEditingController();
+  TextEditingController overviewController = TextEditingController();
+
   GlobalKey<FormState> formKe = GlobalKey<FormState>();
 
   @override
@@ -51,14 +56,25 @@ class AddNewBook extends StatelessWidget {
                       Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
-                          Image(
-                            image: const AssetImage(
-                              'assets/images/placeholder.jpg',
+                          if (MainCubit.get(context).imageFile != null)
+                            Image(
+                              image:
+                                  FileImage(MainCubit.get(context).imageFile!),
+                              width: MediaQuery.of(context).size.width / 2,
+                              height:
+                                  MediaQuery.of(context).size.width / 2 * 1.6,
+                              fit: BoxFit.cover,
                             ),
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: MediaQuery.of(context).size.width / 2 * 1.6,
-                            fit: BoxFit.cover,
-                          ),
+                          if (MainCubit.get(context).imageFile == null)
+                            Image(
+                              image: const AssetImage(
+                                'assets/images/placeholder.jpg',
+                              ),
+                              width: MediaQuery.of(context).size.width / 2,
+                              height:
+                                  MediaQuery.of(context).size.width / 2 * 1.6,
+                              fit: BoxFit.cover,
+                            ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 40.0),
                             child: AppButton(
@@ -67,12 +83,60 @@ class AddNewBook extends StatelessWidget {
                               color: HexColor(dialogColor),
                               label:  appTranslation(context).upload,
                               textColor: Theme.of(context).primaryColorDark,
-                              onPress: () {},
+                              onPress: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        const DialogChangePhoto());
+                              },
                             ),
                           ),
                         ],
                       ),
                       space15Vertical,
+                      if (MainCubit.get(context).pdfFile != null)
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width - 88,
+                              child: MyBtnAccount(
+                                voidCallback: () {
+                                  MainCubit.get(context).pickPdf();
+                                },
+                                text: 'Upload PDF',
+                                imagePath: 'info',
+                              ),
+                            ),
+                            space8Horizontal,
+                            SizedBox(
+                              height: 50.0,
+                              width: 50.0,
+                              child: Material(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: HexColor(greyWhite),
+                                child: IconButton(
+                                  onPressed: () {
+                                    MainCubit.get(context).clearPickedPdf();
+                                  },
+                                  icon: Icon(
+                                    Icons.delete_rounded,
+                                    size: 16.0,
+                                    color: HexColor(red),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      if (MainCubit.get(context).pdfFile == null)
+                        MyBtnAccount(
+                          voidCallback: () {
+                            MainCubit.get(context).pickPdf();
+                          },
+                          text: 'Upload PDF',
+                          imagePath: 'info',
+                        ),
                       MyBtnAccount(
                         voidCallback: () {},
                         text: appTranslation(context).uploadPdf,
@@ -131,7 +195,50 @@ class AddNewBook extends StatelessWidget {
                         hint: appTranslation(context).bookCopies,
                         textEditingController: numberOfCopiesController,
                       ),
+                      space8Vertical,
+                      AppTextFormField(
+                        type: TextInputType.number,
+                        hint: 'Classification Number',
+                        textEditingController: classificationNumController,
+                      ),
+                      space8Vertical,
+                      AppTextFormField(
+                        type: TextInputType.text,
+                        hint: 'Overview',
+                        textEditingController: overviewController,
+                      ),
                       space15Vertical,
+                      BuildCondition(
+                        condition: state is CreateBookLoading,
+                        builder: (context) =>
+                            const Center(child: CircularProgressIndicator()),
+                        fallback: (context) => AppButton(
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: 35.0,
+                          color: Theme.of(context).primaryColor,
+                          label: 'ADD',
+                          textColor: HexColor(dialogColor),
+                          onPress: () {
+                            if (formKe.currentState!.validate()) {
+                              MainCubit.get(context).createBook(
+                                library: libraryController.text,
+                                type: typeController.text,
+                                name: bookNameController.text,
+                                edition: num.parse(bookEditionController.text),
+                                rate: 0,
+                                auther: bookAuthorController.text,
+                                pages: num.parse(pagesController.text),
+                                category: bookCategoryController.text,
+                                bookNum: num.parse(bookNumberController.text),
+                                amount:
+                                    num.parse(numberOfCopiesController.text),
+                                classificationNum:
+                                    classificationNumController.text,
+                                overview: overviewController.text,
+                              );
+                            }
+                          },
+                        ),
                       AppButton(
                         width: MediaQuery.of(context).size.width / 3,
                         height: 35.0,

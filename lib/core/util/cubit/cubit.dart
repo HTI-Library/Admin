@@ -2,17 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hti_library_admin/core/di/injection.dart';
-import 'package:hti_library_admin/core/error/exceptions.dart';
 import 'package:hti_library_admin/core/models/book_details_model.dart';
 import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/models/categories_model.dart';
 import 'package:hti_library_admin/core/models/get_all_library_model.dart';
 import 'package:hti_library_admin/core/models/get_all_types_model.dart';
+import 'package:hti_library_admin/core/models/login_model.dart';
 import 'package:hti_library_admin/core/models/top_borrow_model.dart';
 import 'package:hti_library_admin/core/network/local/cache_helper.dart';
 import 'package:hti_library_admin/core/network/repository.dart';
@@ -31,8 +32,7 @@ class MainCubit extends Cubit<MainState> {
 
   MainCubit({
     required Repository repository,
-  })
-      : _repository = repository,
+  })  : _repository = repository,
         super(Empty());
 
   static MainCubit get(context) => BlocProvider.of(context);
@@ -117,16 +117,15 @@ class MainCubit extends Cubit<MainState> {
       primaryColorLight: HexColor(greyWhite),
       primaryColorDark: HexColor(mainColorL),
 
-
       scaffoldBackgroundColor: HexColor(surface),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-          statusBarColor: HexColor(surface),
-          statusBarIconBrightness: Brightness.dark,
-        ),
+                statusBarColor: HexColor(surface),
+                statusBarIconBrightness: Brightness.dark,
+              ),
         backgroundColor: HexColor(surface),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -229,16 +228,15 @@ class MainCubit extends Cubit<MainState> {
       primaryColorLight: HexColor(secondaryColorD),
       primaryColorDark: HexColor(textColorD),
 
-
       scaffoldBackgroundColor: HexColor(scaffoldBackground),
       // canvasColor: Colors.transparent,
       appBarTheme: AppBarTheme(
         systemOverlayStyle: Platform.isIOS
             ? null
             : SystemUiOverlayStyle(
-          statusBarColor: HexColor(scaffoldBackground),
-          statusBarIconBrightness: Brightness.light,
-        ),
+                statusBarColor: HexColor(scaffoldBackground),
+                statusBarIconBrightness: Brightness.light,
+              ),
         backgroundColor: HexColor(scaffoldBackground),
         elevation: 0.0,
         titleSpacing: 0.0,
@@ -402,83 +400,33 @@ class MainCubit extends Cubit<MainState> {
     emit(InternetState());
   }
 
-  PickedFile? imageFile;
-
-  void openGallery(BuildContext context) async {
-    await ImagePicker()
-        .getImage(
-      source: ImageSource.gallery,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  void openCamera(BuildContext context) async {
-    await ImagePicker()
-        .getImage(
-      source: ImageSource.camera,
-    )
-        .then((value) {
-      imageFile = value;
-      emit(ChangeImageSuccessState());
-    }).catchError((onError) {
-      debugPrint(onError.toString());
-      emit(ChangeImageLoadingState());
-    });
-    Navigator.pop(context);
-  }
-
-  //TODO pick photo ------------ start
-  // final ImagePicker _picker = ImagePicker();
-  // File? imageFile;
-  //
-  // void selectImage() async {
-  //   _picker.pickImage(source: ImageSource.gallery).then((value) {
-  //     imageFile = File(value!.path);
-  //   });
-  //
-  //   emit(PickImageSuccessState());
-  // }
-  //
-  // File? cameraFile;
-  //
-  // void selectCamera() async {
-  //   _picker.pickImage(source: ImageSource.camera).then((value) {
-  //     cameraFile = File(value!.path);
-  //   });
-  //
-  //   emit(PickImageSuccessState());
-  // }
-  //TODO pick photo ------------ end
-
   /// createUser ------------------- start
 
   void createUser({
     required String email,
     required String name,
     required String password,
+    required String phone,
   }) async {
     debugPrint('createUser------------loading');
     emit(CreateUserLoading());
     await _repository
-        .createUserRepo(email: email, name: name, password: password)
+        .createUserRepo(
+      email: email,
+      name: name,
+      password: password,
+      phone: phone,
+    )
         .then((value) {
       // success
       debugPrint('createUser------------success');
       emit(CreateUserSuccess());
+      getAllUsers();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
       debugPrint('createUser------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createUser------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -486,21 +434,21 @@ class MainCubit extends Cubit<MainState> {
   // createUser ------------------- end
 
   /// getAllUsers ------------------- start
+  AllUsersModel? allUsersModel;
 
   void getAllUsers() async {
     debugPrint('getAllUsers------------loading');
     emit(GetAllUsersLoading());
     await _repository.getAllUsersRepo().then((value) {
       // success
+      allUsersModel = AllUsersModel.fromJson(value.data);
       debugPrint('getAllUsers------------success');
       emit(GetAllUsersSuccess());
     }).catchError((error) {
       // error
       debugPrint(error.toString());
       debugPrint('getAllUsers------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllUsers------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -518,13 +466,12 @@ class MainCubit extends Cubit<MainState> {
       // success
       debugPrint('deleteUser------------success');
       emit(DeleteUserSuccess());
+      getAllUsers();
     }).catchError((error) {
       // error
       debugPrint(error.toString());
       debugPrint('deleteUser------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteUser------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -553,9 +500,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllBooks------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllBooks------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -581,9 +526,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteBook------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteBook------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -615,9 +558,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllCategories------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllCategories------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -644,18 +585,20 @@ class MainCubit extends Cubit<MainState> {
     emit(CreateBookLoading());
     await _repository
         .createBookRepo(
-        library: library,
-        type: type,
-        name: name,
-        edition: edition,
-        rate: rate,
-        auther: auther,
-        pages: pages,
-        category: category,
-        bookNum: bookNum,
-        amount: amount,
-        classificationNum: classificationNum,
-        overview: overview)
+            image: imageFile,
+            pdf: pdfFile,
+            library: library,
+            type: type,
+            name: name,
+            edition: edition,
+            rate: rate,
+            auther: auther,
+            pages: pages,
+            category: category,
+            bookNum: bookNum,
+            amount: amount,
+            classificationNum: classificationNum,
+            overview: overview)
         .then((value) {
       // success
       debugPrint('createBook------------success');
@@ -664,9 +607,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createBook------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createBook------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -692,18 +633,13 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('search------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('search------------ServerException error');
-      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }
 
 // search ------------------- end
 
-  var currentMonth = DateTime
-      .now()
-      .month;
+  var currentMonth = DateTime.now().month;
 
   void setSelectedMonth(int value) {
     currentMonth = value;
@@ -722,7 +658,7 @@ class MainCubit extends Cubit<MainState> {
   void editBook({
     required String library,
     required String type,
-    required String name,
+    String? name,
     required num edition,
     required num rate,
     required String auther,
@@ -738,6 +674,8 @@ class MainCubit extends Cubit<MainState> {
     emit(EditBookLoading());
     await _repository
         .editBookRepo(
+      image: imageFile,
+      pdf: pdfFile,
       library: library,
       type: type,
       name: name,
@@ -760,9 +698,6 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editBook------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editBook------------ServerException error');
-      debugPrint(exception.error);
       emit(Error(error.toString()));
     });
   }
@@ -791,9 +726,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createLibrary------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createLibrary------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -824,9 +757,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editLibrary------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editLibrary------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -850,9 +781,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllLibraries------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllLibraries------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -872,9 +801,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteLibrary------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteLibrary------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -903,9 +830,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createType------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createType------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -935,9 +860,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editType------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editType------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -963,9 +886,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('getAllTypes------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('getAllTypes------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -988,9 +909,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteType------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteType------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1014,9 +933,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('deleteCategory------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('deleteCategory------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1047,9 +964,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('createCategory------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('createCategory------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1062,6 +977,9 @@ class MainCubit extends Cubit<MainState> {
 
   Future<void> bookDetails({required String bookId}) async {
     bookModel = null;
+    pdfFile = null;
+    imageFile = null;
+
     debugPrint('bookDetails------------loading');
     emit(BookDetailsLoading());
     await _repository
@@ -1155,9 +1073,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint('startBorrowTime------------error');
       debugPrint(error.toString());
-      ServerException exception = error as ServerException;
-      debugPrint('startBorrowTime------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1183,9 +1099,7 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint('returnBorrow------------error');
       debugPrint(error.toString());
-      ServerException exception = error as ServerException;
-      debugPrint('returnBorrow------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
@@ -1218,15 +1132,12 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint('getCatBooks------------error');
       debugPrint(error.toString());
-      ServerException exception = error as ServerException;
-      debugPrint('getCatBooks------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
 
 // getCatBooks ------------------- end
-
 
   /// editCat ------------------- start
 
@@ -1254,14 +1165,117 @@ class MainCubit extends Cubit<MainState> {
       // error
       debugPrint(error.toString());
       debugPrint('editCat------------Error');
-      ServerException exception = error as ServerException;
-      debugPrint('editCat------------ServerException error');
-      debugPrint(exception.error);
+
       emit(Error(error.toString()));
     });
   }
 
 // editCat ------------------- end
 
-}
+  /// pick photo ------------ start
+  final ImagePicker _picker = ImagePicker();
+  File? imageFile;
 
+  void selectImage(context) async {
+    _picker.pickImage(source: ImageSource.gallery).then((value) {
+      imageFile = File(value!.path);
+      emit(PickImageSuccessState());
+    });
+    Navigator.pop(context);
+  }
+
+  void selectCamera(context) async {
+    _picker.pickImage(source: ImageSource.camera).then((value) {
+      imageFile = File(value!.path);
+      emit(PickImageSuccessState());
+    });
+
+    Navigator.pop(context);
+  }
+
+  void clearSelectedImage() {
+    imageFile = null;
+    emit(ClearImageSuccessState());
+  }
+
+// pick photo ------------ end
+
+  /// pick pdf ------------ start
+
+  File? pdfFile;
+
+  void pickPdf() async {
+    await FilePicker.platform.pickFiles().then((value) {
+      pdfFile = File(value!.files.single.path!);
+      emit(PickPdfSuccess());
+    });
+  }
+
+  void clearPickedPdf() {
+    pdfFile = null;
+    emit(ClearPickedPdfSuccess());
+  }
+
+// pick pdf ------------ end
+
+  /// blockUser ------------------- start
+
+  void blockUser({
+    required String studentID,
+  }) async {
+    debugPrint('blockUser------------loading');
+    emit(BlockUserLoading());
+    await _repository
+        .blockUserRepo(
+      studentID: studentID,
+    )
+        .then((value) {
+      // success
+      debugPrint('blockUser------------success');
+      emit(BlockUserSuccess());
+      getAllUsers();
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('blockUser------------Error');
+
+      emit(Error(error.toString()));
+    });
+  }
+
+// blockUser ------------------- end
+
+  /// unblockUser ------------------- start
+
+  void unblockUser({
+    required String studentID,
+  }) async {
+    debugPrint('unblockUser------------loading');
+    emit(UnblockUserLoading());
+    await _repository
+        .unblockUserRepo(
+      studentID: studentID,
+    )
+        .then((value) {
+      // success
+      debugPrint('unblockUser------------success');
+      emit(UnblockUserSuccess());
+      getAllUsers();
+    }).catchError((error) {
+      // error
+      debugPrint(error.toString());
+      debugPrint('unblockUser------------Error');
+
+      emit(Error(error.toString()));
+    });
+  }
+
+// unblockUser ------------------- end
+
+  bool isSearch = false;
+
+  void openSearch() {
+    isSearch = !isSearch;
+    emit(OpenSearch());
+  }
+}

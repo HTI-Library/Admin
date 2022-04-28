@@ -109,7 +109,6 @@ class SelectDay extends MainState {
     required this.value,
   });
 
-  @override
   List<Object> get props => [
         value,
       ];
@@ -183,4 +182,20 @@ class EditCatLoading extends MainState {}
 
 class EditCatSuccess extends MainState {}
 
+class PickImageSuccessState extends MainState {}
+
+class ClearImageSuccessState extends MainState {}
+
+class PickPdfSuccess extends MainState {}
+
+class ClearPickedPdfSuccess extends MainState {}
+
+class BlockUserLoading extends MainState {}
+
+class BlockUserSuccess extends MainState {}
+
+class UnblockUserLoading extends MainState {}
+
+class UnblockUserSuccess extends MainState {}
+class OpenSearch extends MainState {}
 

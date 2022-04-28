@@ -55,6 +55,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   awesome_dialog: ^2.1.2
   syncfusion_flutter_calendar: ^19.4.47
+  file_picker: ^4.5.1
 
   #  firebase_core: ^1.8.0
   #  firebase_messaging: ^11.1.0

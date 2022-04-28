@@ -1,5 +1,4 @@
 {
-
   "myProfile": "Profile",
   "notification": "Notifications",
   "notificationNo": "You don't have any notification",
@@ -37,21 +36,17 @@
   "pagesNum": "Pages Num",
   "edition": "Edition",
   "noSave": "You don't have any favourite books ",
-
   "yes": "Yes",
   "no": "No",
   "loginToLibrary": "Login to Library",
   "password": "Password",
   "id": "ID",
-
   "home": "Home",
   "categories": "Categories",
   "saved": "Favourite",
   "account": "Account",
-
   "myBorrowBook": "Borrowed Books",
   "myReturnBook": "Returned Books",
-
   "cancel": "Cancel",
   "confirm": "Confirm",
   "delete": "Delete",
@@ -85,4 +80,6 @@
 
 
   "logIn": "Login"
+  "logIn": "Login",
+  "users": "Users"
 }
