@@ -71,8 +71,8 @@ class _EditBookState extends State<EditBook> {
 
     overviewController.text = MainCubit.get(context).bookModel!.book.overview;
 
-    classificationNumController.text = MainCubit.get(context).bookModel!.book.classificationNum;
-
+    classificationNumController.text =
+        MainCubit.get(context).bookModel!.book.classificationNum;
   }
 
   @override
@@ -101,8 +101,13 @@ class _EditBookState extends State<EditBook> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Edit Book',
-                              style: Theme.of(context).textTheme.headline6,
+                              appTranslation(context).editBook,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(
+                                    color: Theme.of(context).primaryColorDark,
+                                  ),
                             ),
                             space15Vertical,
                             Stack(
@@ -110,25 +115,28 @@ class _EditBookState extends State<EditBook> {
                               children: [
                                 if (MainCubit.get(context).imageFile != null)
                                   Image(
-                                    image:
-                                    FileImage(MainCubit.get(context).imageFile!),
-                                    width: MediaQuery.of(context).size.width / 2,
-                                    height:
-                                    MediaQuery.of(context).size.width / 2 * 1.6,
+                                    image: FileImage(
+                                        MainCubit.get(context).imageFile!),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height: MediaQuery.of(context).size.width /
+                                        2 *
+                                        1.6,
                                     fit: BoxFit.cover,
                                   ),
                                 if (MainCubit.get(context).imageFile == null)
-                                Image(
-                                  image: NetworkImage(MainCubit.get(context)
-                                      .bookModel!
-                                      .book
-                                      .bookImage),
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  height: MediaQuery.of(context).size.width /
-                                      2 *
-                                      1.6,
-                                  fit: BoxFit.cover,
-                                ),
+                                  Image(
+                                    image: NetworkImage(MainCubit.get(context)
+                                        .bookModel!
+                                        .book
+                                        .bookImage),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height: MediaQuery.of(context).size.width /
+                                        2 *
+                                        1.6,
+                                    fit: BoxFit.cover,
+                                  ),
                                 Wrap(
                                   children: [
                                     IconButton(
@@ -136,7 +144,7 @@ class _EditBookState extends State<EditBook> {
                                         showDialog(
                                             context: context,
                                             builder: (BuildContext context) =>
-                                            const DialogChangePhoto());
+                                                const DialogChangePhoto());
                                       },
                                       icon: CircleAvatar(
                                         backgroundColor: HexColor(greyWhite),
@@ -148,21 +156,23 @@ class _EditBookState extends State<EditBook> {
                                         ),
                                       ),
                                     ),
-                                    if (MainCubit.get(context).imageFile != null)
-                                    IconButton(
-                                      onPressed: () {
-                                        MainCubit.get(context).clearSelectedImage();
-                                      },
-                                      icon: CircleAvatar(
-                                        backgroundColor: HexColor(greyWhite),
-                                        radius: 16.0,
-                                        child: Icon(
-                                          Icons.delete_rounded,
-                                          size: 16.0,
-                                          color: HexColor(red),
+                                    if (MainCubit.get(context).imageFile !=
+                                        null)
+                                      IconButton(
+                                        onPressed: () {
+                                          MainCubit.get(context)
+                                              .clearSelectedImage();
+                                        },
+                                        icon: CircleAvatar(
+                                          backgroundColor: HexColor(greyWhite),
+                                          radius: 16.0,
+                                          child: Icon(
+                                            Icons.delete_rounded,
+                                            size: 16.0,
+                                            color: HexColor(red),
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ],
@@ -172,7 +182,8 @@ class _EditBookState extends State<EditBook> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width - 88,
+                                    width:
+                                        MediaQuery.of(context).size.width - 88,
                                     child: MyBtnAccount(
                                       voidCallback: () {
                                         MainCubit.get(context).pickPdf();
@@ -191,7 +202,8 @@ class _EditBookState extends State<EditBook> {
                                       color: HexColor(greyWhite),
                                       child: IconButton(
                                         onPressed: () {
-                                          MainCubit.get(context).clearPickedPdf();
+                                          MainCubit.get(context)
+                                              .clearPickedPdf();
                                         },
                                         icon: Icon(
                                           Icons.delete_rounded,
@@ -204,73 +216,71 @@ class _EditBookState extends State<EditBook> {
                                 ],
                               ),
                             if (MainCubit.get(context).pdfFile == null)
-                              MyBtnAccount(
-                                voidCallback: () {
-                                  MainCubit.get(context).pickPdf();
-                                },
-                                text: 'Upload PDF',
-                                imagePath: 'info',
-                              ),
+                            MyBtnAccount(
+                              voidCallback: () {},
+                              text: appTranslation(context).uploadPdf,
+                              imagePath: 'info',
+                            ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.name,
-                              hint: 'Library',
-                              label: 'Library',
+                              hint: appTranslation(context).libraryDepartment,
+                              label: appTranslation(context).libraryDepartment,
                               textEditingController: libraryController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.name,
-                              hint: 'Book Type',
-                              label: 'Book Type',
+                              hint: appTranslation(context).bookType,
+                              label: appTranslation(context).bookType,
                               textEditingController: typeController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.name,
-                              hint: 'Book Name',
-                              label: 'Book Name',
+                              hint: appTranslation(context).bookName,
+                              label: appTranslation(context).bookName,
                               textEditingController: bookNameController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.number,
-                              hint: 'Book Edition',
-                              label: 'Book Edition',
+                              hint: appTranslation(context).bookEdition,
+                              label: appTranslation(context).bookEdition,
                               textEditingController: bookEditionController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.name,
-                              hint: 'Book Author',
-                              label: 'Book Author',
+                              hint: appTranslation(context).bookAuthor,
+                              label: appTranslation(context).bookAuthor,
                               textEditingController: bookAuthorController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.number,
-                              hint: 'Book Pages',
-                              label: 'Book Pages',
+                              hint: appTranslation(context).bookPages,
+                              label: appTranslation(context).bookPages,
                               textEditingController: pagesController,
                             ),
                             space8Vertical,
                             AppTextFormField(
-                              hint: 'Book Categories',
-                              label: 'Book Categories',
+                              hint: appTranslation(context).bookCategory,
+                              label: appTranslation(context).bookCategory,
                               textEditingController: bookCategoryController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.number,
-                              hint: 'Book Number',
-                              label: 'Book Number',
+                              hint: appTranslation(context).bookNumber,
+                              label: appTranslation(context).bookNumber,
                               textEditingController: bookNumberController,
                             ),
                             space8Vertical,
                             AppTextFormField(
                               type: TextInputType.number,
-                              hint: 'Book Copies',
-                              label: 'Book Copies',
+                              hint: appTranslation(context).bookCopies,
+                              label: appTranslation(context).bookCopies,
                               textEditingController: numberOfCopiesController,
                             ),
                             space8Vertical,
@@ -288,13 +298,14 @@ class _EditBookState extends State<EditBook> {
                             ),
                             space15Vertical,
                             BuildCondition(
-                              condition:  state is EditBookLoading,
-                              builder: (context) => const Center(child: CircularProgressIndicator()),
+                              condition: state is EditBookLoading,
+                              builder: (context) => const Center(
+                                  child: CircularProgressIndicator()),
                               fallback: (context) => AppButton(
                                 width: MediaQuery.of(context).size.width / 3,
                                 height: 35.0,
-                                color: HexColor(mainColorL),
-                                label: 'SAVE',
+                                color: Theme.of(context).primaryColorDark,
+                                label: appTranslation(context).save,
                                 textColor: HexColor(dialogColor),
                                 onPress: () {
                                   if (formKe.currentState!.validate()) {
@@ -305,7 +316,13 @@ class _EditBookState extends State<EditBook> {
                                           .id,
                                       library: libraryController.text,
                                       type: typeController.text,
-                                      name: bookNameController.text == MainCubit.get(context).bookModel!.book.name ? null : bookNameController.text,
+                                      name: bookNameController.text ==
+                                              MainCubit.get(context)
+                                                  .bookModel!
+                                                  .book
+                                                  .name
+                                          ? null
+                                          : bookNameController.text,
                                       edition:
                                           num.parse(bookEditionController.text),
                                       rate: 0,
@@ -324,7 +341,6 @@ class _EditBookState extends State<EditBook> {
                                 },
                               ),
                             ),
-                            space30Vertical,
                           ],
                         ),
                       ),

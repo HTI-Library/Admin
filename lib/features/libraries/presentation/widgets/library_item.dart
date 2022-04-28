@@ -80,13 +80,12 @@ class LibraryItem extends StatelessWidget {
                             ),
                           ),
                           backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).scaffoldBackgroundColor,
                           builder: (context) {
                             return Padding(
                               padding: EdgeInsets.only(
-                                bottom: MediaQuery.of(context)
-                                    .viewInsets
-                                    .bottom,
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom,
                               ),
                               child: SizedBox(
                                 child: Padding(
@@ -94,59 +93,62 @@ class LibraryItem extends StatelessWidget {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.only(
-                                            bottom: 15.0),
+                                        margin:
+                                            const EdgeInsets.only(bottom: 15.0),
                                         height: 4,
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            5,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                         decoration: BoxDecoration(
                                           color: HexColor(mainColorL),
                                           borderRadius:
-                                          BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10.0),
                                         ),
                                       ),
                                       AppTextFormField(
                                         type: TextInputType.name,
-                                        hint: 'Name',
-                                        textEditingController:
-                                        nameController,
+                                        hint: appTranslation(context).name,
+                                        textEditingController: nameController,
                                       ),
                                       space15Vertical,
                                       AppTextFormField(
                                         type: TextInputType.name,
-                                        hint: 'Code',
-                                        textEditingController:
-                                        codeController,
+                                        hint: appTranslation(context).code,
+                                        textEditingController: codeController,
                                       ),
                                       space30Vertical,
                                       Row(
                                         children: [
                                           Expanded(
                                               child: AppButton(
-                                                label: 'SAVE',
-                                                onPress: () {
-                                                  Navigator.pop(context);
-                                                  MainCubit.get(context).editLibrary(name: nameController.text,code: codeController.text,libraryID: libraryModel.id);
-                                                },
-                                                width: 100.0,
-                                              )),
+                                            label: appTranslation(context).save,
+                                            onPress: () {
+                                              Navigator.pop(context);
+                                              MainCubit.get(context)
+                                                  .editLibrary(
+                                                      name: nameController.text,
+                                                      code: codeController.text,
+                                                      libraryID:
+                                                          libraryModel.id);
+                                            },
+                                            width: 100.0,
+                                          )),
                                           space15Horizontal,
                                           AppIconButton(
                                             height: 40.0,
                                             width: 40.0,
-                                            backgroundColor: Theme.of(context).primaryColor.withOpacity(.15),
+                                            backgroundColor: Theme.of(context)
+                                                .primaryColor
+                                                .withOpacity(.15),
                                             iconColor: HexColor(red),
                                             onPressed: () {
                                               Navigator.pop(context);
                                               MainCubit.get(context)
                                                   .deleteLibrary(
-                                                library:
-                                                libraryModel.id,
+                                                library: libraryModel.id,
                                               );
                                             },
                                             icon: Icons.delete_rounded,

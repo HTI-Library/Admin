@@ -114,18 +114,18 @@ class _TypesPageState extends State<TypesPage> {
                               ),
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Name',
+                                hint: appTranslation(context).name,
                                 textEditingController: nameController,
                               ),
                               space15Vertical,
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Library',
+                                hint: appTranslation(context).libraryDepartment,
                                 textEditingController: libraryController,
                               ),
                               space30Vertical,
                               AppButton(
-                                label: 'SAVE',
+                                label: appTranslation(context).save,
                                 onPress: () {
                                   Navigator.pop(context);
                                   MainCubit.get(context).createType(

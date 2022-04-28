@@ -37,7 +37,7 @@ class _LibrariesPageState extends State<LibrariesPage> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return BackScaffold(
-          title: 'Libraries',
+          title: appTranslation(context).libraries,
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: MainCubit.get(context).getAllLibraryModel != null
               ? MainCubit.get(context).getAllLibraryModel!.libraries.isNotEmpty
@@ -104,18 +104,18 @@ class _LibrariesPageState extends State<LibrariesPage> {
                               ),
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Name',
+                                hint: appTranslation(context).name,
                                 textEditingController: nameController,
                               ),
                               space15Vertical,
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Code',
+                                hint: appTranslation(context).code,
                                 textEditingController: codeController,
                               ),
                               space30Vertical,
                               AppButton(
-                                label: 'SAVE',
+                                label: appTranslation(context).save,
                                 onPress: () {
                                   Navigator.pop(context);
                                   MainCubit.get(context).createLibrary(

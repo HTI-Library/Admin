@@ -48,7 +48,9 @@ class AddNewBook extends StatelessWidget {
                     children: [
                       Text(
                         appTranslation(context).addBook,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                              color: Theme.of(context).primaryColorDark,
+                            ),
                       ),
                       space15Vertical,
                       Stack(
@@ -80,7 +82,7 @@ class AddNewBook extends StatelessWidget {
                               height: 35.0,
                               color: HexColor(dialogColor),
                               label: appTranslation(context).upload,
-                              textColor: HexColor(mainColorL),
+                              textColor: Theme.of(context).primaryColorDark,
                               onPress: () {
                                 showDialog(
                                     context: context,
@@ -128,64 +130,62 @@ class AddNewBook extends StatelessWidget {
                           ],
                         ),
                       if (MainCubit.get(context).pdfFile == null)
-                        MyBtnAccount(
-                          voidCallback: () {
-                            MainCubit.get(context).pickPdf();
-                          },
-                          text: 'Upload PDF',
-                          imagePath: 'info',
-                        ),
+                      MyBtnAccount(
+                        voidCallback: () {},
+                        text: appTranslation(context).uploadPdf,
+                        imagePath: 'info',
+                      ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
-                        hint: 'Library',
+                        hint: appTranslation(context).libraryDepartment,
                         textEditingController: libraryController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
-                        hint: 'Book Type',
+                        hint: appTranslation(context).bookType,
                         textEditingController: typeController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
-                        hint: 'Book Name',
+                        hint: appTranslation(context).bookName,
                         textEditingController: bookNameController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
-                        hint: 'Book Edition',
+                        hint: appTranslation(context).bookEdition,
                         textEditingController: bookEditionController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
-                        hint: 'Book Author',
+                        hint: appTranslation(context).bookAuthor,
                         textEditingController: bookAuthorController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
-                        hint: 'Book Pages',
+                        hint: appTranslation(context).bookPages,
                         textEditingController: pagesController,
                       ),
                       space8Vertical,
                       AppTextFormField(
-                        hint: 'Book Categories',
+                        hint: appTranslation(context).bookCategory,
                         textEditingController: bookCategoryController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
-                        hint: 'Book Number',
+                        hint: appTranslation(context).bookNumber,
                         textEditingController: bookNumberController,
                       ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.number,
-                        hint: 'Book Copies',
+                        hint: appTranslation(context).bookCopies,
                         textEditingController: numberOfCopiesController,
                       ),
                       space8Vertical,
@@ -208,8 +208,8 @@ class AddNewBook extends StatelessWidget {
                         fallback: (context) => AppButton(
                           width: MediaQuery.of(context).size.width / 3,
                           height: 35.0,
+                          label: appTranslation(context).addBook,
                           color: Theme.of(context).primaryColor,
-                          label: 'ADD',
                           textColor: HexColor(dialogColor),
                           onPress: () {
                             if (formKe.currentState!.validate()) {
@@ -233,7 +233,6 @@ class AddNewBook extends StatelessWidget {
                           },
                         ),
                       ),
-                      space30Vertical,
                     ],
                   ),
                 ),

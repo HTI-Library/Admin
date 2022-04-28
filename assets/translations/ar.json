@@ -32,7 +32,6 @@
   "moreBooksFromThisCategory": "كتب أكثر من هذه الفئة",
   "moreBooksFromThisAuthor": "كتب أكثر لهذا المؤلف",
   "doYouWantToLogout": "هل تريد تسجيل الخروج؟",
-  "bookName": "اسم الكتاب",
   "author": "المؤلف",
   "pagesNum": "صفحات",
   "edition": "الإصدار",
@@ -62,6 +61,28 @@
   "deliveries": "طلبات الاعادة",
   "addBook": "أضف كتاب",
   "upload": "حمل صورة",
+
+
+  "uploadPdf": "أضف ملف PDF",
+  "libraryDepartment": "فسم المكتبة",
+  "bookType": "نوع الكتاب",
+  "bookName": "أسم الكتاب",
+  "bookEdition": "إصدار الكتاب",
+  "bookAuthor": "أسم مؤلف الكتاب",
+  "bookPages": "عدد صفحات الكتاب",
+  "bookCategory": "فسم الكتاب",
+  "bookNumber": "رقم الكتاب",
+  "bookCopies": "عدد نسخ الكتاب",
+
+  "editBook": "تحرير كتاب",
+  "save": "حفظ",
+
+
+  "name": "الإسم",
+  "code": "الكود",
+
+
+
   "logIn": "تسجيل الدخول",
   "users": "المستخدمين"
 }
