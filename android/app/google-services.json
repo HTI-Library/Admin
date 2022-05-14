@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1074437345859",
+    "project_id": "library-20a94",
+    "storage_bucket": "library-20a94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074437345859:android:1629d97d69298256333af6",
+        "android_client_info": {
+          "package_name": "com.hti_library_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074437345859-lqrt5j29qa537i66t214cu15u1c6sjrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3PTTURUC3WC0G8A5-9tOlOp9KOF_6Bbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074437345859-lqrt5j29qa537i66t214cu15u1c6sjrf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
