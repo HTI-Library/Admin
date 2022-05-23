@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ void main() async {
   await di.init();
 
   bool isRtl = false;
-
+  await Firebase.initializeApp();
   await sl<CacheHelper>().get('isRtl').then((value) {
     debugPrint('trl ------------- $value');
     if (value != null) {
@@ -100,7 +101,15 @@ class _MyAppState extends State<MyApp> {
             ..checkConnectivity()
             ..getBooksInBorrowTrue(page: 1)
             ..getBooksInBorrowFalse(page: 1)
-            ..getAllBooks(page: 1),
+            ..getAllBooks(page: 1)
+            ..sendMessage(
+              text: 'test4',
+              receiverId: '627fe5899bed66c66b63b971',
+            )
+            ..getMessages(
+              receiverId: '627fe5899bed66c66b63b971',
+            )
+            ..getAllUsersInChat(),
         ),
       ],
       child: BlocBuilder<MainCubit, MainState>(

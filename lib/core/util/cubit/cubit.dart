@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:hti_library_admin/core/di/injection.dart';
 import 'package:hti_library_admin/core/models/book_details_model.dart';
 import 'package:hti_library_admin/core/models/borrow_model.dart';
 import 'package:hti_library_admin/core/models/categories_model.dart';
+import 'package:hti_library_admin/core/models/chat_model.dart';
 import 'package:hti_library_admin/core/models/get_all_library_model.dart';
 import 'package:hti_library_admin/core/models/get_all_types_model.dart';
 import 'package:hti_library_admin/core/models/login_model.dart';
@@ -22,9 +24,8 @@ import 'package:hti_library_admin/core/util/translation.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/books.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/home.dart';
 import 'package:hti_library_admin/features/main/presentation/pages/messages.dart';
+import 'package:hti_library_admin/features/settings/pages/settings/settings.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../features/settings/pages/settings/settings.dart';
 import '../constants.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -60,7 +61,7 @@ class MainCubit extends Cubit<MainState> {
     const Home(),
     const Messages(),
     const Books(),
-    Settings(),
+    SettingsPage(),
   ];
 
   void bottomChanged(int index) {
@@ -1277,5 +1278,104 @@ class MainCubit extends Cubit<MainState> {
   void openSearch() {
     isSearch = !isSearch;
     emit(OpenSearch());
+  }
+
+  var db = FirebaseFirestore.instance;
+
+  void sendMessage({
+    required String receiverId,
+    required String text,
+  }) {
+    MessageModel model = MessageModel(
+      text: text,
+      senderId: 'admin',
+      receiverId: receiverId,
+      date: DateTime.now().toString(),
+    );
+
+    // set my chats
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc('admin')
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .add(model.toMap())
+        .then((value) {
+      emit(SendMessageSuccess());
+      updateUser(id: 'admin');
+    }).catchError((error) {
+      emit(SendMessageError());
+    });
+
+    // set receiver chats
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(receiverId)
+        .collection('chats')
+        .doc('admin')
+        .collection('messages')
+        .add(model.toMap())
+        .then((value) {
+      emit(SendMessageSuccess());
+
+      updateUser(id: receiverId);
+    }).catchError((error) {
+      emit(SendMessageError());
+    });
+  }
+
+  List<MessageModel> messages = [];
+
+  void getMessages({
+    required String receiverId,
+  }) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc('admin')
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .orderBy('date')
+        .snapshots()
+        .listen((event) {
+      messages = [];
+
+      for (var element in event.docs) {
+        messages.add(MessageModel.fromJson(element.data()));
+      }
+      debugPrint('getMessages------------success${messages.first.text}');
+
+      emit(GetMessagesSuccess());
+    });
+  }
+
+  List<String> users = [];
+
+  void getAllUsersInChat() {
+    FirebaseFirestore.instance.collection('users').snapshots().listen((event) {
+      users = [];
+      for (var element in event.docs) {
+        users.add(element.id);
+      }
+      debugPrint('getAllUsersInChat------------success${users.length}');
+
+      emit(GetAllUsersInChatSuccess());
+    });
+  }
+
+  void updateUser({
+    required String id,
+  }) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(id)
+        .set({'id': id}).then((value) {
+      UserUpdateSuccess();
+    }).catchError((error) {
+      emit(UserUpdateError());
+    });
   }
 }

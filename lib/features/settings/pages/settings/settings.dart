@@ -13,8 +13,8 @@ import '../../widget/btn_my_account.dart';
 import '../info/info.dart';
 import '../setting/presntation/setting.dart';
 
-class Settings extends StatelessWidget {
-  Settings({Key? key}) : super(key: key);
+class SettingsPage extends StatelessWidget {
+  SettingsPage({Key? key}) : super(key: key);
 
   Widget appointmentBuilder(BuildContext context,
       CalendarAppointmentDetails calendarAppointmentDetails) {

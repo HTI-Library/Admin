@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -13,13 +14,10 @@ import 'cubit/cubit.dart';
 const String serverFailureMessage = 'Server Failure';
 const String cacheFailureMessage = 'Cache Failure';
 
-
 /// Dark Mode Colors
 const String mainColorD = '008fd3';
 const String secondaryColorD = '203440';
 const String textColorD = '008fd3';
-
-
 
 /// Light Mode Colors
 const String mainColorL = '00439c';
@@ -73,7 +71,7 @@ String? token = '';
 
 void navigateTo(context, widget) => Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => widget,
       ),
     );
@@ -84,7 +82,7 @@ void navigateAndFinish(
 ) =>
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => widget,
       ),
       (route) {
@@ -246,7 +244,6 @@ const space4Horizontal = SizedBox(
 const space5Horizontal = SizedBox(
   width: 5.0,
 );
-
 
 const space8Horizontal = SizedBox(
   width: 8.0,

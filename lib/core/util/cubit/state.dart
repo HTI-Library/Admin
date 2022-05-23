@@ -197,5 +197,17 @@ class BlockUserSuccess extends MainState {}
 class UnblockUserLoading extends MainState {}
 
 class UnblockUserSuccess extends MainState {}
+
 class OpenSearch extends MainState {}
 
+class SendMessageSuccess extends MainState {}
+
+class SendMessageError extends MainState {}
+
+class GetMessagesSuccess extends MainState {}
+
+class GetAllUsersInChatSuccess extends MainState {}
+
+class UserUpdateSuccess extends MainState {}
+
+class UserUpdateError extends MainState {}

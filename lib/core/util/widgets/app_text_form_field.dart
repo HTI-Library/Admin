@@ -56,7 +56,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
               }
             },
             style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                  color: Theme.of(context).primaryColorLight,
+                  color: Theme.of(context).primaryColor,
                 ),
             keyboardType: widget.type,
             controller: widget.textEditingController,
