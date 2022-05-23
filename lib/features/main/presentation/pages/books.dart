@@ -48,7 +48,7 @@ class Books extends StatelessWidget {
                       ],
                     )
                   : EmptyWidgetReload(
-                      emptyText: appTranslation(context).noBooksToPresent,
+                      emptyText: appTranslation(context).noBooksToPresentDelivers,
                       onPressed: () {
                         MainCubit.get(context).getAllBooks(page: 1);
                       },

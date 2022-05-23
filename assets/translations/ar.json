@@ -56,6 +56,7 @@
   "addLibrary": "اضف مكتبة",
   "libraries": "المكتبات",
   "noBooksToPresent": "لا توجد كتب لعرضها",
+  "noBooksToPresentDelivers": "لا توجد كتب لعرضها",
   "reload": "اعادة التحميل",
   "orders": "طلبات الاستعارة",
   "deliveries": "طلبات الاعادة",
