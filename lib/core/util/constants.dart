@@ -16,7 +16,7 @@ const String cacheFailureMessage = 'Cache Failure';
 
 /// Dark Mode Colors
 const String mainColorD = '008fd3';
-const String secondaryColorD = '203440';
+const String secondaryColorD = '192329';
 const String textColorD = '008fd3';
 
 /// Light Mode Colors
