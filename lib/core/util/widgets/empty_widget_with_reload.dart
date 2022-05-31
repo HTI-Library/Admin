@@ -25,7 +25,7 @@ class EmptyWidgetReload extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: FloatingActionButton.extended(
             elevation: 0.0,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).primaryColorLight,
             onPressed: onPressed,
             label:  Text(appTranslation(context).reload),
             icon: const Icon(Icons.refresh_rounded),
