@@ -15,9 +15,9 @@ const String serverFailureMessage = 'Server Failure';
 const String cacheFailureMessage = 'Cache Failure';
 
 /// Dark Mode Colors
-const String mainColorD = '008fd3';
-const String secondaryColorD = '203440';
-const String textColorD = '008fd3';
+const String mainColorD = 'c9c9c9';//text and accent color
+const String secondaryColorD = '243447';//buttons on account
+const String textColorD = '008fd3';//blue color that shows before pictures load
 
 /// Light Mode Colors
 const String mainColorL = '00439c';

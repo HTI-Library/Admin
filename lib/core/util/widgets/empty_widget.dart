@@ -10,7 +10,7 @@ class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
     Key? key,
     required this.text,
-    this.image = 'empty.png',
+    this.image = 'empty_dark.png',
   }) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class EmptyWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image(
-            color: Theme.of(context).primaryColor,
+            // color: Theme.of(context).primaryColor,
             image:  AssetImage(
               'assets/images/$image',
             ),

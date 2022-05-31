@@ -129,20 +129,16 @@ class MainPage extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       top: 10.0,
                     ),
-                    child: Icon(
-                      MainCubit.get(context).currentIndex == 3
-                          ? Icons.settings_rounded
-                          : Icons.settings_outlined,
-                      color: Theme.of(context).primaryColor,
+                    child: AssetSvg(
+                      color:MainCubit.get(context).isDark
+                          ? HexColor(mainColorD)
+                          : HexColor(mainColorL),
+                      imagePath: MainCubit.get(context).currentIndex == 3
+                          ? 'user_soled'
+                          : 'user',
                     ),
-                    // child: AssetSvg(
-                    //   color: HexColor(mainColor),
-                    //   imagePath: MainCubit.get(context).currentIndex == 3
-                    //       ? 'user_soled'
-                    //       : 'user',
-                    // ),
                   ),
-                  label: 'Settings',
+                  label: 'User',
                 ),
               ],
             ),
