@@ -25,7 +25,7 @@ class ChatItem extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(8.0),
               onTap: () {
-                navigateTo(context, ChatPage());
+                navigateTo(context, ChatPage(uId: userId,));
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),

@@ -1287,10 +1287,11 @@ class MainCubit extends Cubit<MainState> {
     required String text,
   }) {
     MessageModel model = MessageModel(
-      text: text,
       senderId: 'admin',
-      receiverId: receiverId,
-      date: DateTime.now().toString(),
+      message: text,
+       reciverId: receiverId,
+      time: DateTime.now().toString(),
+      messageId: receiverId + DateTime.now().toString(),
     );
 
     // set my chats
@@ -1301,7 +1302,7 @@ class MainCubit extends Cubit<MainState> {
         .collection('chats')
         .doc(receiverId)
         .collection('messages')
-        .add(model.toMap())
+        .add(model.toJson())
         .then((value) {
       emit(SendMessageSuccess());
       updateUser(id: 'admin');
@@ -1317,7 +1318,7 @@ class MainCubit extends Cubit<MainState> {
         .collection('chats')
         .doc('admin')
         .collection('messages')
-        .add(model.toMap())
+        .add(model.toJson())
         .then((value) {
       emit(SendMessageSuccess());
 
@@ -1328,26 +1329,23 @@ class MainCubit extends Cubit<MainState> {
   }
 
   List<MessageModel> messages = [];
-
   void getMessages({
-    required String receiverId,
-  }) {
+  required String receiverId
+}) {
     FirebaseFirestore.instance
-        .collection('users')
+        .collection("users")
         .doc('admin')
-        .collection('chats')
+        .collection("chats")
         .doc(receiverId)
-        .collection('messages')
-        .orderBy('date')
-        .snapshots()
-        .listen((event) {
-      messages = [];
+        .collection("messages")
+        .get()
+        .then((value) {
+      messages.clear();
 
-      for (var element in event.docs) {
-        messages.add(MessageModel.fromJson(element.data()));
+      for (var element in value.docs) {
+        MessageModel message = MessageModel.fromJson(element.data());
+        messages.add(message);
       }
-      debugPrint('getMessages------------success${messages.first.text}');
-
       emit(GetMessagesSuccess());
     });
   }
@@ -1365,6 +1363,36 @@ class MainCubit extends Cubit<MainState> {
       emit(GetAllUsersInChatSuccess());
     });
   }
+
+  void  listenToMessages(String receiverId) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc('admin')
+        .collection("chats")
+        .doc(receiverId)
+        .collection("messages")
+    // sort data
+        .orderBy("time")
+    // get last message  || if you can get first message use (limit)
+        .limitToLast(1)
+    // stream snapshots
+        .snapshots()
+    // listen to message .
+        .listen((event) {
+      // messages.clear();
+
+      print('Docs => ${event.docs.length}');
+
+      // another method
+      // MessageModel message = MessageModel.fromJson(event.docs[0].data());
+      for (var element in event.docs) {
+        MessageModel model = MessageModel.fromJson(element.data());
+        messages.add(model);
+      }
+      emit(GetMessagesSuccess());
+    });
+  }
+
 
   void updateUser({
     required String id,
