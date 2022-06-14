@@ -1305,7 +1305,6 @@ class MainCubit extends Cubit<MainState> {
         .add(model.toJson())
         .then((value) {
       emit(SendMessageSuccess());
-      updateUser(id: 'admin');
     }).catchError((error) {
       emit(SendMessageError());
     });
@@ -1338,6 +1337,7 @@ class MainCubit extends Cubit<MainState> {
         .collection("chats")
         .doc(receiverId)
         .collection("messages")
+        .orderBy('time')
         .get()
         .then((value) {
       messages.clear();
@@ -1391,6 +1391,22 @@ class MainCubit extends Cubit<MainState> {
       }
       emit(GetMessagesSuccess());
     });
+  }
+
+  String? uName;
+  String? uImage;
+  String? uPhone;
+  void getDataUser({required String uId}) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .get()
+        .then((value) {
+      uName = value.get('name').toString();
+      uImage = value.get('avatar').toString();
+      uPhone = value.get('phone').toString();
+    });
+  emit(GetDataFromFirebaseSuccess());
   }
 
 

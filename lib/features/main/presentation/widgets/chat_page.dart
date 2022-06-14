@@ -8,6 +8,7 @@ import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
 import 'package:hti_library_admin/core/util/widgets/main_scaffold.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key,required this.uId}) : super(key: key);
@@ -27,21 +28,50 @@ class _ChatPageState extends State<ChatPage> {
     cubit = context.read<MainCubit>();
     cubit.getMessages(receiverId: widget.uId);
     cubit.listenToMessages(widget.uId);
+    cubit.getDataUser(uId:widget.uId);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<MainCubit, MainState>(
       listener: (context, state) {},
-      child: BackScaffold(
-        scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: 'Admin',
-        body: Column(
-          children: [
-            buildChattingListView(),
-            buildTextChat(),
-          ],
+      child: MainScaffold(
+        scaffold: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          appBar: AppBar(
+            title: Text(cubit.uName!,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+            centerTitle: true,
+            leading: IconButton(
+              onPressed: ()=> Navigator.of(context).pop(),
+              icon: Icon(
+                  Icons.arrow_back,
+                color: Colors.white,
+              ),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  final lanTel = 'tel:${cubit.uPhone}';
+                  if (await canLaunch(lanTel)){
+                  await launch(lanTel);
+                  }
+                },
+                icon: Icon(
+                  Icons.phone,
+                  color: Colors.white,
+                ),
+              )
+
+            ],
+          ),
+          body: Column(
+            children: [
+              buildChattingListView(),
+              buildTextChat(),
+            ],
+          ),
         ),
+
       ),
     );
   }
@@ -72,34 +102,36 @@ class _ChatPageState extends State<ChatPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
-          alignment: Alignment.centerRight,
+        Expanded(
           child: Container(
-            margin: const EdgeInsets.only(
-              top: 5,
-              bottom: 5,
-              right: 15,
-              left: 25,
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            // width: double.infinity,
-            // alignment: Alignment.centerRight,
-            decoration: BoxDecoration(
-              color: Colors.blue[500],
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
+            alignment: Alignment.centerRight,
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 5,
+                bottom: 5,
+                right: 15,
+                left: 25,
               ),
-            ),
-            child: Text(
-              message,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
+              // width: double.infinity,
+              // alignment: Alignment.centerRight,
+              decoration: BoxDecoration(
+                color: Colors.blue[500],
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                ),
+              ),
+              child: Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
@@ -127,40 +159,43 @@ class _ChatPageState extends State<ChatPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Padding(
+         Padding(
           padding: EdgeInsetsDirectional.only(start: 10),
           child: CircleAvatar(
             radius: 15,
-            backgroundColor: Colors.white,
+            backgroundImage: NetworkImage(cubit.uImage != '' ? cubit.uImage! :
+            'https://cdn-icons-png.flaticon.com/512/149/149071.png'),
             // backgroundImage: Image.network(),
           ),
         ),
-        Container(
-          alignment: Alignment.centerLeft,
+        Expanded(
           child: Container(
-            margin: const EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-              right: 25,
-              left: 15,
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.blue[100],
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomRight: Radius.circular(15),
+            alignment: Alignment.centerLeft,
+            child: Container(
+              margin: const EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+                right: 25,
+                left: 15,
               ),
-            ),
-            child: Text(
-              message,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue[100],
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+              ),
+              child: Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
@@ -197,24 +232,22 @@ class _ChatPageState extends State<ChatPage> {
                   color: HexColor(mainColorD).withOpacity(0.05),
                   borderRadius: BorderRadius.circular(40),
                 ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.sentiment_satisfied_alt_outlined,
-                      color: HexColor(mainColorD).withOpacity(0.64),
-                    ),
-                    const SizedBox(width: 15 / 4),
+                child:
                     Expanded(
                       child: TextField(
                         controller: messageController,
-                        decoration: const InputDecoration(
+                        style: const TextStyle(
+                          color: Colors.white
+                        ),
+                        decoration: InputDecoration(
                           hintText: "Type message",
+                          hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.5)
+                          ),
                           border: InputBorder.none,
                         ),
                       ),
                     ),
-                  ],
-                ),
               ),
             ),
             IconButton(

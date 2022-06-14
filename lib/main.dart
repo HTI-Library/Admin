@@ -102,13 +102,13 @@ class _MyAppState extends State<MyApp> {
             ..getBooksInBorrowTrue(page: 1)
             ..getBooksInBorrowFalse(page: 1)
             ..getAllBooks(page: 1)
-            ..sendMessage(
-              text: 'test4',
-              receiverId: '627fe5899bed66c66b63b978',
-            )
-            ..getMessages(
-              receiverId: '627fe5899bed66c66b63b978',
-            )
+            // ..sendMessage(
+            //   text: 'test4',
+            //   receiverId: '627fe5899bed66c66b63b978',
+            // )
+            // ..getMessages(
+            //   receiverId: '627fe5899bed66c66b63b978',
+            // )
             ..getAllUsersInChat(),
         ),
       ],

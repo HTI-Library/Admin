@@ -11,11 +11,16 @@ class Messages extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
-        return ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) =>
-              ChatItem(userId: MainCubit.get(context).users[index]),
-          itemCount: MainCubit.get(context).users.length,
+        return RefreshIndicator(
+          onRefresh: () async {
+            MainCubit.get(context).users;
+          },
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) =>
+                ChatItem(userId: MainCubit.get(context).users[index]),
+            itemCount: MainCubit.get(context).users.length,
+          ),
         );
       },
     );
