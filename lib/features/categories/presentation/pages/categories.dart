@@ -128,27 +128,27 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               ),
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Name',
+                                hint:  appTranslation(context).name,
                                 textEditingController:
                                 nameController,
                               ),
                               space15Vertical,
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Type',
+                                hint:  appTranslation(context).type,
                                 textEditingController:
                                 typeController,
                               ),
                               space15Vertical,
                               AppTextFormField(
                                 type: TextInputType.name,
-                                hint: 'Library',
+                                hint:  appTranslation(context).libraryDepartment,
                                 textEditingController:
                                 libraryController,
                               ),
                               space30Vertical,
                               AppButton(
-                                label: 'SAVE',
+                                label:appTranslation(context).save,
                                 onPress: () {
                                   Navigator.pop(context);
                                   MainCubit.get(context)
@@ -169,7 +169,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     );
                   });
             },
-            label: const Text('Add Category'),
+            label:  Text(appTranslation(context).addCategory),
             icon: const Icon(Icons.add),
             backgroundColor: HexColor(mainColorL),
           ),
