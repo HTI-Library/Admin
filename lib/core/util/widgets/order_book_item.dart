@@ -28,9 +28,7 @@ class OrderBookItem extends StatelessWidget {
         end: 15.0,
       ),
       decoration: BoxDecoration(
-        color: MainCubit.get(context).isDark
-            ? HexColor(greyWhite)
-            : HexColor(greyWhite),
+        color: Theme.of(context).primaryColorLight,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(

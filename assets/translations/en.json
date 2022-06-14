@@ -60,6 +60,9 @@
   "deliveries": "DELIVERIES",
   "addBook": "Add Book",
   "upload": "Upload Photo",
+  "addType": "Add Type",
+  "addCategory": "Add Category",
+  "type": "Type",
 
   "uploadPdf": "Upload PDF",
   "libraryDepartment": "Library Department",
