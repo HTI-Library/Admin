@@ -1397,6 +1397,9 @@ class MainCubit extends Cubit<MainState> {
   String? uImage;
   String? uPhone;
   void getDataUser({required String uId}) {
+    uName ='';
+    uImage ='';
+    uPhone ='';
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
@@ -1405,8 +1408,11 @@ class MainCubit extends Cubit<MainState> {
       uName = value.get('name').toString();
       uImage = value.get('avatar').toString();
       uPhone = value.get('phone').toString();
+      print('phone --------------------- $uPhone');
+      emit(GetDataFromFirebaseSuccess());
+
     });
-  emit(GetDataFromFirebaseSuccess());
+
   }
 
 

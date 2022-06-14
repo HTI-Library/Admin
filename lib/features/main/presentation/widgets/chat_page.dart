@@ -7,6 +7,7 @@ import 'package:hti_library_admin/core/util/constants.dart';
 import 'package:hti_library_admin/core/util/cubit/cubit.dart';
 import 'package:hti_library_admin/core/util/cubit/state.dart';
 import 'package:hti_library_admin/core/util/widgets/back_scaffold.dart';
+import 'package:hti_library_admin/core/util/widgets/loading.dart';
 import 'package:hti_library_admin/core/util/widgets/main_scaffold.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,46 +34,48 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MainCubit, MainState>(
-      listener: (context, state) {},
-      child: MainScaffold(
-        scaffold: Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          appBar: AppBar(
-            title: Text(cubit.uName!,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: ()=> Navigator.of(context).pop(),
-              icon: Icon(
+    return BlocBuilder<MainCubit, MainState>(
+      builder: (context, state) {
+        return MainScaffold(
+          scaffold: Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            appBar: cubit.uName != '' ? AppBar(
+              title: Text(
+                cubit.uName!,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+              centerTitle: true,
+              leading: IconButton(
+                onPressed: ()=> Navigator.of(context).pop(),
+                icon: const Icon(
                   Icons.arrow_back,
-                color: Colors.white,
-              ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () async {
-                  final lanTel = 'tel:${cubit.uPhone}';
-                  if (await canLaunch(lanTel)){
-                  await launch(lanTel);
-                  }
-                },
-                icon: Icon(
-                  Icons.phone,
                   color: Colors.white,
                 ),
-              )
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () async {
+                    final lanTel = 'tel:${cubit.uPhone}';
+                    if (await canLaunch(lanTel)){
+                      await launch(lanTel);
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.phone,
+                    color: Colors.white,
+                  ),
+                )
 
-            ],
+              ],
+            ) :
+            null,
+            body: cubit.uName != '' ? Column(
+              children: [
+                buildChattingListView(),
+                buildTextChat(),
+              ],
+            ) : const LoadingWidget(),
           ),
-          body: Column(
-            children: [
-              buildChattingListView(),
-              buildTextChat(),
-            ],
-          ),
-        ),
-
-      ),
+        );
+      },
     );
   }
 
