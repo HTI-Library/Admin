@@ -64,7 +64,7 @@ class OrderBookItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '42018064',
+                  model.userEmail.split('@')[0],
                   style: Theme.of(context).textTheme.subtitle2,
                   maxLines: 1,
                 ),
