@@ -275,6 +275,7 @@ class _ChatPageState extends State<ChatPage> {
         time: DateTime.now().toString(),
       );
       cubit.sendMessage(text: messageController.text,receiverId: widget.uId);
+      cubit.getMessages(receiverId: widget.uId);
       messageController.clear();
     }
   }
