@@ -2,7 +2,7 @@
     package="com.hti_library_admin">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="HTI Library Admin"
+        android:label="Library"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

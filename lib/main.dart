@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocBuilder<MainCubit, MainState>(
         builder: (context, state) {
           return MaterialApp(
-            title: 'HTI Library Admin',
+            title: 'Library',
             debugShowCheckedModeBanner: false,
             themeMode: MainCubit.get(context).isDark
                 ? ThemeMode.dark

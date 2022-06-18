@@ -55,6 +55,8 @@
   "addLibrary": "Add Library",
   "libraries": "Libraries",
   "noBooksToPresent": "No Orders",
+  "noBooksToPresentDelivers": "No Delivers",
+  "noBooksToPresent": "No Orders",
   "reload": "Reload",
   "orders": "ORDERS",
   "deliveries": "DELIVERIES",

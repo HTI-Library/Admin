@@ -54,6 +54,7 @@ class TranslationModel {
   late String addLibrary;
   late String libraries;
   late String noBooksToPresent;
+  late String noBooksToPresentDelivers;
   late String reload;
   late String orders;
   late String deliveries;
@@ -142,6 +143,7 @@ class TranslationModel {
     addLibrary = json['addLibrary'];
     libraries = json['libraries'];
     noBooksToPresent = json['noBooksToPresent'];
+    noBooksToPresentDelivers = json['noBooksToPresentDelivers'];
     reload = json['reload'];
     orders = json['orders'];
     deliveries = json['deliveries'];
