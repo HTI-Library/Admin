@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:hti_library_admin/core/util/cubit/cubit.dart';
+import 'package:hti_library_admin/core/util/cubit/state.dart';
 
 import '../constants.dart';
 
@@ -44,8 +47,8 @@ class AppButton extends StatelessWidget {
         child: Text(
           label,
           style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                color: textColor ?? HexColor(surface),
-              ),
+            color: textColor!,
+          ),
           maxLines: 1,
         ),
       ),
