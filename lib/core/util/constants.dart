@@ -22,6 +22,7 @@ const String textColorD = '008fd3';//blue color that shows before pictures load
 /// Light Mode Colors
 const String mainColorL = '00439c';
 const String secondary = '005C89';
+const String buttonColor = '01070d';
 // const String secondColor = 'da7339';
 // const String thirdColor = '1da1f2';
 // const String darkWhite = 'e0e0e0';
