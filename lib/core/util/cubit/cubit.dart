@@ -112,7 +112,7 @@ class MainCubit extends Cubit<MainState> {
   }
 
   void changeTheme() {
-    family = isRtl ? 'Roboto' : 'Roboto';
+    family = isRtl ? 'Cairo' : 'DroidNaksh';
 
     lightTheme = ThemeData(
       primaryColor: HexColor(mainColorL),
