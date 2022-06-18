@@ -28,9 +28,7 @@ class OrderBookItem extends StatelessWidget {
         end: 15.0,
       ),
       decoration: BoxDecoration(
-        color: MainCubit.get(context).isDark
-            ? HexColor(greyWhite)
-            : HexColor(greyWhite),
+        color: Theme.of(context).primaryColorLight,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(
@@ -66,7 +64,7 @@ class OrderBookItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '42018064',
+                  model.userEmail.split('@')[0],
                   style: Theme.of(context).textTheme.subtitle2,
                   maxLines: 1,
                 ),

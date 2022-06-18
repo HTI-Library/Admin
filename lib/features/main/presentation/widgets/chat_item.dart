@@ -25,7 +25,7 @@ class ChatItem extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(8.0),
               onTap: () {
-                navigateTo(context, ChatPage());
+                navigateTo(context, ChatPage(uId: userId,));
               },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -34,7 +34,7 @@ class ChatItem extends StatelessWidget {
                     const CircleAvatar(
                       radius: 28.0,
                       backgroundImage: NetworkImage(
-                          'https://www.darkmatterday.com/wp-content/uploads/2019/09/circle-cropped.png'),
+                          'https://cdn-icons-png.flaticon.com/512/149/149071.png'),
                     ),
                     space10Horizontal,
                     Expanded(

@@ -71,7 +71,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 space20Vertical,
                 Text(
-                  'Account',
+                  appTranslation(context).account,
                   style: Theme.of(context).textTheme.headline6!,
                 ),
                 space10Vertical,

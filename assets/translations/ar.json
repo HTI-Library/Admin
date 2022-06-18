@@ -62,6 +62,11 @@
   "deliveries": "طلبات الاعادة",
   "addBook": "أضف كتاب",
   "upload": "حمل صورة",
+  "addType": "أضف نوع",
+  "addCategory": "أضف قسم",
+  "type": "النوع",
+
+
 
 
   "uploadPdf": "أضف ملف PDF",

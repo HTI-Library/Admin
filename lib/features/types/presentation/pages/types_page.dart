@@ -143,7 +143,7 @@ class _TypesPageState extends State<TypesPage> {
                     );
                   });
             },
-            label: const Text('Add Type'),
+            label: Text(appTranslation(context).addType),
             icon: const Icon(Icons.add),
             backgroundColor: HexColor(mainColorL),
           ),

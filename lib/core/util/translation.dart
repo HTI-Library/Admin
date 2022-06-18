@@ -75,6 +75,9 @@ class TranslationModel {
   late String save;
   late String name;
   late String code;
+  late String addType;
+  late String addCategory;
+  late String type;
 
 
 
@@ -161,6 +164,9 @@ class TranslationModel {
     save = json['save'];
     name = json['name'];
     code = json['code'];
+    addType = json['addType'];
+    addCategory = json['addCategory'];
+    type = json['type'];
 
     users = json['users'];
   }

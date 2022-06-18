@@ -14,7 +14,7 @@ import 'features/main/presentation/pages/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = MyBlocObserver();
+  // Bloc.observer = MyBlocObserver();
 
   await di.init();
 
@@ -102,13 +102,13 @@ class _MyAppState extends State<MyApp> {
             ..getBooksInBorrowTrue(page: 1)
             ..getBooksInBorrowFalse(page: 1)
             ..getAllBooks(page: 1)
-            ..sendMessage(
-              text: 'test4',
-              receiverId: '627fe5899bed66c66b63b971',
-            )
-            ..getMessages(
-              receiverId: '627fe5899bed66c66b63b971',
-            )
+            // ..sendMessage(
+            //   text: 'test4',
+            //   receiverId: '627fe5899bed66c66b63b978',
+            // )
+            // ..getMessages(
+            //   receiverId: '627fe5899bed66c66b63b978',
+            // )
             ..getAllUsersInChat(),
         ),
       ],

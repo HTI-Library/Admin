@@ -71,7 +71,7 @@ class MyBtnAccount extends StatelessWidget {
                 if (imagePath != '')
                   AssetSvg(
                     imagePath: imagePath!,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).primaryColorLight,
                     size: 23,
                   )
               ],

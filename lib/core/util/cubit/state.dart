@@ -211,3 +211,5 @@ class GetAllUsersInChatSuccess extends MainState {}
 class UserUpdateSuccess extends MainState {}
 
 class UserUpdateError extends MainState {}
+
+class GetDataFromFirebaseSuccess extends MainState {}
