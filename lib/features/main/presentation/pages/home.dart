@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 controller: MainCubit.get(context).controller,
                 padding: EdgeInsets.zero,
-                unselectedLabelColor: HexColor(darkBlue),
+                unselectedLabelColor:MainCubit.get(context).isDark? HexColor(greyWhite): HexColor(darkBlue),
                 isScrollable: true,
                 indicatorColor: Theme.of(context).primaryColor,
                 labelColor: Theme.of(context).primaryColor,

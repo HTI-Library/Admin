@@ -133,6 +133,8 @@ class _LibrariesPageState extends State<LibrariesPage> {
                   });
             },
             label: Text(appTranslation(context).addLibrary),
+
+
             icon: const Icon(Icons.add),
             backgroundColor: Theme.of(context).primaryColor,
           ),

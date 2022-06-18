@@ -108,6 +108,7 @@ class MainCubit extends Cubit<MainState> {
     changeTheme();
 
     emit(ThemeLoaded());
+
   }
 
   void changeTheme() {
@@ -339,6 +340,7 @@ class MainCubit extends Cubit<MainState> {
     isDark = value;
 
     sl<CacheHelper>().put('isDark', isDark);
+
 
     emit(ChangeModeState());
   }
