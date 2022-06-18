@@ -94,20 +94,24 @@ class AddNewBook extends StatelessWidget {
                         ],
                       ),
                       space15Vertical,
-                      if (MainCubit.get(context).pdfFile != null)
+
                         Row(
                           children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 88,
-                              child: MyBtnAccount(
-                                voidCallback: () {
-                                  MainCubit.get(context).pickPdf();
-                                },
-                                text: 'Upload PDF',
-                                imagePath: 'info',
+                            Expanded(
+                              child: SizedBox(
+                                child: MyBtnAccount(
+                                  voidCallback: () {
+                                    MainCubit.get(context).pickPdf();
+                                    print('pdf');
+                                  },
+                                  text: 'Upload PDF',
+                                  imagePath: 'info',
+                                ),
                               ),
                             ),
+                            if (MainCubit.get(context).pdfFile != null)
                             space8Horizontal,
+                            if (MainCubit.get(context).pdfFile != null)
                             SizedBox(
                               height: 50.0,
                               width: 50.0,
@@ -129,12 +133,15 @@ class AddNewBook extends StatelessWidget {
                             ),
                           ],
                         ),
-                      if (MainCubit.get(context).pdfFile == null)
-                      MyBtnAccount(
-                        voidCallback: () {},
-                        text: appTranslation(context).uploadPdf,
-                        imagePath: 'info',
-                      ),
+                      // if (MainCubit.get(context).pdfFile == null)
+                      // MyBtnAccount(
+                      //   voidCallback: () {
+                      //     print('pdf');
+                      //
+                      //   },
+                      //   text: appTranslation(context).uploadPdf,
+                      //   imagePath: 'info',
+                      // ),
                       space8Vertical,
                       AppTextFormField(
                         type: TextInputType.name,
