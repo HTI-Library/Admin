@@ -83,6 +83,8 @@ class TranslationModel {
 
   late String logIn;
   late String users;
+  late String addBookSuccess;
+  late String addBookError;
 
 
   TranslationModel.fromJson(Map<String, dynamic> json) {
@@ -92,6 +94,8 @@ class TranslationModel {
     english = json['english'];
     setting = json['setting'];
     language = json['language'];
+    addBookSuccess = json['addBookSuccess'];
+    addBookError = json['addBookError'];
     themes = json['themes'];
     myProfile = json['myProfile'];
     notification = json['notification'];

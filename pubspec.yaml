@@ -92,7 +92,7 @@ flutter_native_splash:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/hti_logo.png"
+  image_path: "assets/images/app_logo.png"
   #run this in terminal flutter pub run flutter_launcher_icons:main
 
 

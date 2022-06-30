@@ -27,13 +27,20 @@ class AddNewBook extends StatelessWidget {
   TextEditingController numberOfCopiesController = TextEditingController();
   TextEditingController classificationNumController = TextEditingController();
   TextEditingController overviewController = TextEditingController();
-
   GlobalKey<FormState> formKe = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainCubit, MainState>(
+    return BlocConsumer<MainCubit, MainState>(
+        listener: (context, state) {
+          if (state is CreateBookSuccess) {
+            showToast(message: appTranslation(context).addBookSuccess, toastStates: ToastStates.SUCCESS);
+          } else if (state is Error) {
+            showToast(message: appTranslation(context).addBookError, toastStates: ToastStates.ERROR);
+          }
+        },
       builder: (context, state) {
+
         return BackScaffold(
           scaffoldBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: SingleChildScrollView(
@@ -49,8 +56,8 @@ class AddNewBook extends StatelessWidget {
                       Text(
                         appTranslation(context).addBook,
                         style: Theme.of(context).textTheme.headline6?.copyWith(
-                              color: Theme.of(context).primaryColorDark,
-                            ),
+                          color: Theme.of(context).primaryColorDark,
+                        ),
                       ),
                       space15Vertical,
                       Stack(
@@ -59,10 +66,10 @@ class AddNewBook extends StatelessWidget {
                           if (MainCubit.get(context).imageFile != null)
                             Image(
                               image:
-                                  FileImage(MainCubit.get(context).imageFile!),
+                              FileImage(MainCubit.get(context).imageFile!),
                               width: MediaQuery.of(context).size.width / 2,
                               height:
-                                  MediaQuery.of(context).size.width / 2 * 1.6,
+                              MediaQuery.of(context).size.width / 2 * 1.6,
                               fit: BoxFit.cover,
                             ),
                           if (MainCubit.get(context).imageFile == null)
@@ -72,7 +79,7 @@ class AddNewBook extends StatelessWidget {
                               ),
                               width: MediaQuery.of(context).size.width / 2,
                               height:
-                                  MediaQuery.of(context).size.width / 2 * 1.6,
+                              MediaQuery.of(context).size.width / 2 * 1.6,
                               fit: BoxFit.cover,
                             ),
                           Padding(
@@ -87,7 +94,7 @@ class AddNewBook extends StatelessWidget {
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
-                                        const DialogChangePhoto());
+                                    const DialogChangePhoto());
                               },
                             ),
                           ),
@@ -95,23 +102,23 @@ class AddNewBook extends StatelessWidget {
                       ),
                       space15Vertical,
 
-                        Row(
-                          children: [
-                            Expanded(
-                              child: SizedBox(
-                                child: MyBtnAccount(
-                                  voidCallback: () {
-                                    MainCubit.get(context).pickPdf();
-                                    print('pdf');
-                                  },
-                                  text: 'Upload PDF',
-                                  imagePath: 'info',
-                                ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              child: MyBtnAccount(
+                                voidCallback: () {
+                                  MainCubit.get(context).pickPdf();
+                                  print('pdf');
+                                },
+                                text: 'Upload PDF',
+                                imagePath: 'info',
                               ),
                             ),
-                            if (MainCubit.get(context).pdfFile != null)
+                          ),
+                          if (MainCubit.get(context).pdfFile != null)
                             space8Horizontal,
-                            if (MainCubit.get(context).pdfFile != null)
+                          if (MainCubit.get(context).pdfFile != null)
                             SizedBox(
                               height: 50.0,
                               width: 50.0,
@@ -131,8 +138,8 @@ class AddNewBook extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                        ],
+                      ),
                       // if (MainCubit.get(context).pdfFile == null)
                       // MyBtnAccount(
                       //   voidCallback: () {
@@ -211,7 +218,7 @@ class AddNewBook extends StatelessWidget {
                       BuildCondition(
                         condition: state is CreateBookLoading,
                         builder: (context) =>
-                            const Center(child: CircularProgressIndicator()),
+                        const Center(child: CircularProgressIndicator()),
                         fallback: (context) => AppButton(
                           width: MediaQuery.of(context).size.width / 3,
                           height: 35.0,
@@ -231,9 +238,9 @@ class AddNewBook extends StatelessWidget {
                                 category: bookCategoryController.text,
                                 bookNum: num.parse(bookNumberController.text),
                                 amount:
-                                    num.parse(numberOfCopiesController.text),
+                                num.parse(numberOfCopiesController.text),
                                 classificationNum:
-                                    classificationNumController.text,
+                                classificationNumController.text,
                                 overview: overviewController.text,
                               );
                             }

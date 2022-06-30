@@ -65,6 +65,8 @@
   "addType": "أضف نوع",
   "addCategory": "أضف قسم",
   "type": "النوع",
+  "addBookSuccess": "تم اضافة الكتاب بنجاح",
+  "addBookError": "برجاء التاكد من البيانات السابقة",
 
 
 

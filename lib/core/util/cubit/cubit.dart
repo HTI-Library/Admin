@@ -1291,7 +1291,7 @@ class MainCubit extends Cubit<MainState> {
     MessageModel model = MessageModel(
       senderId: 'admin',
       message: text,
-       reciverId: receiverId,
+      reciverId: receiverId,
       time: DateTime.now().toString(),
       messageId: receiverId + DateTime.now().toString(),
     );
@@ -1331,8 +1331,8 @@ class MainCubit extends Cubit<MainState> {
 
   List<MessageModel> messages = [];
   void getMessages({
-  required String receiverId
-}) {
+    required String receiverId
+  }) {
     FirebaseFirestore.instance
         .collection("users")
         .doc('admin')
@@ -1381,7 +1381,7 @@ class MainCubit extends Cubit<MainState> {
         .listen((event) {
       // messages.clear();
 
-      print('Docs => ${event.docs.length}');
+      // print('Docs => ${event.docs.length}');
 
       // another method
       // MessageModel message = MessageModel.fromJson(event.docs[0].data());
@@ -1428,4 +1428,6 @@ class MainCubit extends Cubit<MainState> {
       emit(UserUpdateError());
     });
   }
+
+
 }

@@ -65,6 +65,9 @@
   "addType": "Add Type",
   "addCategory": "Add Category",
   "type": "Type",
+  "addBookSuccess": "The book has been successfully added",
+  "addBookError": "Please verify the previous information",
+
 
   "uploadPdf": "Upload PDF",
   "libraryDepartment": "Library Department",

@@ -39,9 +39,9 @@ class _ChatPageState extends State<ChatPage> {
         return MainScaffold(
           scaffold: Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            appBar: cubit.uName != '' ? AppBar(
+            appBar: AppBar(
               title: Text(
-                cubit.uName!,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                widget.uId,style: TextStyle(color: MainCubit.get(context).isDark? Colors.white : Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
               centerTitle: true,
               leading: IconButton(
                 onPressed: ()=> Navigator.of(context).pop(),
@@ -65,14 +65,13 @@ class _ChatPageState extends State<ChatPage> {
                 )
 
               ],
-            ) :
-            null,
-            body: cubit.uName != '' ? Column(
+            ),
+            body: Column(
               children: [
                 buildChattingListView(),
                 buildTextChat(),
               ],
-            ) : const LoadingWidget(),
+            ),
           ),
         );
       },
@@ -214,12 +213,12 @@ class _ChatPageState extends State<ChatPage> {
         vertical: 15 / 2,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, 4),
             blurRadius: 32,
-            color: HexColor(mainColorD).withOpacity(0.08),
+            color: Theme.of(context).primaryColorLight,
           ),
         ],
       ),
@@ -239,13 +238,13 @@ class _ChatPageState extends State<ChatPage> {
                     Expanded(
                       child: TextField(
                         controller: messageController,
-                        style: const TextStyle(
-                          color: Colors.white
+                        style:  TextStyle(
+                          color: MainCubit.get(context).isDark? Colors.white : Colors.black
                         ),
                         decoration: InputDecoration(
                           hintText: "Type message",
                           hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5)
+                              color: MainCubit.get(context).isDark? Colors.white.withOpacity(0.7) : Colors.black.withOpacity(0.7)
                           ),
                           border: InputBorder.none,
                         ),

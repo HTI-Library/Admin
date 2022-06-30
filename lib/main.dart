@@ -14,12 +14,10 @@ import 'features/main/presentation/pages/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Bloc.observer = MyBlocObserver();
-
+  await Firebase.initializeApp();
   await di.init();
 
   bool isRtl = false;
-  await Firebase.initializeApp();
   await sl<CacheHelper>().get('isRtl').then((value) {
     debugPrint('trl ------------- $value');
     if (value != null) {
